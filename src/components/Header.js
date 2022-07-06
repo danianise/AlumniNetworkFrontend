@@ -2,9 +2,9 @@ import React from 'react'
 
 function Header() {
   return (
-    <div>
+    <div className = 'header'>
       <h1>
-        <img src="/profileicon.png"/>
+        <img src="/profileicon.png" alt='Gender Neutral Silhouette'/>
         [theAlumniNetwork]
       </h1>
       <nav>
