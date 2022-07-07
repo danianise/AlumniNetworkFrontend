@@ -1,17 +1,20 @@
 import React from 'react'
 
-function LoggedInLandingPage() {
+function LoggedInLandingPage(props) {
   return (
     <div className='loggedInLandingPage'>
-      <h1>[welcome, **userName**]</h1>
+      <h1>[welcome, {props.name}]</h1>
       <div className='profileInfo'>
         <img className='profilePic profilePicLarge' src='/DHoey.jpg' alt='User Profile Picture'/><br />
         <a href=''>Edit Profile</a>
       </div>
       <div className='networkInfo'>
         <h3>My Networks</h3>
-        <img src='/GALogo.png' alt='General Assembly Logo'/><br />
-        <img src='/MHSLogo.png' alt="Miss Hall's School Logo"/>
+        {props.networks.map(each => {
+          return (
+            <img src = {each.logo} alt = "{each.name} Logo"/>
+          )
+        })}
       </div>
     </div>
   )

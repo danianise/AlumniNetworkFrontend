@@ -1,6 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState} from 'react'
 
-function LandingPage() {
+function LandingPage(props) {
+
+  const [djangoData, setDjangoData] = useState([])
+
+  useEffect(() => {
+    fetch('https://radiant-tundra-28877.herokuapp.com/networks')
+    .then(res => res.json())
+    // .then(data => console.log(data))
+    .then(data => setDjangoData(data))
+  })
+
   return (
     <div className='landingPage'>
         <h1>
@@ -11,14 +21,18 @@ function LandingPage() {
             the same school or completed the same course(s).<br /> Stay connected, strengthen your network.
         </p>
         <h4>
-            To get started, choose a Network to connect to.
+            <a href=''>[REGISTER HERE]</a> to get started.
         </h4>
-        <a href=''>
-            <img src='/GALogo.png'/> 
-        </a>
-        <a href=''>
-            <img src='MHSLogo.png'/>
-        </a>
+        {/* {props.networks.map(each => {
+            return(
+                <img src={each.logo} alt = '{each.name} Logo' />
+            )
+        })} */}
+        {djangoData.map(each => {
+            return(
+                <img src={each.logo} alt = '{each.name} Logo' />
+            )
+        })}
         <p>
             Don't see your network? <a href=''>[REQUEST A NETWORK]</a>
         </p>
