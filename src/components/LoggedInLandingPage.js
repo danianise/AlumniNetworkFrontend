@@ -10,9 +10,11 @@ function LoggedInLandingPage(props) {
       </div>
       <div className='networkInfo'>
         <h3>My Networks</h3>
-        {props.networks.map(each => {
-          return (
-            <img src = {each.logo} alt = "{each.name} Logo"/>
+        {props.networks.map(function(each, index){
+          return(
+            <li key={index}>
+              <img src={each.logo} alt = '{each.name} Logo' />
+            </li>
           )
         })}
       </div>

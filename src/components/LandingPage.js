@@ -28,11 +28,11 @@ function LandingPage(props) {
                 <img src={each.logo} alt = '{each.name} Logo' />
             )
         })} */}
-        {djangoData.map(each => {
-            return(
-                <img src={each.logo} alt = '{each.name} Logo' />
-            )
-        })}
+            {djangoData.map(function(each, index){
+                return(
+                    <img key={index} src={each.logo} alt = '{each.name} Logo' />
+                )
+            })}
         <p>
             Don't see your network? <a href=''>[REQUEST A NETWORK]</a>
         </p>
