@@ -1,21 +1,24 @@
 import React, { useState } from 'react'
 import UserInfo from './UserInfo'
+import Login from './Login'
+import { Link } from 'react-router-dom'
 
-function Sidebar() {
+function Sidebar(props) {
 
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
   const [currentNetwork, setCurrentNetwork] = useState("General Assembly")
+  console.log(props.user.name)
 
   return (
     <div className='sidebar'>
       {loggedIn 
       ? 
       <>
-        <UserInfo />
-        <a href=''>[My Profile]</a> <br />
-        <a href=''>[My Networks]</a> <br />
-        <a href=''>[Events]</a> <br />
-        <a href=''>[Conversations]</a> <br />
+        <UserInfo user={props.user} />
+        <Link to='/'>[My Profile]</Link> <br />
+        <Link to=''>[My Networks]</Link> <br />
+        <Link to=''>[Events]</Link> <br />
+        <Link to='/conversations'>[Conversations]</Link> <br />
           {currentNetwork === 'General Assembly'
           ?
           <>
@@ -33,7 +36,7 @@ function Sidebar() {
       </>
       : 
       <>
-  
+        {/* <Login /> */}
       </>
       }
     </div>

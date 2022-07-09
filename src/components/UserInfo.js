@@ -1,13 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-function UserInfo() {
+function UserInfo(props) {
+  console.log(props.user.name)
   return (
     <div className = 'userInfo'>
       <h5>
       Logged in as
       </h5>
-      <img className='profilePic' src='/DHoey.jpg' alt='User Profile Picture'/>
-      <p>**userName**</p>
+      <img className='profilePic' src={props.user.photo} alt='User Profile Picture'/><br />
+      <Link to='/'>{props.user.name}</Link><br />
       <button>LOGOUT</button><hr />
     </div>
   )

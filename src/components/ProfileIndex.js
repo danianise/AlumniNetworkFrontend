@@ -1,15 +1,20 @@
 import React from 'react'
+import NetworkIndex from './NetworkIndex'
+import { Link } from 'react-router-dom'
 
-function ProfileIndex() {
+function ProfileIndex(props) {
   return (
     <div className='profileIndex'>
         <h1>
-            [My Profile]
+            [welcome, {props.user.name}]
         </h1>
-        <img className='profilePicLarge' src='/DHoey.jpg' alt='User Profile Picture'/>
+        {/* <img className='profilePicLarge' src='/DHoey.jpg' alt='User Profile Picture'/> */}
+        <div className='profileInfo'>
+        <img className='profilePic profilePicLarge' src='/DHoey.jpg' alt='User Profile Picture'/><br />
+      </div>
         <p className='nameLocation'>
-            [Danielle Hoey]
-            Lunenburg, MA
+            [{props.user.name}]<br />
+            {props.user.location}
         </p>
         <ul>
             <li>
@@ -18,41 +23,34 @@ function ProfileIndex() {
                 </a>
             </li>
             <li>
-                <a href=''>
+                <a href={props.user.linkedin}>
                     <img className='contactIcons' src='/LinkedInLogo.png' alt='LinkedIn Icon'/>
                 </a>
             </li>
             <li>
-                <a href=''>
+                <a href={props.user.github}>
                     <img className='contactIcons' src='/GitHubLogo.png' alt='GitHub Icon'/>
                 </a>
             </li>
             <li>
-                <a href=''>
+                <a href={props.user.facebook}>
                     <img className='contactIcons' src='/FacebookLogo.png' alt='Facebook Icon'/>
                 </a>
             </li>
             <li>
-                <a href=''>
+                <a href={props.user.twitter}>
                     <img className='contactIcons' src='/TwitterLogo.png' alt='Twitter Icon'/>
                 </a>
             </li>
             <li>
-                <a href=''>
+                <a href={props.user.instagram}>
                     <img className='contactIcons' src='/InstagramLogo.png' alt='Instagram Icon'/>
                 </a>
             </li>
         </ul>
+        <Link to=''>Edit Profile</Link>
         <div className='networkInfo'>
-        <h3>Networks</h3>
-        <ul>
-            <li>
-                <img src='/GALogo.png' alt='General Assembly Logo'/><br />
-            </li>
-            <li>
-                <img src='/MHSLogo.png' alt="Miss Hall's School Logo"/>
-            </li>
-        </ul>
+        <NetworkIndex />
       </div>
     </div>
   )

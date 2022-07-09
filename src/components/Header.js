@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Login from './Login'
+import { Link } from 'react-router-dom'
 
 function Header() {
 
@@ -12,10 +14,10 @@ function Header() {
       </h1>
       <nav>
         <a href="https://blooming-waters-28022.herokuapp.com/">HOME</a> 
-        | <a href="">CHANGE NETWORK</a> 
-        | <a href="">REQUEST A NETWORK</a> 
-        | <a href="">REGISTER</a> 
-        | {!loggedIn ? <a href="">LOGIN</a> : <a href="">LOGOUT</a>}
+        | <Link to="">CHANGE NETWORK</Link> 
+        | <Link to="">REQUEST A NETWORK</Link> 
+        | <Link to="">REGISTER</Link> 
+        | {!loggedIn ? <><Login /></> : <a href="">LOGOUT</a>}
       </nav>
     </div>
   )
