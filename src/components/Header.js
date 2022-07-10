@@ -13,7 +13,7 @@ function Header() {
         [theAlumniNetwork]
       </h1>
       <nav>
-        <a href="https://blooming-waters-28022.herokuapp.com/">HOME</a> 
+        <Link to ="/">HOME</Link> 
         | <Link to="">CHANGE NETWORK</Link> 
         | <Link to="">REQUEST A NETWORK</Link> 
         | <Link to="">REGISTER</Link> 

@@ -17,20 +17,21 @@ function App() {
   //   .then(data => console.log(data))
 
   const [loggedIn, setLoggedIn] = useState(true)
+  const [djangoData, setDjangoData] = useState(null)
 
   // useEffect(() => {
-  //   const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3MjE3MjI3LCJpYXQiOjE2NTcyMTY5MjcsImp0aSI6IjQyNTZiMWRlZDk4YzQwYjM5MzMwOTE4NDIwNWY5NTU3IiwidXNlcl9pZCI6MX0.A2y2x4t9TwwTKX_L4GRhqN_llrcOHmWWoKZOyurcLOQ"
-  //   const url = process.env.REACT_APP_API_URL + "posts/"
+  //   // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3MjE3MjI3LCJpYXQiOjE2NTcyMTY5MjcsImp0aSI6IjQyNTZiMWRlZDk4YzQwYjM5MzMwOTE4NDIwNWY5NTU3IiwidXNlcl9pZCI6MX0.A2y2x4t9TwwTKX_L4GRhqN_llrcOHmWWoKZOyurcLOQ"
+  //   const url = process.env.REACT_APP_API_URL + 'users/'
   //   const opts = {
   //     method: 'GET',
   //     headers: {
   //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${accessToken}`
+  //       // 'Authorization': `Bearer ${accessToken}`
   //     }
   //   }
   //   fetch(url, opts)
   //   .then(res => res.json())
-  //   .then(data => console.log(data))
+  //   .then(data => setDjangoData(data))
   // })
 
   const networkArray = [
@@ -60,6 +61,7 @@ function App() {
     networks: networkArray
   }
 
+  console.log(djangoData)
 
   return (
     <div>
@@ -67,9 +69,13 @@ function App() {
       <Sidebar user={user} />
       <Routes>
         {!loggedIn ? <Route path="/" element={<LandingPage />} /> : <Route path="/" element={<ProfileIndex user={user} />} />}
-        <Route path='/posts' element={<PostList />} />
+        {/* <Route path='/posts' element={<PostList />} /> */}
         <Route path='/newpost' element={<PostForm />} />
         <Route path='/conversations' element={<ConversationIndex />} />
+        <Route path='/conversations/life' element = {<PostList topic={'Life'} />} />
+        <Route path='/conversations/partytime' element = {<PostList topic={'Party Time'} />} />
+        <Route path='/conversations/industry' element = {<PostList topic={'Industry'} />} />
+        <Route path='/conversations/cryingroom' element = {<PostList topic={'Crying Room'} />} />
       </Routes>  
       {/* <NetworkIndex networks={networkArray} /> */}
       {/* <ConversationIndex /> */}

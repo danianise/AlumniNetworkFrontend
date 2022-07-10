@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function ConversationIndex() {
   return (
@@ -6,16 +7,16 @@ function ConversationIndex() {
       <h1>[Conversations]</h1>
       <ul>
         <li>
-          <span className='emoji'>🥂</span>Life
+          <Link to='/conversations/life'><span className='emoji'>🥂</span>Life</Link>
         </li>
         <li>
-          <span className='emoji'>🎉</span>Party Time
+          <Link to='/conversations/partytime'><span className='emoji'>🎉</span>Party Time</Link>
         </li>
         <li>
-          <span className='emoji'>💻</span>Industry
+          <Link to='/conversations/industry'><span className='emoji'>💻</span>Industry</Link>
         </li>
         <li>
-          <span className='emoji'>😭</span>Crying Room
+          <Link to='/conversations/cryingroom'><span className='emoji'>😭</span>Crying Room</Link>
         </li>
       </ul>
     </div>

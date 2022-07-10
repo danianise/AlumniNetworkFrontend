@@ -1,9 +1,11 @@
 import React from 'react'
 
-function CommentForm() {
+function CommentForm(props) {
 
   const initialState = {
-    body: " "
+    post: props.post,
+    author: '1',
+    body: ''
   };
   const [formState, setFormState] = useState(initialState);
 

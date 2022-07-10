@@ -1,16 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import UserInfo from './UserInfo'
 import Login from './Login'
 import { Link } from 'react-router-dom'
 
 function Sidebar(props) {
 
+  const [djangoData, setDjangoData] = useState([])
   const [loggedIn, setLoggedIn] = useState(true)
   const [currentNetwork, setCurrentNetwork] = useState("General Assembly")
-  console.log(props.user.name)
 
-  return (
-    <div className='sidebar'>
+  useEffect(() => {
+    fetch(process.env.REACT_APP_API_URL + 'users/')
+    .then(res => res.json())
+    .then(data => setDjangoData(data))
+  }, [])
+
+  console.log(djangoData[0])
+
+  return (<>
+  {!djangoData
+    ? <h1>LOADING...</h1>
+    : <div className='sidebar'>
       {loggedIn 
       ? 
       <>
@@ -22,10 +32,10 @@ function Sidebar(props) {
           {currentNetwork === 'General Assembly'
           ?
           <>
-            <a className='tab' href=''>Life</a><br />
-            <a className='tab' href=''>Party Time</a><br />
-            <a className='tab' href=''>Industry</a><br />
-            <a className='tab' href=''>Crying Room</a><br />
+            <Link className='tab' to='/conversations/life'>Life</Link><br />
+            <Link className='tab' to='/conversations/partytime'>Party Time</Link><br />
+            <Link className='tab' to='/conversations/industry'>Industry</Link><br />
+            <Link className='tab' to='/conversations/cryingroom'>Crying Room</Link><br />
           </>
           :
           <>
@@ -36,10 +46,12 @@ function Sidebar(props) {
       </>
       : 
       <>
-        {/* <Login /> */}
+        <Login />
       </>
       }
     </div>
+  }
+  </>
   )
 }
 
