@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import '../css/Login.css'
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import EmailIcon from '@mui/icons-material/Email';
 
 function Login() {
 
@@ -20,20 +23,24 @@ function Login() {
   return (
     <div className='login'>
         <form onSubmit={handleSubmit}>
-            <label htmlFor="email">email:</label>
+            <label htmlFor="email"><EmailIcon /></label>
             <input 
                 id="email"
                 type="email"
+                placeholder="email"
                 onChange={handleChange}
                 value={formState.email}
             />
-            <label for="password">password:</label>
+            <br />
+            <label for="password"><VpnKeyIcon /></label>
             <input 
                 id="password"
                 type="password"
+                placeholder="password"
                 onChange={handleChange}
                 value={formState.password}
             />
+            <br />
             <button type="submit">Login</button>
         </form>
         {/* <p>{networkErrMsg}</p>

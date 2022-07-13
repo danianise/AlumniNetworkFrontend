@@ -9,6 +9,7 @@ import ProfileIndex from './components/ProfileIndex';
 import PostList from './components/PostList';
 import PostForm from './components/PostForm';
 import ConversationIndex from './components/ConversationIndex'
+import NetworkIndex from './components/NetworkIndex';
 
 function App() {
   
@@ -64,21 +65,24 @@ function App() {
   console.log(djangoData)
 
   return (
-    <div>
+    <div className = "app">
       <Header />
-      <Sidebar user={user} />
-      <Routes>
-        {!loggedIn ? <Route path="/" element={<LandingPage />} /> : <Route path="/" element={<ProfileIndex user={user} />} />}
-        {/* <Route path='/posts' element={<PostList />} /> */}
-        <Route path='/newpost' element={<PostForm />} />
-        <Route path='/conversations' element={<ConversationIndex />} />
-        <Route path='/conversations/life' element = {<PostList topic={'Life'} />} />
-        <Route path='/conversations/partytime' element = {<PostList topic={'Party Time'} />} />
-        <Route path='/conversations/industry' element = {<PostList topic={'Industry'} />} />
-        <Route path='/conversations/cryingroom' element = {<PostList topic={'Crying Room'} />} />
-      </Routes>  
-      {/* <NetworkIndex networks={networkArray} /> */}
-      {/* <ConversationIndex /> */}
+      <div className = 'mainContent'>
+        <Sidebar user={user} />
+        <div className = 'routes'>
+          <Routes>
+            {!loggedIn ? <Route path="/" element={<LandingPage />} /> : <Route path="/" element={<ProfileIndex user={user} />} />}
+            {/* <Route path='/posts' element={<PostList />} /> */}
+            <Route path='/newpost' element={<PostForm />} />
+            <Route path='/conversations' element={<ConversationIndex />} />
+            <Route path='/conversations/life' element = {<PostList topic={'Life'} />} />
+            <Route path='/conversations/partytime' element = {<PostList topic={'Party Time'} />} />
+            <Route path='/conversations/industry' element = {<PostList topic={'Industry'} />} />
+            <Route path='/conversations/cryingroom' element = {<PostList topic={'Crying Room'} />} />
+            <Route path='/networks' element={<NetworkIndex headline = "My Networks"/>} />
+          </Routes>  
+        </div>
+      </div>
     </div>
   );
 }

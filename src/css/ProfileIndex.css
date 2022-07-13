@@ -1,0 +1,21 @@
+.profilePhoto img {
+    width: 200px;
+    border-radius: 10px;
+}
+
+.contactIcons {
+    width: 50px;
+    height: auto;
+}
+
+.profileInfoContainer {
+    display: flex;
+}
+
+.networkInfo {
+    margin-left: 50px;
+}
+
+.networkInfo h1 {
+    font-size: 25px;
+}

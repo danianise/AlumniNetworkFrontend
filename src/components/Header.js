@@ -1,24 +1,103 @@
 import React, { useState } from 'react'
 import Login from './Login'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+
+import "../css/Header.css"
+import HomeIcon from '@mui/icons-material/Home';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function Header() {
 
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
 
   return (
-    <div className = 'header'>
-      <h1>
+    <div className = "header">
+      <div className = "header__left">
         <img src="/profileicon.png" alt='Gender Neutral Silhouette'/>
-        [theAlumniNetwork]
-      </h1>
-      <nav>
-        <Link to ="/">HOME</Link> 
-        | <Link to="">CHANGE NETWORK</Link> 
-        | <Link to="">REQUEST A NETWORK</Link> 
-        | <Link to="">REGISTER</Link> 
-        | {!loggedIn ? <><Login /></> : <a href="">LOGOUT</a>}
-      </nav>
+      </div>
+
+      <div className = "header__right__center">
+
+        <div className = "header__center">
+          <h1>
+            [theAlumniNetwork]
+          </h1>
+        </div>
+        <div className = "header__right">
+          <nav>
+            <div className = "header__option">
+
+              <NavLink 
+                className = "header__link"
+                exact = {true}
+                activeClassName = "isActive"
+                to ="/"
+              >
+                <HomeIcon />
+                <span className = "header__text">
+                  HOME
+                </span>
+              </NavLink> 
+
+              <NavLink
+                className = "header__link"
+                exact = {true}
+                activeClassName = "isActive"
+                to=""
+              >
+                <PeopleAltIcon />
+                <span className = "header__text">
+                  CHANGE NETWORK
+                </span>
+              </NavLink> 
+
+              <NavLink
+                className = "header__link"
+                exact = {true}
+                activeClassName = "isActive"
+                to=""
+              >
+                <GroupAddIcon />
+                <span className = "header__text">
+                  REQUEST A NETWORK
+                </span>
+              </NavLink> 
+
+              <NavLink
+                className = "header__link"
+                exact = {true}
+                activeClassName = "isActive"
+                to=""
+              >
+                <AppRegistrationIcon />
+                <span className = "header__text">
+                  REGISTER
+                </span>
+              </NavLink> 
+
+              {!loggedIn 
+                ? <></> 
+                : <NavLink 
+                    className = "header__link"
+                    exact = {true}
+                    activeClassName = "isActive"
+                    to=""
+                  >
+                    <LogoutIcon />
+                    <span className = "header__text header__logout">
+                      LOGOUT
+                    </span>
+                  </NavLink>
+              }
+
+            </div>
+          </nav>
+        </div>
+
+      </div>
     </div>
   )
 }

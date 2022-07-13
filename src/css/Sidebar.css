@@ -1,0 +1,9 @@
+.sidebar {
+    padding: 25px 10px;
+    box-shadow: 5px 5px 9px -9px rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    /* color: grey; */
+    width: fit-content;
+    height: 100vh;
+    flex: 0.33
+}

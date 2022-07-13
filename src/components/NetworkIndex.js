@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import '../css/NetworkIndex.css'
 
-function NetworkIndex() {
+function NetworkIndex(props) {
 
   const [djangoData, setDjangoData] = useState([])
 
@@ -14,7 +15,10 @@ function NetworkIndex() {
 
   return (
     <div className='networkIndex'>
-      <h1>[My Networks]</h1>
+      {props.headline
+      ? <h1>[{props.headline}]</h1>
+      : <></>
+      }
       <ul>
           {djangoData.map(function(each, index){
                 return(
@@ -22,7 +26,6 @@ function NetworkIndex() {
                 )
             })}
       </ul>
-      <Link to=''>[REQUEST A NETWORK]</Link>
     </div>
   )
 }
