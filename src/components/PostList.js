@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import PostForm from './PostForm'
 
-function PostList(props) {const [djangoData, setDjangoData] = useState([])
+import '../css/PostList.css'
+import TelegramIcon from '@mui/icons-material/Telegram';
+import CelebrationIcon from '@mui/icons-material/Celebration';
+import ComputerIcon from '@mui/icons-material/Computer';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+
+
+function PostList(props) {
+  
+  const [djangoData, setDjangoData] = useState([])
 
   useEffect(() => {
     fetch(process.env.REACT_APP_API_URL + 'posts/')
@@ -10,21 +19,23 @@ function PostList(props) {const [djangoData, setDjangoData] = useState([])
     .then(data => setDjangoData(data))
   }, [])
 
-  console.log(djangoData)
+  // console.log(djangoData)
 
   let emojis = [
-    {topic: 'Life', emoji: '🥂'},
-    {topic: 'Party Time', emoji: '🎉'},
-    {topic: 'Industry', emoji: '💻'},
-    {topic: 'Crying Room', emoji: '😭'}
+    {topic: 'Life', icon: <TelegramIcon fontSize="large" />},
+    {topic: 'Party Time', icon: <CelebrationIcon fontSize="large" />},
+    {topic: 'Industry', icon: <ComputerIcon fontSize="large" />},
+    {topic: 'Crying Room', icon: <SentimentVeryDissatisfiedIcon fontSize="large" />}
   ]
+
+  // console.log(props.userData)
 
   return (
     <div>
       {emojis.map((each) => {
         if (props.topic === each.topic){
           return(
-            <h1>{each.emoji}[{props.topic}]</h1>
+            <h1>{each.icon} [{props.topic}]</h1>
           )
         }
       })}
@@ -33,13 +44,17 @@ function PostList(props) {const [djangoData, setDjangoData] = useState([])
           console.log(each)
           return(
           <>
+            <h6>
+              {props.userData[each.author-1].name}
+            </h6>
             <p>{each.body}</p>
             <h6>{each.timestamp}</h6>
-            <h6>{each.author}</h6>
+            
           </>
           )
         }
       })}
+      <hr />
       <h5>...add to the conversation</h5>
       <PostForm topic={props.topic}/>
     </div>

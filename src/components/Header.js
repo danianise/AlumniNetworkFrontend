@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Login from './Login'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import "../css/Header.css"
 import HomeIcon from '@mui/icons-material/Home';
@@ -31,9 +31,7 @@ function Header() {
             <div className = "header__option">
 
               <NavLink 
-                className = "header__link"
                 exact = {true}
-                activeClassName = "isActive"
                 to ="/"
               >
                 <HomeIcon />
@@ -43,10 +41,8 @@ function Header() {
               </NavLink> 
 
               <NavLink
-                className = "header__link"
                 exact = {true}
-                activeClassName = "isActive"
-                to=""
+                to="/changenetwork"
               >
                 <PeopleAltIcon />
                 <span className = "header__text">
@@ -55,10 +51,8 @@ function Header() {
               </NavLink> 
 
               <NavLink
-                className = "header__link"
                 exact = {true}
-                activeClassName = "isActive"
-                to=""
+                to="/requestnetwork"
               >
                 <GroupAddIcon />
                 <span className = "header__text">
@@ -67,10 +61,8 @@ function Header() {
               </NavLink> 
 
               <NavLink
-                className = "header__link"
                 exact = {true}
-                activeClassName = "isActive"
-                to=""
+                to="/register"
               >
                 <AppRegistrationIcon />
                 <span className = "header__text">
@@ -81,10 +73,8 @@ function Header() {
               {!loggedIn 
                 ? <></> 
                 : <NavLink 
-                    className = "header__link"
                     exact = {true}
-                    activeClassName = "isActive"
-                    to=""
+                    to="/logout"
                   >
                     <LogoutIcon />
                     <span className = "header__text header__logout">

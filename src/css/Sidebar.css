@@ -2,8 +2,20 @@
     padding: 25px 10px;
     box-shadow: 5px 5px 9px -9px rgba(0, 0, 0, 0.75);
     border-radius: 4px;
-    /* color: grey; */
-    width: fit-content;
-    height: 100vh;
-    flex: 0.33
+    width: 160px;
+    height: 90vh;
+    position: relative;
+}
+
+.tab.topics {
+    margin-left: 20px;
+    font-size: 15px;
+    display: none;
+}
+
+.hide .topics {
+    margin-left: 20px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
 }

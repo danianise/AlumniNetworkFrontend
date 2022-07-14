@@ -10,6 +10,7 @@ import PostList from './components/PostList';
 import PostForm from './components/PostForm';
 import ConversationIndex from './components/ConversationIndex'
 import NetworkIndex from './components/NetworkIndex';
+import EventIndex from './components/EventIndex';
 
 function App() {
   
@@ -20,20 +21,20 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(true)
   const [djangoData, setDjangoData] = useState(null)
 
-  // useEffect(() => {
-  //   // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3MjE3MjI3LCJpYXQiOjE2NTcyMTY5MjcsImp0aSI6IjQyNTZiMWRlZDk4YzQwYjM5MzMwOTE4NDIwNWY5NTU3IiwidXNlcl9pZCI6MX0.A2y2x4t9TwwTKX_L4GRhqN_llrcOHmWWoKZOyurcLOQ"
-  //   const url = process.env.REACT_APP_API_URL + 'users/'
-  //   const opts = {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       // 'Authorization': `Bearer ${accessToken}`
-  //     }
-  //   }
-  //   fetch(url, opts)
-  //   .then(res => res.json())
-  //   .then(data => setDjangoData(data))
-  // })
+  useEffect(() => {
+    // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3MjE3MjI3LCJpYXQiOjE2NTcyMTY5MjcsImp0aSI6IjQyNTZiMWRlZDk4YzQwYjM5MzMwOTE4NDIwNWY5NTU3IiwidXNlcl9pZCI6MX0.A2y2x4t9TwwTKX_L4GRhqN_llrcOHmWWoKZOyurcLOQ"
+    const url = process.env.REACT_APP_API_URL + 'users/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': `Bearer ${accessToken}`
+      }
+    }
+    fetch(url, opts)
+    .then(res => res.json())
+    .then(data => setDjangoData(data))
+  }, [])
 
   const networkArray = [
     {
@@ -62,7 +63,7 @@ function App() {
     networks: networkArray
   }
 
-  console.log(djangoData)
+  // console.log(djangoData)
 
   return (
     <div className = "app">
@@ -75,11 +76,12 @@ function App() {
             {/* <Route path='/posts' element={<PostList />} /> */}
             <Route path='/newpost' element={<PostForm />} />
             <Route path='/conversations' element={<ConversationIndex />} />
-            <Route path='/conversations/life' element = {<PostList topic={'Life'} />} />
-            <Route path='/conversations/partytime' element = {<PostList topic={'Party Time'} />} />
-            <Route path='/conversations/industry' element = {<PostList topic={'Industry'} />} />
-            <Route path='/conversations/cryingroom' element = {<PostList topic={'Crying Room'} />} />
+            <Route path='/conversations/life' element = {<PostList topic={'Life'} userData={djangoData} />} />
+            <Route path='/conversations/partytime' element = {<PostList topic={'Party Time'} userData={djangoData} />} />
+            <Route path='/conversations/industry' element = {<PostList topic={'Industry'} userData={djangoData} />} />
+            <Route path='/conversations/cryingroom' element = {<PostList topic={'Crying Room'} userData={djangoData} />} />
             <Route path='/networks' element={<NetworkIndex headline = "My Networks"/>} />
+            <Route path='/events' element={<EventIndex />} />
           </Routes>  
         </div>
       </div>

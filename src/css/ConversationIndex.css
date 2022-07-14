@@ -1,0 +1,18 @@
+.conversationLinks {
+    display: flex;
+    flex-direction: row;
+}
+
+.eachLink {
+    margin: 5px;
+    background-color: lightgrey;
+    height: 15vh;
+    width: 15vw;
+    border-radius: 10%;
+    font-size: 20px;
+    text-align:center;
+}
+
+.avatar {
+    margin: 5px;
+}

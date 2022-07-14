@@ -17,7 +17,7 @@ function PostForm(props) {
 
   let topicForRoute = (props.topic).toLowerCase()
   topicForRoute = topicForRoute.replace(/\s/g, '') 
-  console.log(topicForRoute)
+  // console.log(topicForRoute)
 
   const [formData, setFormData] = useState(initialState)
   const [djangoData, setDjangoData] = useState([])
@@ -44,17 +44,11 @@ function PostForm(props) {
       .then(data => console.log(data))
   }
 
-  console.log(djangoData)
+  // console.log(djangoData)
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {/* <label>new post by [{djangoData[0].name}]</label><br /> */}
-        {/* <select onChange={handleChange} id="topic">
-          <option value="Life">Life</option>
-          <option value="Party Time">Party Time</option>
-          <option value="Industry">Industry</option>
-          <option value="Crying Room">Crying Room</option>
-        </select><br /> */}
         <textarea
           rows='10'
           cols='60'

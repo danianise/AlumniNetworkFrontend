@@ -42,8 +42,10 @@
     color: #89cff0;
 }
 
-.isActive {
-    border-bottom: 2px #89cff0;
+.active {
+    color: #89cff0;
+    border-bottom: 4px solid #89cff0;
+    margin-right: 10px;
 }
 
 .header__option {

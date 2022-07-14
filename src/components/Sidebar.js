@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import UserInfo from './UserInfo'
 import Login from './Login'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import '../css/Sidebar.css'
 import SidebarRow from './SidebarRow'
@@ -11,12 +11,18 @@ import PersonIcon from '@mui/icons-material/Person';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import EventIcon from '@mui/icons-material/Event';
 import CommentIcon from '@mui/icons-material/Comment';
+import TelegramIcon from '@mui/icons-material/Telegram';
+import CelebrationIcon from '@mui/icons-material/Celebration';
+import ComputerIcon from '@mui/icons-material/Computer';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+
 
 function Sidebar(props) {
 
   const [djangoData, setDjangoData] = useState([])
   const [loggedIn, setLoggedIn] = useState(true)
   const [currentNetwork, setCurrentNetwork] = useState("General Assembly")
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     fetch(process.env.REACT_APP_API_URL + 'users/')
@@ -24,12 +30,16 @@ function Sidebar(props) {
     .then(data => setDjangoData(data))
   }, [])
 
-  console.log(djangoData[0])
+  // console.log(djangoData[0])
 
-  return (<>
+  const handleClick = event => {
+    setIsActive(current => !current);
+  };
+
+  return (<div className='sidebar'>
   {!djangoData
     ? <h1>LOADING...</h1>
-    : <div className='sidebar'>
+    : <>
       {loggedIn 
       ? 
       <>
@@ -64,41 +74,53 @@ function Sidebar(props) {
           />
         </Link>
 
-        <Link to='/conversations'>
+        <div className={isActive ? 'hide' : ''} onClick={handleClick}>
           <SidebarRow
             title={"Conversations"}
             Icon={CommentIcon}
-            src=""
           />
-        </Link>
 
-        {/* <Link to='/'>My Profile</Link> <br />
-        <Link to=''>My Networks</Link> <br />
-        <Link to=''>Events</Link> <br />
-        <Link to='/conversations'>Conversations</Link> <br />
-          {currentNetwork === 'General Assembly'
-          ?
-          <>
-            <Link className='tab' to='/conversations/life'>Life</Link><br />
-            <Link className='tab' to='/conversations/partytime'>Party Time</Link><br />
-            <Link className='tab' to='/conversations/industry'>Industry</Link><br />
-            <Link className='tab' to='/conversations/cryingroom'>Crying Room</Link><br />
-          </>
-          :
-          <>
-            <a className='tab' href=''>Life</a><br />
-            <a className='tab' href=''>Just For Fun</a><br />
-            <a className='tab' href=''>News</a><br />
-          </>} */}
+          <div className=" topics tab">
+            <Link to='/conversations/life'>
+            <SidebarRow
+              title={"Life"}
+              Icon={TelegramIcon}
+            />
+            </Link>
+
+            <Link to='/conversations/partytime'>
+            <SidebarRow
+              title={"Party Time"}
+              Icon={CelebrationIcon}
+            />
+            </Link>
+
+            <Link to='/conversations/industry'>
+            <SidebarRow
+              title={"Industry"}
+              Icon={ComputerIcon}
+            />
+            </Link>
+
+            <Link to='/conversations/cryingroom'>
+                <SidebarRow
+                  title={"Crying Room"}
+                  Icon={SentimentVeryDissatisfiedIcon}
+                />
+              
+            </Link>
+          </div>  
+        </div>
+        
       </>
       : 
       <>
         <Login />
       </>
       }
-    </div>
+    </>
   }
-  </>
+  </div>
   )
 }
 
