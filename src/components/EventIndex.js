@@ -38,7 +38,7 @@ function EventIndex() {
           amPM = "PM"
         } 
 
-        console.log(month)
+        // console.log(month)
 
         return (
         <>

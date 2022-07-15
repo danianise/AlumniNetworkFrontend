@@ -7,24 +7,23 @@ import PersonIcon from '@mui/icons-material/Person';
 
 
 function ProfileIndex(props) {
+
+  console.log(props)
+
   return (
     <div className='profileIndex'>
         <h1>
-            [welcome, {props.user.name}]
+            [welcome, {props.userData.name}]
         </h1>
         <div className = 'profileInfoContainer'>
             <div className='profileInfo'>
             <Link to=''>Edit Profile</Link>
-                {props.user.photo
-                    ? <div className='profilePhoto'>
-                        <img src='/DHoey.jpg' alt='User Profile Picture'/><br />
+                <div className='profilePhoto'>
+                        <img src={props.userData.photo ? props.userData.photo : './profileicon.png'} alt='User Profile Picture'/><br />
                     </div>
-                    : <div className='profilePhoto'>
-                        <img src={PersonIcon} /><br />
-                    </div>}
                 <p className='nameLocation'>
-                    [{props.user.name}]<br />
-                    {props.user.location}
+                    [{props.userData.name}]<br />
+                    {props.userData.location}
                 </p>
             </div>
             <ul>
@@ -34,27 +33,27 @@ function ProfileIndex(props) {
                     </a>
                 </li>
                 <li>
-                    <a href={props.user.linkedin}>
+                    <a href={props.userData.linkedin}>
                         <img className='contactIcons' src='/LinkedInLogo.png' alt='LinkedIn Icon'/>
                     </a>
                 </li>
                 <li>
-                    <a href={props.user.github}>
+                    <a href={props.userData.github}>
                         <img className='contactIcons' src='/GitHubLogo.png' alt='GitHub Icon'/>
                     </a>
                 </li>
                 <li>
-                    <a href={props.user.facebook}>
+                    <a href={props.userData.facebook}>
                         <img className='contactIcons' src='/FacebookLogo.png' alt='Facebook Icon'/>
                     </a>
                 </li>
                 <li>
-                    <a href={props.user.twitter}>
+                    <a href={props.userData.twitter}>
                         <img className='contactIcons' src='/TwitterLogo.png' alt='Twitter Icon'/>
                     </a>
                 </li>
                 <li>
-                    <a href={props.user.instagram}>
+                    <a href={props.userData.instagram}>
                         <img className='contactIcons' src='/InstagramLogo.png' alt='Instagram Icon'/>
                     </a>
                 </li>

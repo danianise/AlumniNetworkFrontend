@@ -47,7 +47,7 @@ function Sidebar(props) {
 
         <SidebarRow 
           title={props.user.name}
-          src={props.user.photo}
+          src={props.user.photo ? props.user.photo : './profileicon.png'}
         />
 
         <Link to='/'>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PostForm from './PostForm'
+import PostPreview from './PostPreview';
 
 import '../css/PostList.css'
 import TelegramIcon from '@mui/icons-material/Telegram';
@@ -10,16 +11,25 @@ import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDiss
 
 function PostList(props) {
   
-  const [djangoData, setDjangoData] = useState([])
+  const [postData, setPostData] = useState([])
+  const [commentData, setCommentData] = useState([])
 
   useEffect(() => {
     fetch(process.env.REACT_APP_API_URL + 'posts/')
     .then(res => res.json())
     // .then(data => console.log(data))
-    .then(data => setDjangoData(data))
+    .then(data => setPostData(data))
   }, [])
 
-  // console.log(djangoData)
+  useEffect(() => {
+    fetch(process.env.REACT_APP_API_URL + 'comments/')
+    .then(res => res.json())
+    // .then(data => console.log(data))
+    .then(data => setCommentData(data))
+  }, [])
+
+  console.log(postData)
+  console.log(commentData)
 
   let emojis = [
     {topic: 'Life', icon: <TelegramIcon fontSize="large" />},
@@ -39,21 +49,9 @@ function PostList(props) {
           )
         }
       })}
-      {djangoData.map((each) => {
-        if(props.topic === each.topic){
-          console.log(each)
-          return(
-          <>
-            <h6>
-              {props.userData[each.author-1].name}
-            </h6>
-            <p>{each.body}</p>
-            <h6>{each.timestamp}</h6>
-            
-          </>
-          )
-        }
-      })}
+
+      <PostPreview topic={props.topic} userData={props.userData}/>
+
       <hr />
       <h5>...add to the conversation</h5>
       <PostForm topic={props.topic}/>
