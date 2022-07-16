@@ -13,7 +13,7 @@ import EventIcon from '@mui/icons-material/Event';
 import CommentIcon from '@mui/icons-material/Comment';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import CelebrationIcon from '@mui/icons-material/Celebration';
-import ComputerIcon from '@mui/icons-material/Computer';
+import CodeOffIcon from '@mui/icons-material/CodeOff';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 
@@ -98,7 +98,7 @@ function Sidebar(props) {
             <Link to='/conversations/industry'>
             <SidebarRow
               title={"Industry"}
-              Icon={ComputerIcon}
+              Icon={CodeOffIcon}
             />
             </Link>
 

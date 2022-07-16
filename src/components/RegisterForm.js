@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import '../css/RegisterForm.css'
 
 function RegisterForm() {
 
@@ -30,7 +31,7 @@ function RegisterForm() {
   };
 
   return (
-    <div>
+    <div className='registerForm'>
          <form onSubmit={handleSubmit}>
       <label htmlFor="name">Name</label>
       <input
@@ -38,7 +39,7 @@ function RegisterForm() {
         type="text"
         onChange={handleChange}
         value={formState.name}
-      />
+      /><br />
 
       <label htmlFor="email">Email:</label>
       <input
@@ -46,7 +47,7 @@ function RegisterForm() {
         type="email"
         onChange={handleChange}
         value={formState.email}
-      />
+      /><br />
 
       <label htmlFor="photo">Profile Photo (URL):</label>
       <input
@@ -54,7 +55,7 @@ function RegisterForm() {
         type="url"
         onChange={handleChange}
         value={formState.photo}
-      />
+      /><br />
 
       {/* <label htmlFor="photo">Profile Photo:</label>
       <input
@@ -70,7 +71,7 @@ function RegisterForm() {
         type="text"
         onChange={handleChange}
         value={formState.location}
-      />
+      /><br />
 
       <label htmlFor="linkedin">LinkedIn (URL):</label>
       <input
@@ -78,7 +79,7 @@ function RegisterForm() {
         type="url"
         onChange={handleChange}
         value={formState.linkedin}
-      />
+      /><br />
 
       <label htmlFor="github">GitHub (URL):</label>
       <input
@@ -86,7 +87,7 @@ function RegisterForm() {
         type="url"
         onChange={handleChange}
         value={formState.github}
-      />
+      /><br />
 
       <label htmlFor="facebook">Facebook (URL):</label>
       <input
@@ -94,7 +95,7 @@ function RegisterForm() {
         type="url"
         onChange={handleChange}
         value={formState.facebook}
-      />
+      /><br />
 
       <label htmlFor="twitter">Twitter (URL):</label>
       <input
@@ -102,7 +103,7 @@ function RegisterForm() {
         type="url"
         onChange={handleChange}
         value={formState.twitter}
-      />
+      /><br />
 
       <label htmlFor="instagram">Instagram (URL):</label>
       <input
@@ -110,9 +111,9 @@ function RegisterForm() {
         type="url"
         onChange={handleChange}
         value={formState.instagram}
-      />
+      /><br />
 
-      <label htmlFor="network">Which Network would you like to join?</label>
+      <label htmlFor="network">Which Network would you like to join? </label>
       <select
         id="network"
         onChange={handleChange}
@@ -120,7 +121,7 @@ function RegisterForm() {
       >
         <option value="General Assembly">General Assembly</option>
         <option value="Miss Hall's School">Miss Hall's School</option>
-      </select>
+      </select><br />
 
       <label htmlFor="password">Password:</label>
       <input
@@ -128,7 +129,7 @@ function RegisterForm() {
         type="password"
         onChange={handleChange}
         value={formState.password}
-      />
+      /><br />
 
       <label htmlFor="verify">Verify Password:</label>
       <input
@@ -136,7 +137,7 @@ function RegisterForm() {
         type="password"
         onChange={handleChange}
         value={formState.password}
-      />
+      /><br />
       <button type="submit">Submit</button>
     </form>
     </div>

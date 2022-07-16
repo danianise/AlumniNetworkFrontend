@@ -4,19 +4,45 @@ import { useParams } from 'react-router-dom'
 
 function PostDetail(props) {
 
+  console.log(props)
+
   const params = useParams()
 
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'posts/')
+    // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3OTkyNDU4LCJpYXQiOjE2NTc5OTIxNTgsImp0aSI6IjU3MjY3YmZhODJjZDRjMWNhMGFjMmVmM2IxMDA2OTRkIiwidXNlcl9pZCI6MX0.cNJhd3ftMSCjMp5sUXnUbzicfqleZYzNdNBN6_6cOGo"
+    const url = process.env.REACT_APP_API_URL + 'posts/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.accessToken}`
+      }
+    }
+    fetch(url, opts)
     .then(res => res.json())
     .then(data => setPostData(data))
   }, [])
 
+  // useEffect(() => {
+  //   fetch(process.env.REACT_APP_API_URL + 'posts/')
+  //   .then(res => res.json())
+  //   .then(data => setPostData(data))
+  // }, [])
+
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'comments/')
+    // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3OTkyNjU1LCJpYXQiOjE2NTc5OTIzNTUsImp0aSI6ImNkYjM5Y2I1NTYwNTQ4MjFiNTczYzNlMTQwYzY2YTRhIiwidXNlcl9pZCI6MX0.S5St3fSIHsiPcWdGa8XQ06lorRavhufW0noViYMA_pQ"
+    const url = process.env.REACT_APP_API_URL + 'comments/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.accessToken}`
+      }
+    }
+    fetch(url, opts)
     .then(res => res.json())
     .then(data => setCommentData(data))
   }, [])

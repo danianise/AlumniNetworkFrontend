@@ -3,23 +3,29 @@ import React, { useEffect, useState } from 'react'
 import '../css/EventIndex.css'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
-function EventIndex() {
+function EventIndex(props) {
 
-  const [djangoData, setDjangoData] = useState([])
+  const [eventData, setEventData] = useState([])
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'events/')
+    // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3OTkyNDU4LCJpYXQiOjE2NTc5OTIxNTgsImp0aSI6IjU3MjY3YmZhODJjZDRjMWNhMGFjMmVmM2IxMDA2OTRkIiwidXNlcl9pZCI6MX0.cNJhd3ftMSCjMp5sUXnUbzicfqleZYzNdNBN6_6cOGo"
+    const url = process.env.REACT_APP_API_URL + 'events/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.accessToken}`
+      }
+    }
+    fetch(url, opts)
     .then(res => res.json())
-    // .then(data => console.log(data))
-    .then(data => setDjangoData(data))
+    .then(data => setEventData(data))
   }, [])
-
-  console.log(djangoData)
 
   return (
     <div className='eventIndex'>
       <h1>[Events]</h1>
-      {djangoData.map((each) => {
+      {eventData.map((each) => {
         let dateTime = each.dateTime
         let date = dateTime.slice(0, 10)
         let year = date.slice(0, 4)

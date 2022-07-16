@@ -27,7 +27,7 @@ function LandingPage(props) {
         </h4>
             <NetworkIndex />
         <p>
-            Don't see your network? <Link to=''>[REQUEST A NETWORK]</Link>
+            Don't see your network? <Link to='/addnetwork'>[REQUEST A NETWORK]</Link>
         </p>
     </div>
   )

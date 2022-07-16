@@ -22,3 +22,12 @@ a {
 .routes {
   margin-left: 20px;
 }
+
+button{
+  border: none;
+  padding: 5px 10px 5px 10px;
+  border-radius: 4px;
+  margin-top: 5px;
+  background-color: #89cff0;
+  color: white;
+}

@@ -31,7 +31,6 @@ function Header() {
             <div className = "header__option">
 
               <NavLink 
-                exact = {true}
                 to ="/"
               >
                 <HomeIcon />
@@ -41,8 +40,7 @@ function Header() {
               </NavLink> 
 
               <NavLink
-                exact = {true}
-                to="/changenetwork"
+                to="/networks"
               >
                 <PeopleAltIcon />
                 <span className = "header__text">
@@ -51,8 +49,7 @@ function Header() {
               </NavLink> 
 
               <NavLink
-                exact = {true}
-                to="/requestnetwork"
+                to="/addnetwork"
               >
                 <GroupAddIcon />
                 <span className = "header__text">
@@ -61,7 +58,6 @@ function Header() {
               </NavLink> 
 
               <NavLink
-                exact = {true}
                 to="/register"
               >
                 <AppRegistrationIcon />
@@ -73,7 +69,6 @@ function Header() {
               {!loggedIn 
                 ? <></> 
                 : <NavLink 
-                    exact = {true}
                     to="/logout"
                   >
                     <LogoutIcon />

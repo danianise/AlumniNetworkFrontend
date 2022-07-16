@@ -10,26 +10,6 @@ import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDiss
 
 
 function PostList(props) {
-  
-  const [postData, setPostData] = useState([])
-  const [commentData, setCommentData] = useState([])
-
-  useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'posts/')
-    .then(res => res.json())
-    // .then(data => console.log(data))
-    .then(data => setPostData(data))
-  }, [])
-
-  useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'comments/')
-    .then(res => res.json())
-    // .then(data => console.log(data))
-    .then(data => setCommentData(data))
-  }, [])
-
-  console.log(postData)
-  console.log(commentData)
 
   let emojis = [
     {topic: 'Life', icon: <TelegramIcon fontSize="large" />},
@@ -50,11 +30,18 @@ function PostList(props) {
         }
       })}
 
-      <PostPreview topic={props.topic} userData={props.userData}/>
+      <PostPreview
+        topic={props.topic}
+        userData={props.userData}
+        accessToken={props.accessToken}
+      />
 
       <hr />
       <h5>...add to the conversation</h5>
-      <PostForm topic={props.topic}/>
+      <PostForm
+        topic={props.topic}
+        accessToken={props.accessToken}
+      />
     </div>
   )
 }

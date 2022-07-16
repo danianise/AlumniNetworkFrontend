@@ -12,13 +12,21 @@ function CommentForm(props) {
   const [postData, setPostData] = useState([])
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'posts/')
+    // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3OTkyNDU4LCJpYXQiOjE2NTc5OTIxNTgsImp0aSI6IjU3MjY3YmZhODJjZDRjMWNhMGFjMmVmM2IxMDA2OTRkIiwidXNlcl9pZCI6MX0.cNJhd3ftMSCjMp5sUXnUbzicfqleZYzNdNBN6_6cOGo"
+    const url = process.env.REACT_APP_API_URL + 'posts/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.accessToken}`
+      }
+    }
+    fetch(url, opts)
     .then(res => res.json())
-    // .then(data => console.log(data))
     .then(data => setPostData(data))
   }, [])
 
-  console.log(postData)
+  // console.log(postData)
 
   const handleChange = event => {
     setFormState({ ...formState, [event.target.id]: event.target.value })

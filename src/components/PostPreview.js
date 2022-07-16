@@ -8,13 +8,30 @@ function PostPreview(props) {
   // const [userData, setUserData] = useState([])
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'posts/')
+    const url = process.env.REACT_APP_API_URL + 'posts/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.accessToken}`
+      }
+    }
+    fetch(url, opts)
     .then(res => res.json())
     .then(data => setPostData(data))
   }, [])
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'comments/')
+    // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3OTkyNjU1LCJpYXQiOjE2NTc5OTIzNTUsImp0aSI6ImNkYjM5Y2I1NTYwNTQ4MjFiNTczYzNlMTQwYzY2YTRhIiwidXNlcl9pZCI6MX0.S5St3fSIHsiPcWdGa8XQ06lorRavhufW0noViYMA_pQ"
+    const url = process.env.REACT_APP_API_URL + 'comments/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.accessToken}`
+      }
+    }
+    fetch(url, opts)
     .then(res => res.json())
     .then(data => setCommentData(data))
   }, [])

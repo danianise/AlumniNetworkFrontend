@@ -12,6 +12,7 @@ function PostForm(props) {
     topic: props.topic,
     body: '',
     author: '1',
+    // user_string: 'simple_user'
 
   }
 
@@ -35,6 +36,7 @@ function PostForm(props) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.accessToken}`
       },
       body: JSON.stringify(formData)
     }
