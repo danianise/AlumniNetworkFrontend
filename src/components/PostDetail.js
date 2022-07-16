@@ -124,7 +124,7 @@ function PostDetail(props) {
     <div>
       <hr />
       <h5>...add a comment</h5>
-      <CommentForm post={params.postId}/>
+      <CommentForm post={params.postId} accessToken={props.accessToken}/>
     </div>
   </>)
 }

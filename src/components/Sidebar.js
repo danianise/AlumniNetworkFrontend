@@ -17,10 +17,13 @@ import CodeOffIcon from '@mui/icons-material/CodeOff';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 
-function Sidebar(props) {
+function Sidebar({user, loggedIn, setLoggedIn, setAccessToken}) {
+
+  console.log({user, loggedIn, setLoggedIn})
+  
 
   const [djangoData, setDjangoData] = useState([])
-  const [loggedIn, setLoggedIn] = useState(true)
+  // const [loggedIn, setLoggedIn] = useState(false)
   const [currentNetwork, setCurrentNetwork] = useState("General Assembly")
   const [isActive, setIsActive] = useState(false);
 
@@ -40,14 +43,15 @@ function Sidebar(props) {
   {!djangoData
     ? <h1>LOADING...</h1>
     : <>
-      {loggedIn 
+      {/* {props.loggedIn */}
+      {loggedIn
       ? 
       <>
         {/* <UserInfo user={props.user} /> */}
 
         <SidebarRow 
-          title={props.user.name}
-          src={props.user.photo ? props.user.photo : './profileicon.png'}
+          title={user.name}
+          src={user.photo ? user.photo : './profileicon.png'}
         />
 
         <Link to='/'>
@@ -115,7 +119,7 @@ function Sidebar(props) {
       </>
       : 
       <>
-        <Login />
+        <Login setLoggedIn={setLoggedIn} setAccessToken={setAccessToken}/>
       </>
       }
     </>

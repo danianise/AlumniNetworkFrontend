@@ -85,10 +85,12 @@ function PostPreview(props) {
               <h6>{months[month]} {day}, {year} {hour}:{minutes}{amPM}</h6>
 
               {commentData.map((eachComment) => {
+                let commentsThisPost = [] 
                 if(eachPost.id === eachComment.post){
+                  commentsThisPost.push(eachComment)
                   return(
                     <div className='commentContainer'>
-                      <p>{commentData.length} Comment{commentData.length > 1 ? "s" : ""}</p>
+                      <p>{commentsThisPost.length} Comment{commentsThisPost.length > 1 ? "s" : ""}</p>
                       </div>
                   )
                 }

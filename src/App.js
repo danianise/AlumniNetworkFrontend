@@ -23,6 +23,7 @@ import PostForm from './components/PostForm';
 import CommentList from './components/CommentList';
 import CommentDetail from './components/CommentDetail';
 import CommentForm from './components/CommentForm';
+import EventForm from './components/EventForm';
 
 
 function App() {
@@ -54,9 +55,9 @@ function App() {
     networks: networkArray
   }
 
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('user'))
   const [djangoData, setDjangoData] = useState({user})
-  const [accessToken, setAccessToken] = useState("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3OTk1Njg3LCJpYXQiOjE2NTc5OTUzODcsImp0aSI6IjkyMTc5YWMxZjhhMDRiZGNiN2ExZjhmYTE4NzQ3NDNmIiwidXNlcl9pZCI6MX0.Q0RXSBgV5eO_tg_gy2u-jaVw5ajAgwUBLi567l_ktcs")
+  const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'))
 
   useEffect(() => {
     fetch(process.env.REACT_APP_API_URL + 'users/')
@@ -71,7 +72,7 @@ function App() {
     <div className = "app">
       <Header />
       <div className = 'mainContent'>
-        <Sidebar user={user} />
+        <Sidebar user={user} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setAccessToken={setAccessToken}/>
         <div className = 'routes'>
           <Routes>
             {!loggedIn ? <Route path="/" element={<LandingPage />} /> : <Route path="/" element={<ProfileIndex userData={user} />} />}
@@ -213,9 +214,10 @@ function App() {
             
             <Route path='/addnetwork' element={<NetworkForm />} />
             <Route path='/register' element={<RegisterForm />} />
-            <Route path='/login' element={<Login />} />
+            <Route path='/login' element={<Login setLoggedIn={setLoggedIn}/>} />
             <Route path='/addpost' element={<PostForm />} />
             <Route path='/addcomment' element = {<CommentForm accessToken={accessToken}/>} />
+            <Route path='/addevent' element = {<EventForm accessToken={accessToken} />}/>
       
           </Routes>  
         </div>
