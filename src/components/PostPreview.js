@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-function PostPreview(props) {
+function PostPreview({ topic, userData, accessToken }) {
 
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
@@ -13,7 +13,7 @@ function PostPreview(props) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${props.accessToken}`
+        'Authorization': `Bearer ${accessToken}`
       }
     }
     fetch(url, opts)
@@ -22,13 +22,12 @@ function PostPreview(props) {
   }, [])
 
   useEffect(() => {
-    // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3OTkyNjU1LCJpYXQiOjE2NTc5OTIzNTUsImp0aSI6ImNkYjM5Y2I1NTYwNTQ4MjFiNTczYzNlMTQwYzY2YTRhIiwidXNlcl9pZCI6MX0.S5St3fSIHsiPcWdGa8XQ06lorRavhufW0noViYMA_pQ"
     const url = process.env.REACT_APP_API_URL + 'comments/'
     const opts = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${props.accessToken}`
+        'Authorization': `Bearer ${accessToken}`
       }
     }
     fetch(url, opts)
@@ -36,15 +35,17 @@ function PostPreview(props) {
     .then(data => setCommentData(data))
   }, [])
 
-  console.log(props)
+  console.log(postData)
 
-  let topicForRoute = (props.topic).toLowerCase()
+  let topicForRoute = (topic).toLowerCase()
   topicForRoute = topicForRoute.replace(/\s/g, '')
+  
+  console.log([...postData].reverse())
 
   return (<>
 
     <div className='postPreview'>
-      {postData.map((eachPost) => {
+      {[...postData].reverse().map((eachPost) => {
 
         let dateTime = eachPost.timestamp
         let date = dateTime.slice(0, 10)
@@ -71,7 +72,7 @@ function PostPreview(props) {
             return string.substring(0, limit)
         }
 
-        if(props.topic === eachPost.topic){
+        if(topic === eachPost.topic){
 
           // console.log(eachPost)
 
@@ -79,19 +80,18 @@ function PostPreview(props) {
           <Link to={`/conversations/${topicForRoute}/${eachPost.id}`}>
             <div className='postContainer'>
               <h6>
-                {props.userData[0].name}
+                {userData.name}
               </h6>
               <p>{eachPost.body.substring(0, 50)}{eachPost.body.length > 50 ? "..." : ""}</p>
               <h6>{months[month]} {day}, {year} {hour}:{minutes}{amPM}</h6>
 
               {commentData.map((eachComment) => {
-                let commentsThisPost = [] 
+                
                 if(eachPost.id === eachComment.post){
+                  let commentsThisPost = []
                   commentsThisPost.push(eachComment)
                   return(
-                    <div className='commentContainer'>
-                      <p>{commentsThisPost.length} Comment{commentsThisPost.length > 1 ? "s" : ""}</p>
-                      </div>
+                    <><p>{commentsThisPost.length} Comment{commentsThisPost.length > 1 ? "s" : ""}</p></>
                   )
                 }
               })}

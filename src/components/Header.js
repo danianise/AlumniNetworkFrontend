@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Login from './Login'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import "../css/Header.css"
 import HomeIcon from '@mui/icons-material/Home';
@@ -9,9 +9,9 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-function Header() {
+function Header({loggedIn}) {
 
-  const [loggedIn, setLoggedIn] = useState(true)
+  const navigate = useNavigate()
 
   return (
     <div className = "header">
@@ -70,6 +70,7 @@ function Header() {
                 ? <></> 
                 : <NavLink 
                     to="/logout"
+                    onClick={() => navigate.push('/')}
                   >
                     <LogoutIcon />
                     <span className = "header__text header__logout">

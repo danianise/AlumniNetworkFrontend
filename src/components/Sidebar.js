@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import UserInfo from './UserInfo'
 import Login from './Login'
 import { Link, NavLink } from 'react-router-dom'
 
@@ -17,48 +16,56 @@ import CodeOffIcon from '@mui/icons-material/CodeOff';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 
-function Sidebar({user, loggedIn, setLoggedIn, setAccessToken}) {
+function Sidebar({userData, loggedIn, setLoggedIn, accessToken, setAccessToken}) {
 
-  console.log({user, loggedIn, setLoggedIn})
-  
-
-  const [djangoData, setDjangoData] = useState([])
-  // const [loggedIn, setLoggedIn] = useState(false)
-  const [currentNetwork, setCurrentNetwork] = useState("General Assembly")
+  // const [userData, setUserData] = useState([])
   const [isActive, setIsActive] = useState(false);
 
-  useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'users/')
-    .then(res => res.json())
-    .then(data => setDjangoData(data))
-  }, [])
+  // useEffect(() => {
+  //   const url = process.env.REACT_APP_API_URL + 'users/'
+  //   const opts = {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${accessToken}`
+  //     }
+  //   }
+  //   fetch(url, opts)
+  //   .then(res => res.json())
+  //   .then(data => setUserData(data))
+  // }, [])
 
-  // console.log(djangoData[0])
+  // console.log(userData)
 
   const handleClick = event => {
     setIsActive(current => !current);
   };
 
   return (<div className='sidebar'>
-  {!djangoData
+  {!userData
     ? <h1>LOADING...</h1>
     : <>
-      {/* {props.loggedIn */}
       {loggedIn
       ? 
       <>
-        {/* <UserInfo user={props.user} /> */}
-
-        <SidebarRow 
-          title={user.name}
-          src={user.photo ? user.photo : './profileicon.png'}
+        {/* <div className="noHover">
+        <SidebarRow
+          title={userData.name}
+          src={userData.photo ? userData.photo : './profileicon.png'}
         />
+        </div> */}
+
+        <div className="sidebarUser">
+          <Avatar src={userData.photo ? userData.photo : './profileicon.png'} />
+          <h5>
+              {userData.name}
+          </h5>
+        </div>
 
         <Link to='/'>
           <SidebarRow 
             title={"My Profile"}
             Icon={PersonIcon}
-            src=""
           />
         </Link>
 
@@ -66,7 +73,6 @@ function Sidebar({user, loggedIn, setLoggedIn, setAccessToken}) {
           <SidebarRow
             title={"My Networks"}
             Icon={PeopleAltIcon}
-            src="" 
           />
         </Link>
 
@@ -74,7 +80,6 @@ function Sidebar({user, loggedIn, setLoggedIn, setAccessToken}) {
           <SidebarRow
             title={"Events"}
             Icon={EventIcon}
-            src=""
           />
         </Link>
 

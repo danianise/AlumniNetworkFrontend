@@ -65,54 +65,40 @@ function Login({setLoggedIn, setAccessToken}) {
           } else {              
             console.log(data)
 
-            setLoggedIn("ANsuperuser")
+            setLoggedIn(formInfo.username)
             setAccessToken(data.access)
             // add tokens to localstorage here
             localStorage.setItem('access_token', data.access)
-            localStorage.setItem('user', 'ANsuperuser')
+            localStorage.setItem('user', formInfo.username)
             // redirect here
           }
         })
   };
 
   return (
-    // <div className='login'>
-    //     <form onSubmit={handleLogin}>
-    //         <label htmlFor="username"><EmailIcon /></label>
-    //         <input 
-    //             id="username"
-    //             type="text"
-    //             placeholder="username"
-    //             onChange={handleChange}
-    //             // value={formState.username}
-    //         />
-    //         <br />
-    //         <label htmlFor="password"><VpnKeyIcon /></label>
-    //         <input 
-    //             id="password"
-    //             type="password"
-    //             placeholder="password"
-    //             onChange={handleChange}
-    //             // value={formState.password}
-    //         />
-    //         <br />
-    //         <button type="submit">Login</button>
-    //     </form>
-    //     <p>{networkErrMsg}</p>
-    //     <p>{clientErrMsg}</p>
-    // </div>
-    <div>
-    <h3>Login</h3>
-      <form onSubmit={handleLogin}>
-          <label>username:</label>
-          <input id="username" name="username" type="text" onChange={handleChange}/>
-          <label>password:</label>
-          <input id="password" name="username" type="text" onChange={handleChange}/>
-          <button type="submit">Login</button>
-      </form>
-      <p>{networkErrMsg}</p>
-      <p>{clientErrMsg}</p>
-  </div>
+    <div className='login'>
+        <form onSubmit={handleLogin}>
+            <label htmlFor="username"><EmailIcon /></label>
+            <input 
+                id="username"
+                name="username"
+                type="text"
+                onChange={handleChange}
+            />
+            <br />
+            <label htmlFor="password"><VpnKeyIcon /></label>
+            <input 
+                id="password"
+                name="username"
+                type="password" 
+                onChange={handleChange}
+            />
+            <br />
+            <button type="submit">Login</button>
+        </form>
+        <p>{networkErrMsg}</p>
+        <p>{clientErrMsg}</p>
+    </div>
 
   )
 }

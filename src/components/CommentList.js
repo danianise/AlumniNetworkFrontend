@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CommentList() {
+function CommentList({topic, userData, loggedIn, accessToken, postData, commentData}) {
   return (
     <div>CommentList</div>
   )

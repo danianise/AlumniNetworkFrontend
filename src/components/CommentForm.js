@@ -1,10 +1,10 @@
+import { getPopoverUtilityClass } from '@mui/material';
 import React, { useState, useEffect } from 'react'
 
-function CommentForm(props) {
+function CommentForm({post, accessToken, getPosts, getComments}) {
 
-  console.log(props)
   const initialState = {
-    post: props.post,
+    post: post,
     author: '1',
     body: ''
   };
@@ -24,14 +24,20 @@ function CommentForm(props) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${props.accessToken}`
+        'Authorization': `Bearer ${accessToken}`
       },
       body: JSON.stringify(formState)
     }
 
     fetch(url, options)
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+        getPosts()
+        getComments()
+        console.log(data)
+      })
+    
+    setFormState(initialState)
   };
   
   return (
@@ -46,7 +52,7 @@ function CommentForm(props) {
       <input
         id="post"
         type="hidden"
-        value={props.post}
+        value={post}
       />
       <button type="submit">Submit</button>
     </form>

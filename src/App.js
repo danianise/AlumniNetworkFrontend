@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom" 
+import { useNavigate } from 'react-router-dom'
 
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -8,6 +9,7 @@ import Sidebar from './components/Sidebar';
 import NetworkForm from './components/NetworkForm';
 import RegisterForm from './components/RegisterForm';
 import Login from './components/Login';
+import LogOut from './components/LogOut';
 
 import LandingPage from './components/LandingPage';
 import ProfileIndex from './components/ProfileIndex';
@@ -55,169 +57,358 @@ function App() {
     networks: networkArray
   }
 
+  const navigate = useNavigate()
+
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('user'))
-  const [djangoData, setDjangoData] = useState({user})
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'))
+  const [networkData, setNetworkData] = useState([])
+  const [userData, setUserData] = useState({user})
+  const [postData, setPostData] = useState([])
+  const [commentData, setCommentData] = useState([])
+  const [eventData, setEventData] = useState([])
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'users/')
-    .then(res => res.json())
-    .then(data => setDjangoData(data))
+    // getNetworks()
+    // getUsers()
+    // getPosts()
+    // getComments()
+    // getEvents()
   }, [])
 
+  function getNetworks() {
+    const url = process.env.REACT_APP_API_URL + 'networks/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': `Bearer ${accessToken}`
+      }
+    }
+    fetch(url, opts)
+    .then(res => res.json())
+    .then(data => setNetworkData(data))
+  }
 
-  console.log(djangoData)
+  function getUsers() {
+    const url = process.env.REACT_APP_API_URL + 'users/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': `Bearer ${accessToken}`
+      }
+    }
+    fetch(url, opts)
+    .then(res => res.json())
+    .then(data => setUserData(data))
+  }
+
+  function getPosts() {
+    const url = process.env.REACT_APP_API_URL + 'posts/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    }
+    fetch(url, opts)
+    .then(res => res.json())
+    .then(data => setPostData(data))
+  }
+
+  function getComments() {
+    const url = process.env.REACT_APP_API_URL + 'comments/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    }
+    fetch(url, opts)
+    .then(res => res.json())
+    .then(data => setCommentData(data))
+  }
+
+  function getEvents() {
+    const url = process.env.REACT_APP_API_URL + 'events/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    }
+    fetch(url, opts)
+    .then(res => res.json())
+    .then(data => setEventData(data))
+  }
 
   return (
     <div className = "app">
-      <Header />
+      <Header loggedIn={loggedIn}/>
       <div className = 'mainContent'>
-        <Sidebar user={user} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setAccessToken={setAccessToken}/>
+        <Sidebar
+          // userData={userData}
+          userData={user}
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          setAccessToken={setAccessToken}
+          // accessToken={accessToken}
+        />
         <div className = 'routes'>
           <Routes>
-            {!loggedIn ? <Route path="/" element={<LandingPage />} /> : <Route path="/" element={<ProfileIndex userData={user} />} />}
-            <Route path='/networks' element={<NetworkIndex headline = "My Networks"/>} />
-            <Route path='/conversations' element={<ConversationIndex />} />
-            <Route path='/events' element={<EventIndex accessToken={accessToken}/>} />
+            {!loggedIn 
+              ? <Route path="/" element={<LandingPage />} />
+              : <Route path="/" element={
+                <ProfileIndex
+                  networkData={networkData}
+                  userData={user}
+                  // getNetworks={getNetworks}
+                  // getUsers={getUsers} 
+                />
+              }/>
+            }
+            
+            <Route path="/logout" element = {
+              <LogOut
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+                setAccessToken={setAccessToken}
+              />
+            }/>
+            
+
+            <Route path='/networks' element={<NetworkIndex networkData={networkData} headline = "My Networks"/>} />
+            {/* <Route path='/conversations' element={<ConversationIndex />} /> */}
+            <Route path='/events' element={<EventIndex accessToken={accessToken} />} />
 
             <Route path='/conversations/life' element = {
               <PostList 
                 topic={'Life'}
-                userData={djangoData}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                userData={user}
+                postData={postData}
+                commentData={commentData}
+                getPosts={getPosts}
+                getComments={getComments}
               />
             }/>
             <Route path='/conversations/life/:postId' element = {
               <PostDetail
                 topic={'Life'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                getPosts={getPosts}
+                getComments={getComments}
               />
             }/>
             <Route path ='/conversations/life/:postId/comments' element = {
               <CommentList
                 topic={'Life'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                postData={postData}
+                commentData={commentData}
+                // getPosts={getPosts}
+                // getComments={getComments}
               />
             }/>
             <Route path='/conversations/life/:postId/comments/:commentId' element={
               <CommentDetail
                 topic={'Life'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                postData={postData}
+                commentData={commentData}
+                // getPosts={getPosts}
+                // getComments={getComments}
               />
             }/>
 
             <Route path='/conversations/partytime' element = {
               <PostList
                 topic={'Party Time'}
-                userData={djangoData}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                userData={user}
+                postData={postData}
+                commentData={commentData}
+                getPosts={getPosts}
+                getComments={getComments}
               />
             }/>
             <Route path='/conversations/partytime/:postId' element = {
               <PostDetail
                 topic={'Party Time'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                getPosts={getPosts}
+                getComments={getComments}
               />
             }/>
             <Route path ='/conversations/partytime/:postId/comments' element = {
               <CommentList
                 topic={'Party Time'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                postData={postData}
+                commentData={commentData}
+                // getPosts={getPosts}
+                // getComments={getComments}
               />
             }/>
             <Route path='/conversations/partytime/:postId/comments/:commentId' element={
               <CommentDetail
                 topic={'Party Time'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                postData={postData}
+                commentData={commentData}
+                // getPosts={getPosts}
+                // getComments={getComments}
               />
             }/>
 
             <Route path='/conversations/industry' element = {
               <PostList
                 topic={'Industry'}
-                userData={djangoData}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                userData={user}
+                postData={postData}
+                commentData={commentData}
+                getPosts={getPosts}
+                getComments={getComments}
               />
             }/>
             <Route path='/conversations/industry/:postId' element = {
               <PostDetail
                 topic={'Industry'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                getPosts={getPosts}
+                getComments={getComments}
               />
             }/>
             <Route path ='/conversations/industry/:postId/comments' element = {
               <CommentList
                 topic={'Industry'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                postData={postData}
+                commentData={commentData}
+                // getPosts={getPosts}
+                // getComments={getComments}
               />
             }/>
             <Route path='/conversations/industry/:postId/comments/:commentId' element={
               <CommentDetail
                 topic={'Industry'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                postData={postData}
+                commentData={commentData}
+                // getPosts={getPosts}
+                // getComments={getComments}
               />
             }/>
 
             <Route path='/conversations/cryingroom' element = {
               <PostList
                 topic={'Crying Room'}
-                userData={djangoData}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                userData={user}
+                postData={postData}
+                commentData={commentData}
+                getPosts={getPosts}
+                getComments={getComments}
               />
             }/>
             <Route path='/conversations/cryingroom/:postId' element = {
               <PostDetail
                 topic={'Crying Room'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                getPosts={getPosts}
+                getComments={getComments}
               />
             }/>
             <Route path ='/conversations/cryingroom/:postId/comments' element = {
               <CommentList
                 topic={'Crying Room'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                postData={postData}
+                commentData={commentData}
+                // getPosts={getPosts}
+                // getComments={getComments}
               />
             }/>
             <Route path='/conversations/cryingroom/:postId/comments/:commentId' element={
               <CommentDetail
                 topic={'Crying Room'}
-                userData={djangoData}
+                // getUsers={getUsers}
+                userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                postData={postData}
+                commentData={commentData}
+                // getPosts={getPosts}
+                // getComments={getComments}
               />
             }/>
             
             <Route path='/addnetwork' element={<NetworkForm />} />
             <Route path='/register' element={<RegisterForm />} />
             <Route path='/login' element={<Login setLoggedIn={setLoggedIn}/>} />
-            <Route path='/addpost' element={<PostForm />} />
-            <Route path='/addcomment' element = {<CommentForm accessToken={accessToken}/>} />
-            <Route path='/addevent' element = {<EventForm accessToken={accessToken} />}/>
+            {/* <Route path='/addpost' element={
+              <PostForm
+                accessToken={accessToken}
+                getUsers={getUsers}
+                getPosts={getPosts}
+                getComments={getComments}
+              />
+            }/> */}
+            {/* <Route path='/addcomment' element = {
+              <CommentForm 
+                accessToken={accessToken}
+                getUsers={getUsers}
+                getPosts={getPosts}
+                getComments={getComments}
+                />
+            }/> */}
+            <Route path='/addevent' element = {
+              <EventForm
+                accessToken={accessToken} 
+                getEvents={getEvents}
+              />
+            }/>
       
           </Routes>  
         </div>

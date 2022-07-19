@@ -3,18 +3,17 @@ import React, { useEffect, useState } from 'react'
 import '../css/EventIndex.css'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
-function EventIndex(props) {
+function EventIndex({accessToken}) {
 
   const [eventData, setEventData] = useState([])
 
   useEffect(() => {
-    // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3OTkyNDU4LCJpYXQiOjE2NTc5OTIxNTgsImp0aSI6IjU3MjY3YmZhODJjZDRjMWNhMGFjMmVmM2IxMDA2OTRkIiwidXNlcl9pZCI6MX0.cNJhd3ftMSCjMp5sUXnUbzicfqleZYzNdNBN6_6cOGo"
     const url = process.env.REACT_APP_API_URL + 'events/'
     const opts = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${props.accessToken}`
+        'Authorization': `Bearer ${accessToken}`
       }
     }
     fetch(url, opts)

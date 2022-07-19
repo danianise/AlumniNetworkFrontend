@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import NetworkIndex from './NetworkIndex'
 import { Link } from 'react-router-dom'
 
@@ -6,24 +6,41 @@ import '../css/ProfileIndex.css'
 import PersonIcon from '@mui/icons-material/Person';
 
 
-function ProfileIndex(props) {
+function ProfileIndex({userData, networkData}) {
 
-  console.log(props)
+    // const [userData, setUserData] = useState([])
+
+    // useEffect(() => {
+    //     const url = process.env.REACT_APP_API_URL + 'users/'
+    // const opts = {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     // 'Authorization': `Bearer ${accessToken}`
+    //   }
+    // }
+    // fetch(url, opts)
+    // .then(res => res.json())
+    // .then(data => setUserData(data))
+    //   }, [])
+
+    // console.log(networkData)
+    // console.log(userData)
 
   return (
     <div className='profileIndex'>
         <h1>
-            [welcome, {props.userData.name}]
+            [welcome, {userData.name}]
         </h1>
         <div className = 'profileInfoContainer'>
             <div className='profileInfo'>
             <Link to=''>Edit Profile</Link>
                 <div className='profilePhoto'>
-                        <img src={props.userData.photo ? props.userData.photo : './profileicon.png'} alt='User Profile Picture'/><br />
+                        <img src={userData.photo ? userData.photo : './profileicon.png'} alt='User Profile Picture'/><br />
                     </div>
                 <p className='nameLocation'>
-                    [{props.userData.name}]<br />
-                    {props.userData.location}
+                    [{userData.name}]<br />
+                    {userData.location}
                 </p>
             </div>
             <ul>
@@ -33,34 +50,34 @@ function ProfileIndex(props) {
                     </a>
                 </li>
                 <li>
-                    <a href={props.userData.linkedin}>
+                    <a href={userData.linkedin}>
                         <img className='contactIcons' src='/LinkedInLogo.png' alt='LinkedIn Icon'/>
                     </a>
                 </li>
                 <li>
-                    <a href={props.userData.github}>
+                    <a href={userData.github}>
                         <img className='contactIcons' src='/GitHubLogo.png' alt='GitHub Icon'/>
                     </a>
                 </li>
                 <li>
-                    <a href={props.userData.facebook}>
+                    <a href={userData.facebook}>
                         <img className='contactIcons' src='/FacebookLogo.png' alt='Facebook Icon'/>
                     </a>
                 </li>
                 <li>
-                    <a href={props.userData.twitter}>
+                    <a href={userData.twitter}>
                         <img className='contactIcons' src='/TwitterLogo.png' alt='Twitter Icon'/>
                     </a>
                 </li>
                 <li>
-                    <a href={props.userData.instagram}>
+                    <a href={userData.instagram}>
                         <img className='contactIcons' src='/InstagramLogo.png' alt='Instagram Icon'/>
                     </a>
                 </li>
             </ul>
 
             <div className='networkInfo'>
-                <NetworkIndex headline="My Networks"/>
+                <NetworkIndex networkData={networkData} headline="My Networks"/>
             </div>
         </div>
     </div>

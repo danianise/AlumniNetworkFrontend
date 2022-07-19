@@ -2,25 +2,35 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../css/NetworkIndex.css'
 
-function NetworkIndex(props) {
+function NetworkIndex({headline}) {
 
-  const [djangoData, setDjangoData] = useState([])
+  const [networkData, setNetworkData] = useState([])
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + 'networks/')
+  const url = process.env.REACT_APP_API_URL + 'networks/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': `Bearer ${accessToken}`
+      }
+    }
+    fetch(url, opts)
     .then(res => res.json())
-    // .then(data => console.log(data))
-    .then(data => setDjangoData(data))
+    .then(data => setNetworkData(data))
   }, [])
+  
+
+  // console.log(networkData)
 
   return (
     <div className='networkIndex'>
-      {props.headline
-      ? <h1>[{props.headline}]</h1>
+      {headline
+      ? <h1>[{headline}]</h1>
       : <></>
       }
       <ul>
-          {djangoData.map(function(each, index){
+          {networkData.map(function(each, index){
                 return(
                     <img key={index} src={each.logo} alt = '{each.name} Logo' />
                 )

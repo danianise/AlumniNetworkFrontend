@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react'
 import CommentForm from './CommentForm'
 import { useParams } from 'react-router-dom'
 
-function PostDetail(props) {
-
-  console.log(props)
+function PostDetail({topic, userData, loggedIn, accessToken, getPosts, getComments}) {
 
   const params = useParams()
 
@@ -12,13 +10,12 @@ function PostDetail(props) {
   const [commentData, setCommentData] = useState([])
 
   useEffect(() => {
-    // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3OTkyNDU4LCJpYXQiOjE2NTc5OTIxNTgsImp0aSI6IjU3MjY3YmZhODJjZDRjMWNhMGFjMmVmM2IxMDA2OTRkIiwidXNlcl9pZCI6MX0.cNJhd3ftMSCjMp5sUXnUbzicfqleZYzNdNBN6_6cOGo"
     const url = process.env.REACT_APP_API_URL + 'posts/'
     const opts = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${props.accessToken}`
+        'Authorization': `Bearer ${accessToken}`
       }
     }
     fetch(url, opts)
@@ -26,20 +23,13 @@ function PostDetail(props) {
     .then(data => setPostData(data))
   }, [])
 
-  // useEffect(() => {
-  //   fetch(process.env.REACT_APP_API_URL + 'posts/')
-  //   .then(res => res.json())
-  //   .then(data => setPostData(data))
-  // }, [])
-
   useEffect(() => {
-    // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3OTkyNjU1LCJpYXQiOjE2NTc5OTIzNTUsImp0aSI6ImNkYjM5Y2I1NTYwNTQ4MjFiNTczYzNlMTQwYzY2YTRhIiwidXNlcl9pZCI6MX0.S5St3fSIHsiPcWdGa8XQ06lorRavhufW0noViYMA_pQ"
     const url = process.env.REACT_APP_API_URL + 'comments/'
     const opts = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${props.accessToken}`
+        'Authorization': `Bearer ${accessToken}`
       }
     }
     fetch(url, opts)
@@ -47,8 +37,7 @@ function PostDetail(props) {
     .then(data => setCommentData(data))
   }, [])
 
-  console.log(params)
-  console.log(props)
+  // console.log(params)
 
   return (<>
     <div className="postDetail">
@@ -85,7 +74,7 @@ function PostDetail(props) {
 
               {commentData.map((eachComment) => {
 
-                console.log(eachComment)
+                // console.log(eachComment)
 
                 let commentDateTime = eachComment.timestamp
                 let commentDate = commentDateTime.slice(0, 10)
@@ -124,7 +113,7 @@ function PostDetail(props) {
     <div>
       <hr />
       <h5>...add a comment</h5>
-      <CommentForm post={params.postId} accessToken={props.accessToken}/>
+      <CommentForm post={params.postId} accessToken={accessToken} getPosts={getPosts} getComments={getComments} />
     </div>
   </>)
 }
