@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
-import axios from 'axios'
+
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import { Avatar } from "@mui/material"
 
 function PostForm({topic, accessToken, getPosts, getComments}) {
 
@@ -16,6 +18,7 @@ function PostForm({topic, accessToken, getPosts, getComments}) {
     topic: topic,
     body: '',
     author: '1',
+    imageURL: ''
     // user_string: 'simple_user'
 
   }
@@ -52,32 +55,42 @@ function PostForm({topic, accessToken, getPosts, getComments}) {
         res.json()
       })
       .then(data => {
-        getPosts()
-        getComments()
+        // getPosts()
+        // getComments()
         console.log(data)
       })
       .catch(err => {
         console.log(err)
-        navigate('/logout')
       })
-
+      navigate(`/conversations/${topicForRoute}`)
     setFormData(initialState)
   }
 
   // console.log(djangoData)
 
   return (
-    <div>
+    <div className="postForm">
+      <Avatar />
       <form onSubmit={handleSubmit}>
         <textarea
           value={formData.body}
           rows='10'
           cols='60'
           id='body'
-          placeholder='Body'
+          placeholder="What's on your mind?"
           onChange={handleChange}
           type='text' 
         />
+        <br />
+        <div className="imageURL">
+          <PhotoCameraIcon/>
+          <input 
+            value={formData.imageURL}
+            id='imageURL'
+            placeholder='Add a Photo (URL)'
+            onChange={handleChange}
+          />
+        </div>
         <br />
         <button type='submit'>POST</button>
       </form>

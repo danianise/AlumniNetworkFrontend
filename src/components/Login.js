@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import '../css/Login.css'
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import EmailIcon from '@mui/icons-material/Email';
+import {useNavigate} from 'react-router-dom'
 
-function Login({setLoggedIn, setAccessToken}) {
+function Login({setLoggedIn, setAccessToken, setRefreshToken}) {
 
   const loginEndpoint = 'api/token/'
+  const navigate = useNavigate()
 
   const initialState = { username: '', password: '' };
   const [formInfo, setFormInfo] = useState(initialState);
@@ -69,8 +71,10 @@ function Login({setLoggedIn, setAccessToken}) {
             setAccessToken(data.access)
             // add tokens to localstorage here
             localStorage.setItem('access_token', data.access)
+            localStorage.setItem('refresh_token', data.refresh)
             localStorage.setItem('user', formInfo.username)
             // redirect here
+            navigate('/')
           }
         })
   };

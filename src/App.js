@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from "react-router-dom" 
 import { useNavigate } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
 
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -61,6 +62,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('user'))
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'))
+  const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refresh_token'))
   const [networkData, setNetworkData] = useState([])
   const [userData, setUserData] = useState({user})
   const [postData, setPostData] = useState([])
@@ -147,6 +149,7 @@ function App() {
 
   return (
     <div className = "app">
+      <AuthProvider>
       <Header loggedIn={loggedIn}/>
       <div className = 'mainContent'>
         <Sidebar
@@ -155,6 +158,7 @@ function App() {
           loggedIn={loggedIn}
           setLoggedIn={setLoggedIn}
           setAccessToken={setAccessToken}
+          setRefreshToken={setRefreshToken}
           // accessToken={accessToken}
         />
         <div className = 'routes'>
@@ -176,12 +180,13 @@ function App() {
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
                 setAccessToken={setAccessToken}
+                setRefreshToken={setRefreshToken}
               />
             }/>
             
 
             <Route path='/networks' element={<NetworkIndex networkData={networkData} headline = "My Networks"/>} />
-            {/* <Route path='/conversations' element={<ConversationIndex />} /> */}
+            <Route path='/conversations' element={<ConversationIndex />} />
             <Route path='/events' element={<EventIndex accessToken={accessToken} />} />
 
             <Route path='/conversations/life' element = {
@@ -189,6 +194,7 @@ function App() {
                 topic={'Life'}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
+                refreshToken={refreshToken}
                 userData={user}
                 postData={postData}
                 commentData={commentData}
@@ -413,6 +419,7 @@ function App() {
           </Routes>  
         </div>
       </div>
+    </AuthProvider>
     </div>
   );
 }

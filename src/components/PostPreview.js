@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import {Avatar} from '@mui/material'
 
 function PostPreview({ topic, userData, accessToken }) {
 
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
   // const [userData, setUserData] = useState([])
+
+  let commentsThisPost = []
 
   useEffect(() => {
     const url = process.env.REACT_APP_API_URL + 'posts/'
@@ -17,30 +20,38 @@ function PostPreview({ topic, userData, accessToken }) {
       }
     }
     fetch(url, opts)
+    .then(
+      fetch(process.env.REACT_APP_API_URL + 'comments/', opts)
+      .then(res => res.json())
+      .then(data => setCommentData(data))
+    )
     .then(res => res.json())
     .then(data => setPostData(data))
   }, [])
 
-  useEffect(() => {
-    const url = process.env.REACT_APP_API_URL + 'comments/'
-    const opts = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
-      }
-    }
-    fetch(url, opts)
-    .then(res => res.json())
-    .then(data => setCommentData(data))
-  }, [])
+  // useEffect(() => {
+  //   const url = process.env.REACT_APP_API_URL + 'comments/'
+  //   const opts = {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${accessToken}`
+  //     }
+  //   }
+  //   fetch(url, opts)
+  //   .then(res => res.json())
+  //   .then(data => setCommentData(data))
+  // }, [])
 
-  console.log(postData)
+  // console.log(postData)
+  // console.log(commentData)
 
   let topicForRoute = (topic).toLowerCase()
   topicForRoute = topicForRoute.replace(/\s/g, '')
   
-  console.log([...postData].reverse())
+  // console.log([...postData].reverse())
+
+
 
   return (<>
 
@@ -79,17 +90,19 @@ function PostPreview({ topic, userData, accessToken }) {
           return(<>
           <Link to={`/conversations/${topicForRoute}/${eachPost.id}`}>
             <div className='postContainer'>
-              <h6>
-                {userData.name}
+              <h6 className = "userHeader">
+                <Avatar src="" className='postAvatar'/> {userData.name}
               </h6>
-              <p>{eachPost.body.substring(0, 50)}{eachPost.body.length > 50 ? "..." : ""}</p>
+              {eachPost.imageURL ? <img src={eachPost.imageURL} alt="Image input by poster"/> : ""}
+              <p className="postBody">{eachPost.body.substring(0, 50)}{eachPost.body.length > 50 ? "..." : ""}</p>
               <h6>{months[month]} {day}, {year} {hour}:{minutes}{amPM}</h6>
-
+              
               {commentData.map((eachComment) => {
                 
                 if(eachPost.id === eachComment.post){
-                  let commentsThisPost = []
+                  // console.log(eachComment)
                   commentsThisPost.push(eachComment)
+                  
                   return(
                     <><p>{commentsThisPost.length} Comment{commentsThisPost.length > 1 ? "s" : ""}</p></>
                   )

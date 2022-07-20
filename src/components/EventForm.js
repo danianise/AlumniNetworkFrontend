@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function EventForm(props) {
+function EventForm({accessToken}) {
 
   const initialState = { 
     name: '',
@@ -22,7 +22,7 @@ function EventForm(props) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${props.accessToken}`
+        'Authorization': `Bearer ${accessToken}`
       },
       body: JSON.stringify(formState)
     }

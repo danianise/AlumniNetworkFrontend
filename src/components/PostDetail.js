@@ -2,7 +2,18 @@ import React, { useState, useEffect } from 'react'
 import CommentForm from './CommentForm'
 import { useParams } from 'react-router-dom'
 
+import { Avatar } from '@mui/material'
+import "../css/PostList.css"
+
 function PostDetail({topic, userData, loggedIn, accessToken, getPosts, getComments}) {
+  
+let timestamp = "2022-07-20T00:18:28.497677Z"
+let hour = timestamp.slice(11, 13)
+
+if (hour < 1){
+  hour = 12
+}
+console.log(hour)
 
   const params = useParams()
 
@@ -62,15 +73,21 @@ function PostDetail({topic, userData, loggedIn, accessToken, getPosts, getCommen
         if (hour > 12){
         hour = hour-12
         amPM = "PM"
+        } else if (hour < 1){
+          hour = 12
+          amPM = "AM"
         }
 
+        
         if(parseInt(params.postId) === eachPost.id) {
           return(<>
-            <h6>
-              Author of post here
-            </h6>
-            <p>{eachPost.body}</p>
-            <h6>{months[month]} {day}, {year} {hour}:{minutes}{amPM}</h6>
+            <div className="postContainer">
+            <h6 className = "userHeader">
+                <Avatar src="" className='postAvatar'/> {userData.name}
+              </h6>
+              <p>{eachPost.body}</p>
+              <h6>{months[month]} {day}, {year} {hour}:{minutes}{amPM}</h6>
+            </div>
 
               {commentData.map((eachComment) => {
 
@@ -95,7 +112,11 @@ function PostDetail({topic, userData, loggedIn, accessToken, getPosts, getCommen
                 if (commentHour > 12){
                 commentHour = commentHour-12
                 commentAMPM = "PM"
+                } else if (commentHour < 1){
+                  commentHour = 12
+                  amPM = "AM"
                 }
+
                 if(eachPost.id === eachComment.post){
                   return(
                     <div className='commentContainer'>

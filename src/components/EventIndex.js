@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import {Link} from 'react-router-dom'
 
 import '../css/EventIndex.css'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import AddIcon from '@mui/icons-material/Add';
 
 function EventIndex({accessToken}) {
 
@@ -23,7 +25,8 @@ function EventIndex({accessToken}) {
 
   return (
     <div className='eventIndex'>
-      <h1>[Events]</h1>
+      <h1>[Events] <Link to='/addevent'>(+)</Link></h1>
+
       {eventData.map((each) => {
         let dateTime = each.dateTime
         let date = dateTime.slice(0, 10)

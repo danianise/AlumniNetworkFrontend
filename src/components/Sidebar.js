@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Login from './Login'
 import { Link, NavLink } from 'react-router-dom'
 
 import '../css/Sidebar.css'
 import SidebarRow from './SidebarRow'
+import AuthContext from '../context/AuthContext'
 
 import { Avatar } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person';
@@ -16,10 +17,12 @@ import CodeOffIcon from '@mui/icons-material/CodeOff';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 
-function Sidebar({userData, loggedIn, setLoggedIn, accessToken, setAccessToken}) {
+function Sidebar({userData, loggedIn, setLoggedIn, accessToken, setAccessToken, setRefreshToken}) {
 
   // const [userData, setUserData] = useState([])
   const [isActive, setIsActive] = useState(false);
+
+  let {name} = useContext(AuthContext)
 
   // useEffect(() => {
   //   const url = process.env.REACT_APP_API_URL + 'users/'
@@ -58,7 +61,7 @@ function Sidebar({userData, loggedIn, setLoggedIn, accessToken, setAccessToken})
         <div className="sidebarUser">
           <Avatar src={userData.photo ? userData.photo : './profileicon.png'} />
           <h5>
-              {userData.name}
+              {name}
           </h5>
         </div>
 
@@ -124,7 +127,11 @@ function Sidebar({userData, loggedIn, setLoggedIn, accessToken, setAccessToken})
       </>
       : 
       <>
-        <Login setLoggedIn={setLoggedIn} setAccessToken={setAccessToken}/>
+        <Login
+          setLoggedIn={setLoggedIn}
+          setAccessToken={setAccessToken}
+          setRefreshToken={setRefreshToken}  
+        />
       </>
       }
     </>
