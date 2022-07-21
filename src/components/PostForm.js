@@ -6,11 +6,7 @@ import { Avatar } from "@mui/material"
 
 function PostForm({topic, accessToken, getPosts, getComments}) {
 
-  // useEffect(() => {
-  //   fetch(process.env.REACT_APP_API_URL + 'users/')
-  //   .then(res => res.json())
-  //   .then(data => setDjangoData(data))
-  // }, [])
+  const [users, setUsers]=useState(null)
 
   const navigate = useNavigate()
 
@@ -66,12 +62,15 @@ function PostForm({topic, accessToken, getPosts, getComments}) {
     setFormData(initialState)
   }
 
-  // console.log(djangoData)
-
   return (
     <div className="postForm">
       <Avatar />
       <form onSubmit={handleSubmit}>
+      <input
+        id="author"
+        type="hidden"
+        value={localStorage.getItem('user')}
+      />
         <textarea
           value={formData.body}
           rows='10'

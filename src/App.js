@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from "react-router-dom" 
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 
 import Header from './components/Header';
@@ -21,11 +21,9 @@ import EventIndex from './components/EventIndex';
 
 import PostList from './components/PostList';
 import PostDetail from './components/PostDetail';
-import PostForm from './components/PostForm';
 
 import CommentList from './components/CommentList';
 import CommentDetail from './components/CommentDetail';
-import CommentForm from './components/CommentForm';
 import EventForm from './components/EventForm';
 
 
@@ -58,24 +56,30 @@ function App() {
     networks: networkArray
   }
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('user'))
+  const [users, setUsers] = useState(null)
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'))
   const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refresh_token'))
-  const [networkData, setNetworkData] = useState([])
+  const [networkData, setNetworkData] = useState([networkArray])
   const [userData, setUserData] = useState({user})
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
   const [eventData, setEventData] = useState([])
 
   useEffect(() => {
-    // getNetworks()
-    // getUsers()
-    // getPosts()
-    // getComments()
-    // getEvents()
-  }, [])
+    const url = process.env.REACT_APP_API_URL + 'users/'
+    const opts = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  fetch(url, opts)
+  .then(res => res.json())
+  .then(data => setUsers(data))
+    }, [])
 
   function getNetworks() {
     const url = process.env.REACT_APP_API_URL + 'networks/'
@@ -169,6 +173,7 @@ function App() {
                 <ProfileIndex
                   networkData={networkData}
                   userData={user}
+                  users={users}
                   // getNetworks={getNetworks}
                   // getUsers={getUsers} 
                 />
@@ -391,7 +396,7 @@ function App() {
             }/>
             
             <Route path='/addnetwork' element={<NetworkForm />} />
-            <Route path='/register' element={<RegisterForm />} />
+            <Route path='/register' element={<RegisterForm setLoggedIn={setLoggedIn}/>} />
             <Route path='/login' element={<Login setLoggedIn={setLoggedIn}/>} />
             {/* <Route path='/addpost' element={
               <PostForm

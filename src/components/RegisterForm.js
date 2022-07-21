@@ -1,147 +1,109 @@
-import React, { useEffect, useState } from 'react'
-import '../css/RegisterForm.css'
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom'
 
-function RegisterForm() {
+function RegisterForm({setLoggedIn}) {
 
-  const initialState = { 
-    name: '',
-    email: '',
-    photo: '',
-    location: '',
-    linkedin: '',
-    github: '',
-    facebook: '',
-    twitter: '',
-    instagram: '',
-    network: '',
-    password: ''
-  };
-  const [formState, setFormState] = useState(initialState);
+    const signUpEndpoint = 'api/auth/signup/'
 
-  const handleChange = event => {
-    setFormState({ ...formState, [event.target.id]: event.target.value });
-  };
+    const [formInfo, setFromInfo] = useState({username:'', password:''})
+    const [networkErrMsg, setNetworkErrMsg] = useState(null)
+    const [clientErrMsg, setClientErrMsg] = useState(null)
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    // do something with the data in the component state
-    console.log(formState);
-    // clear the form
-    setFormState(initialState);
-  };
+    const navigate = useNavigate()
 
-  return (
-    <div className='registerForm'>
-         <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name</label>
-      <input
-        id="name"
-        type="text"
-        onChange={handleChange}
-        value={formState.name}
-      /><br />
+    const statusCodeToErr = (responseObj) => {
+        const statusCode = responseObj.status
+        let errorText = ''
+        responseObj.text().then(text => {
+            errorText = text
+        
+            setNetworkErrMsg(`Network Error of code: ${statusCode}` +
+                             ` | response text: ${errorText}`
+            )
+        })
+    }
 
-      <label htmlFor="email">Email:</label>
-      <input
-        id="email"
-        type="email"
-        onChange={handleChange}
-        value={formState.email}
-      /><br />
+    const clientFormValidation = (formInfo) => {
+        const blankFields = Object.entries(formInfo)
+                                  .filter(kv => kv[1] === '')
+        if (blankFields.length > 0) {
+            setClientErrMsg(`${blankFields[0][0]} can not be blank`)
+            return false
+        }
+        setClientErrMsg(null)
+        return true
+    }
 
-      <label htmlFor="photo">Profile Photo (URL):</label>
-      <input
-        id="photo"
-        type="url"
-        onChange={handleChange}
-        value={formState.photo}
-      /><br />
+    const handleChange = (e) => {
+        setFromInfo({...formInfo, [e.target.id]: e.target.value})
+    }
+  
+    const handleLogin = (e) => {
+        
+        e.preventDefault()
 
-      {/* <label htmlFor="photo">Profile Photo:</label>
-      <input
-        id="photo" 
-        type="file"
-        onChange={handleChange}
-        value={formState.photo}
-      /> */}
+        const submitFormInfo = {...formInfo, email:`${formInfo.username}`}
+        console.log(submitFormInfo)
 
-      <label htmlFor="location">Location:</label>
-      <input
-        id="location"
-        type="text"
-        onChange={handleChange}
-        value={formState.location}
-      /><br />
+        setNetworkErrMsg(null)
+        if (!clientFormValidation(formInfo)) {
+            return
+        }
+        
+        const apiUrl = process.env.REACT_APP_API_URL
+        
+        fetch( apiUrl + signUpEndpoint, 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/json',
+                    },
+                    body: JSON.stringify(submitFormInfo)
+                }
+        )
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    statusCodeToErr(res)
+                    return Promise.resolve(null)
+                }
+            })
+            .then(data => {
+                if (!data) {
+                    console.log(`problem with network request: ${networkErrMsg}`)
+                } else {
+                    
+                    console.log(data)
+                    
+                    // setUserSignedIn(data.username)
 
-      <label htmlFor="linkedin">LinkedIn (URL):</label>
-      <input
-        id="linkedin"
-        type="url"
-        onChange={handleChange}
-        value={formState.linkedin}
-      /><br />
+                    // add call to login
+                    // redirect here
 
-      <label htmlFor="github">GitHub (URL):</label>
-      <input
-        id="github"
-        type="url"
-        onChange={handleChange}
-        value={formState.github}
-      /><br />
+                    navigate('/')
+                }
+            })
+    }
 
-      <label htmlFor="facebook">Facebook (URL):</label>
-      <input
-        id="facebook"
-        type="url"
-        onChange={handleChange}
-        value={formState.facebook}
-      /><br />
-
-      <label htmlFor="twitter">Twitter (URL):</label>
-      <input
-        id="twitter"
-        type="url"
-        onChange={handleChange}
-        value={formState.twitter}
-      /><br />
-
-      <label htmlFor="instagram">Instagram (URL):</label>
-      <input
-        id="instagram"
-        type="url"
-        onChange={handleChange}
-        value={formState.instagram}
-      /><br />
-
-      <label htmlFor="network">Which Network would you like to join? </label>
-      <select
-        id="network"
-        onChange={handleChange}
-        value={formState.network}
-      >
-        <option value="General Assembly">General Assembly</option>
-        <option value="Miss Hall's School">Miss Hall's School</option>
-      </select><br />
-
-      <label htmlFor="password">Password:</label>
-      <input
-        id="password"
-        type="password"
-        onChange={handleChange}
-        value={formState.password}
-      /><br />
-
-      <label htmlFor="verify">Verify Password:</label>
-      <input
-        id="verify"
-        type="password"
-        onChange={handleChange}
-        value={formState.password}
-      /><br />
-      <button type="submit">Submit</button>
-    </form>
+    return (
+    <div>
+      <h3>Sign Up</h3>
+        <form onSubmit={handleLogin}>
+            <label>Email:</label>
+            <input id="username" name="username" type="text" onChange={handleChange}/><br />
+            <label>Password:</label>
+            <input id="password" name="password" type="text" onChange={handleChange}/><br />
+            <label>First Name:</label>
+            <input id="first_name" name="first_name" type="text" onChange={handleChange}/><br />
+            <label>Last Name:</label>
+            <input id="last_name" name="last_name" type="text" onChange={handleChange}/><br />
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>{networkErrMsg}</p>
+        <p>{clientErrMsg}</p>
     </div>
-  )
+    );
 }
 
-export default RegisterForm
+export default RegisterForm;

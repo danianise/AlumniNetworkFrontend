@@ -12,6 +12,7 @@ function LogOut({loggedIn, setLoggedIn, setAccessToken, setRefreshToken}) {
         localStorage.removeItem('user')
         localStorage.removeItem('access_token')
         localStorage.removeItem('refresh_token')
+        localStorage.removeItem('userId')
         setLoggedIn(null)
         setAccessToken(null)
         setRefreshToken(null)

@@ -32,8 +32,8 @@ function CommentForm({post, accessToken, getPosts, getComments}) {
     fetch(url, options)
       .then(res => res.json())
       .then(data => {
-        getPosts()
-        getComments()
+        // getPosts()
+        // getComments()
         console.log(data)
       })
     

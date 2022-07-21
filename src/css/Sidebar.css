@@ -53,3 +53,10 @@
     align-items: center;
     width: 150px;
 }
+
+
+@media (max-width: 600px) {
+    .hideSidebar{
+        display: none
+    }
+}
