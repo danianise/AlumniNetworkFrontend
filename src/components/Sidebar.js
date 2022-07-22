@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import Login from './Login'
 import { Link, NavLink } from 'react-router-dom'
+// import AuthContext from '../context/AuthContext'
 
 import '../css/Sidebar.css'
 import SidebarRow from './SidebarRow'
@@ -19,35 +20,32 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 function Sidebar({userData, loggedIn, setLoggedIn, accessToken, setAccessToken, setRefreshToken}) {
 
-  // const [userData, setUserData] = useState([])
+  const [users, setUsers] = useState([])
   const [isActive, setIsActive] = useState(false);
 
-  // let {name} = useContext(AuthContext)
+  // let {contextData} = useContext(AuthContext)
+  // console.log({contextData})
 
-  // useEffect(() => {
-  //   const url = process.env.REACT_APP_API_URL + 'users/'
-  //   const opts = {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${accessToken}`
-  //     }
-  //   }
-  //   fetch(url, opts)
-  //   .then(res => res.json())
-  //   .then(data => setUserData(data))
-  // }, [])
-
-  // console.log(userData)
+  useEffect(() => {
+    const url = process.env.REACT_APP_API_URL + 'users/'
+    const opts = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  fetch(url, opts)
+  .then(res => res.json())
+  .then(data => setUsers(data))
+    }, [])
+  
 
   const handleClick = event => {
     setIsActive(current => !current);
   };
 
-  return (<div>
-  {!userData
-    ? <h1>LOADING...</h1>
-    : <>
+  return (
+    <div>
       {loggedIn
       ? <>
         <div className='sidebar'>
@@ -136,9 +134,7 @@ function Sidebar({userData, loggedIn, setLoggedIn, accessToken, setAccessToken, 
         />
       </>
       }
-    </>
-  }
-  </div>
+    </div>
   )
 }
 

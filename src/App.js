@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from "react-router-dom" 
-// import { useNavigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 
 import Header from './components/Header';
@@ -63,23 +62,14 @@ function App() {
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'))
   const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refresh_token'))
   const [networkData, setNetworkData] = useState([networkArray])
-  const [userData, setUserData] = useState({user})
+  // const [userData, setUserData] = useState({user})
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
   const [eventData, setEventData] = useState([])
 
-  useEffect(() => {
-    const url = process.env.REACT_APP_API_URL + 'users/'
-    const opts = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-  fetch(url, opts)
-  .then(res => res.json())
-  .then(data => setUsers(data))
-    }, [])
+  // useEffect(() => {
+  //   
+  //   }, [])
 
   function getNetworks() {
     const url = process.env.REACT_APP_API_URL + 'networks/'
@@ -106,7 +96,7 @@ function App() {
     }
     fetch(url, opts)
     .then(res => res.json())
-    .then(data => setUserData(data))
+    .then(data => setUsers(data))
   }
 
   function getPosts() {
@@ -153,7 +143,7 @@ function App() {
 
   return (
     <div className = "app">
-      <AuthProvider>
+      {/* <AuthProvider> */}
       <Header loggedIn={loggedIn}/>
       <div className = 'mainContent'>
         <Sidebar
@@ -424,7 +414,7 @@ function App() {
           </Routes>  
         </div>
       </div>
-    </AuthProvider>
+    {/* </AuthProvider> */}
     </div>
   );
 }

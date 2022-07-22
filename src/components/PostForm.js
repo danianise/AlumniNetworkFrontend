@@ -7,13 +7,36 @@ import { Avatar } from "@mui/material"
 function PostForm({topic, accessToken, getPosts, getComments}) {
 
   const [users, setUsers]=useState(null)
+  const [author, setAuthor] = useState(null)
+
+  useEffect(() => {
+      const url = process.env.REACT_APP_API_URL + 'users/'
+      const opts = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+      fetch(url, opts)
+      .then(res => res.json())
+      .then(data => {
+        setUsers(data)
+        console.log(users)
+        // users.map((each)=>{
+        //   if(localStorage.getItem('user') === each.username){
+        //     setAuthor(each)
+        //   }
+        // })
+        // console.log(author)
+      })
+    }, [])
 
   const navigate = useNavigate()
 
   const initialState = {
     topic: topic,
     body: '',
-    author: '1',
+    author: '',
     imageURL: ''
     // user_string: 'simple_user'
 
@@ -69,7 +92,7 @@ function PostForm({topic, accessToken, getPosts, getComments}) {
       <input
         id="author"
         type="hidden"
-        value={localStorage.getItem('user')}
+        value={localStorage.getItem('currentUserId')}
       />
         <textarea
           value={formData.body}

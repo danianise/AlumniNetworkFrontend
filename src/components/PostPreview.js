@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {Avatar} from '@mui/material'
 
-function PostPreview({ topic, userData, accessToken }) {
+function PostPreview({ topic, accessToken }) {
 
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
-  // const [userData, setUserData] = useState([])
+  const [userData, setUserData] = useState([])
+  const [currentUser, setCurrentUser] = useState([])
 
   let commentsThisPost = []
 
   useEffect(() => {
-    const url = process.env.REACT_APP_API_URL + 'posts/'
+    const url = process.env.REACT_APP_API_URL
     const opts = {
       method: 'GET',
       headers: {
@@ -19,15 +20,53 @@ function PostPreview({ topic, userData, accessToken }) {
         'Authorization': `Bearer ${accessToken}`
       }
     }
-    fetch(url, opts)
+    const authOpts= {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    }
+    fetch(url + 'users/', opts)
     .then(
-      fetch(process.env.REACT_APP_API_URL + 'comments/', opts)
+      fetch(url + 'posts/', authOpts)
+      .then(
+        fetch(url + 'comments/', authOpts)
+        .then(res=>res.json())
+        .then(data=>setCommentData(data))
+      )
       .then(res => res.json())
-      .then(data => setCommentData(data))
+      .then(data => setPostData(data))
     )
     .then(res => res.json())
-    .then(data => setPostData(data))
+    .then(data => {
+      setUserData(data)
+      userData.map((each)=> {
+        if (each.username === localStorage.getItem('user')){
+          setCurrentUser(each)
+        }
+      })
+    })
   }, [])
+
+  // useEffect(() => {
+  //   const url = process.env.REACT_APP_API_URL + 'posts/'
+  //   const opts = {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${accessToken}`
+  //     }
+  //   }
+  //   fetch(url, opts)
+  //   .then(
+  //     fetch(process.env.REACT_APP_API_URL + 'comments/', opts)
+  //     .then(res => res.json())
+  //     .then(data => setCommentData(data))
+  //   )
+  //   .then(res => res.json())
+  //   .then(data => setPostData(data))
+  // }, [])
 
   // useEffect(() => {
   //   const url = process.env.REACT_APP_API_URL + 'comments/'
@@ -51,12 +90,22 @@ function PostPreview({ topic, userData, accessToken }) {
   
   // console.log([...postData].reverse())
 
-
+  // console.log('userData', userData)
+  // console.log('postData', postData)
+  // console.log('commentData', commentData)
+  // console.log('currentUser', currentUser)
 
   return (<>
 
     <div className='postPreview'>
       {[...postData].reverse().map((eachPost) => {
+
+        let authorOfPost=""
+        {userData.map((eachUser)=>{
+          if (eachUser.id === eachPost.author)
+          authorOfPost=eachUser
+        })}
+        // console.log('authorOfPost', authorOfPost)
 
         let dateTime = eachPost.timestamp
         let date = dateTime.slice(0, 10)
@@ -91,7 +140,8 @@ function PostPreview({ topic, userData, accessToken }) {
           <Link to={`/conversations/${topicForRoute}/${eachPost.id}`}>
             <div className='postContainer'>
               <h6 className = "userHeader">
-                <Avatar src="" className='postAvatar'/> {userData.name}
+                <Avatar src="" className='postAvatar'/>
+                {authorOfPost.first_name} {authorOfPost.last_name}
               </h6>
               {eachPost.imageURL ? <img src={eachPost.imageURL} alt="Image input by poster"/> : ""}
               <p className="postBody">{eachPost.body.substring(0, 50)}{eachPost.body.length > 50 ? "..." : ""}</p>

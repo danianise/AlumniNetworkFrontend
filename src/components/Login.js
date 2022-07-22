@@ -13,6 +13,8 @@ function Login({setLoggedIn, setAccessToken, setRefreshToken}) {
   const [formInfo, setFormInfo] = useState(initialState);
   const [networkErrMsg, setNetworkErrMsg] = useState(null)
   const [clientErrMsg, setClientErrMsg] = useState(null)
+  const [users, setUsers] = useState(null)
+  
 
   const statusCodeToErr = (responseObj) => {
     setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)
@@ -66,7 +68,7 @@ function Login({setLoggedIn, setAccessToken, setRefreshToken}) {
             console.log(`problem with network request: ${networkErrMsg}`)
           } else {              
             console.log(data)
-
+            
             setLoggedIn(formInfo.username)
             setAccessToken(data.access)
             // add tokens to localstorage here
@@ -74,9 +76,35 @@ function Login({setLoggedIn, setAccessToken, setRefreshToken}) {
             localStorage.setItem('refresh_token', data.refresh)
             localStorage.setItem('user', formInfo.username)
             // redirect here
-            navigate('/')
+            // navigate('/')
           }
         })
+        .then(
+          fetch(process.env.REACT_APP_API_URL + 'users/', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          })
+          .then(res => res.json())
+          .then(data => {
+            data.map((eachUser)=>{
+              if(localStorage.getItem('user') === eachUser.username){
+                localStorage.setItem('userId', eachUser.id)
+              }
+            })
+            setUsers(data)
+          })
+          // .then(() =>
+          //   {users?.map((eachUser) => {
+          //     console.log(eachUser)
+          //     if(localStorage.getItem('user') === eachUser.username){
+          //       localStorage.setItem('userId', eachUser.id)
+          //     }
+          //   })
+          //   navigate('/')
+          // })
+        )
   };
 
   return (

@@ -21,25 +21,31 @@ function ProfileIndex({userData, networkData}) {
     }
     fetch(url, opts)
     .then(res => res.json())
-    .then(data => setUsers(data))
-      }, [])
-      console.log(users)
+    .then(data => {
+        setUsers(data)
+        getUser()
+    })
 
+
+      }, [])
+
+    // console.log(users)
+      function getUser(){
+        users?.map((eachUser) => {
+            console.log(eachUser.username, localStorage.getItem('user'))
+            if (eachUser.username === localStorage.getItem('user')) {
+                setCurrentUser(eachUser)
+            }
+        })
+      }
   return (
     <div className='profileIndex'>
-        {/* {users.map((each)=>{
-            if(localStorage.getItem('user') === each.username){
-                console.log(each.id)
-                localStorage.setItem('userId', each.id)
-                setCurrentUser(each)
-                // return(
-                //     <h1>[welcome, {each.first_name} {each.last_name}]</h1>
-                // )
-            }
-        })} */}
+       
         <div className = 'profileInfoContainer'>
             <div className='profileInfo'>
+                
                 <h1>[welcome, {userData.name}]</h1>
+                <h1>[welcome, {currentUser && currentUser.first_name} {currentUser && currentUser.last_name}]</h1>
             <Link to=''>Edit Profile</Link>
                 <div className='profilePhoto'>
                         <img src={userData.photo ? userData.photo : './profileicon.png'} alt='User Profile Picture'/><br />
