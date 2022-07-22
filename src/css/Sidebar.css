@@ -3,8 +3,9 @@
     box-shadow: 5px 5px 9px -9px rgba(0, 0, 0, 0.75);
     border-radius: 4px;
     width: 160px;
-    height: 90vh;
-    position: relative;
+    height: 100%;
+    position: fixed;
+    margin-top: 100px;
 }
 
 .tab.topics {

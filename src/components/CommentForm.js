@@ -1,11 +1,11 @@
 import { getPopoverUtilityClass } from '@mui/material';
 import React, { useState, useEffect } from 'react'
 
-function CommentForm({post, accessToken, getPosts, getComments}) {
+function CommentForm({post, currentUser, accessToken, getPosts, getComments}) {
 
   const initialState = {
     post: post,
-    author: '1',
+    author: currentUser.id,
     body: ''
   };
 

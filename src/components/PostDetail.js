@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { Avatar } from '@mui/material'
 import "../css/PostList.css"
 
-function PostDetail({topic, userData, loggedIn, accessToken, getPosts, getComments}) {
+function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPosts, getComments}) {
   
 let timestamp = "2022-07-20T00:18:28.497677Z"
 let hour = timestamp.slice(11, 13)
@@ -134,7 +134,13 @@ console.log(hour)
     <div>
       <hr />
       <h5>...add a comment</h5>
-      <CommentForm post={params.postId} accessToken={accessToken} getPosts={getPosts} getComments={getComments} />
+      <CommentForm
+        post={params.postId}
+        currentUser={currentUser}
+        accessToken={accessToken}
+        getPosts={getPosts}
+        getComments={getComments}
+      />
     </div>
   </>)
 }

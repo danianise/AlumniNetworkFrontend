@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import {Avatar} from '@mui/material'
+import {autocompleteClasses, Avatar} from '@mui/material'
 
 function PostPreview({ topic, accessToken }) {
 
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
-  const [userData, setUserData] = useState([])
-  const [currentUser, setCurrentUser] = useState([])
+  const [users, setUsers] = useState([])
+  // const [currentUser, setCurrentUser] = useState([])
 
   let commentsThisPost = []
 
@@ -39,14 +39,7 @@ function PostPreview({ topic, accessToken }) {
       .then(data => setPostData(data))
     )
     .then(res => res.json())
-    .then(data => {
-      setUserData(data)
-      userData.map((each)=> {
-        if (each.username === localStorage.getItem('user')){
-          setCurrentUser(each)
-        }
-      })
-    })
+    .then(data => setUsers(data))
   }, [])
 
   // useEffect(() => {
@@ -82,7 +75,8 @@ function PostPreview({ topic, accessToken }) {
   //   .then(data => setCommentData(data))
   // }, [])
 
-  // console.log(postData)
+  console.log(postData)
+  console.log(users)
   // console.log(commentData)
 
   let topicForRoute = (topic).toLowerCase()
@@ -101,11 +95,11 @@ function PostPreview({ topic, accessToken }) {
       {[...postData].reverse().map((eachPost) => {
 
         let authorOfPost=""
-        {userData.map((eachUser)=>{
+        {users?.map((eachUser)=>{
           if (eachUser.id === eachPost.author)
           authorOfPost=eachUser
         })}
-        // console.log('authorOfPost', authorOfPost)
+        console.log('authorOfPost', authorOfPost)
 
         let dateTime = eachPost.timestamp
         let date = dateTime.slice(0, 10)
@@ -143,7 +137,7 @@ function PostPreview({ topic, accessToken }) {
                 <Avatar src="" className='postAvatar'/>
                 {authorOfPost.first_name} {authorOfPost.last_name}
               </h6>
-              {eachPost.imageURL ? <img src={eachPost.imageURL} alt="Image input by poster"/> : ""}
+              {eachPost.imageURL ? <img src={eachPost.imageURL} style={{width:'500px'}} alt="Image input by poster"/> : ""}
               <p className="postBody">{eachPost.body.substring(0, 50)}{eachPost.body.length > 50 ? "..." : ""}</p>
               <h6>{months[month]} {day}, {year} {hour}:{minutes}{amPM}</h6>
               

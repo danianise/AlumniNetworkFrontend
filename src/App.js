@@ -76,7 +76,6 @@ function App() {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${accessToken}`
         }
       }
     )
@@ -93,7 +92,6 @@ function App() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          // 'Authorization': `Bearer ${accessToken}`
         }
       }
     )
@@ -209,14 +207,35 @@ function App() {
             }/>
             
 
-            <Route path='/networks' element={<NetworkIndex networkData={networkData} headline = "My Networks"/>} />
-            <Route path='/conversations' element={<ConversationIndex />} />
-            <Route path='/events' element={<EventIndex accessToken={accessToken} />} />
+            <Route
+              path='/networks'
+              element={
+                <NetworkIndex
+                  networkData={networkData}
+                  headline = "My Networks"
+                />
+              } 
+            />
+            {/* <Route
+              path='/conversations'
+              element={
+                <ConversationIndex />
+              } 
+            /> */}
+            <Route
+              path='/events'
+              element={
+                <EventIndex
+                  accessToken={accessToken}
+                />
+              }
+            />
 
             <Route path='/conversations/life' element = {
               <PostList 
                 topic={'Life'}
-                loggedIn={loggedIn}
+                // loggedIn={loggedIn}
+                currentUser={currentUser}
                 accessToken={accessToken}
                 refreshToken={refreshToken}
                 userData={user}
@@ -229,6 +248,7 @@ function App() {
             <Route path='/conversations/life/:postId' element = {
               <PostDetail
                 topic={'Life'}
+                currentUser={currentUser}
                 // getUsers={getUsers}
                 userData={user}
                 loggedIn={loggedIn}
@@ -267,6 +287,7 @@ function App() {
             <Route path='/conversations/partytime' element = {
               <PostList
                 topic={'Party Time'}
+                currentUser={currentUser}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
                 userData={user}
@@ -279,6 +300,7 @@ function App() {
             <Route path='/conversations/partytime/:postId' element = {
               <PostDetail
                 topic={'Party Time'}
+                currentUser={currentUser}
                 // getUsers={getUsers}
                 userData={user}
                 loggedIn={loggedIn}
@@ -317,6 +339,7 @@ function App() {
             <Route path='/conversations/industry' element = {
               <PostList
                 topic={'Industry'}
+                currentUser={currentUser}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
                 userData={user}
@@ -329,6 +352,7 @@ function App() {
             <Route path='/conversations/industry/:postId' element = {
               <PostDetail
                 topic={'Industry'}
+                currentUser={currentUser}
                 // getUsers={getUsers}
                 userData={user}
                 loggedIn={loggedIn}
@@ -367,6 +391,7 @@ function App() {
             <Route path='/conversations/cryingroom' element = {
               <PostList
                 topic={'Crying Room'}
+                currentUser={currentUser}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
                 userData={user}
@@ -379,6 +404,7 @@ function App() {
             <Route path='/conversations/cryingroom/:postId' element = {
               <PostDetail
                 topic={'Crying Room'}
+                currentUser={currentUser}
                 // getUsers={getUsers}
                 userData={user}
                 loggedIn={loggedIn}

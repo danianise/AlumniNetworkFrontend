@@ -15,7 +15,7 @@ function ProfileIndex({userData, networkData, currentUser}) {
 
             <div className='profileInfo'>
                 <h1>
-                    [welcome, {currentUser && currentUser.first_name} {currentUser && currentUser.last_name}]
+                    [welcome, {currentUser.first_name} {currentUser.last_name}]
                 </h1>
 
                 <div className='customProfile'>
@@ -35,7 +35,7 @@ function ProfileIndex({userData, networkData, currentUser}) {
                         </div>
 
                         <p className='nameLocation'>
-                            [{userData.name}]<br />
+                            [{currentUser.first_name} {currentUser.last_name}]<br />
                             {userData.location}
                         </p>
                     </div>
@@ -72,12 +72,14 @@ function ProfileIndex({userData, networkData, currentUser}) {
                             </a>
                         </li>
                     </ul>
+
+                    <div className='networkInfo'>
+                        <NetworkIndex networkData={networkData} headline="My Networks"/>
+                    </div>
                 </div>
             </div>
 
-            <div className='networkInfo'>
-                <NetworkIndex networkData={networkData} headline="My Networks"/>
-            </div>
+            
             </div>
         
     </div>

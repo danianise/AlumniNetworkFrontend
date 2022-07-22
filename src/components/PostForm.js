@@ -4,39 +4,18 @@ import {useNavigate} from 'react-router-dom'
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { Avatar } from "@mui/material"
 
-function PostForm({topic, accessToken, getPosts, getComments}) {
+function PostForm({topic, currentUser, accessToken, getPosts, getComments}) {
 
-  const [users, setUsers]=useState(null)
-  const [author, setAuthor] = useState(null)
-
-  useEffect(() => {
-      const url = process.env.REACT_APP_API_URL + 'users/'
-      const opts = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-      fetch(url, opts)
-      .then(res => res.json())
-      .then(data => {
-        setUsers(data)
-        console.log(users)
-        // users.map((each)=>{
-        //   if(localStorage.getItem('user') === each.username){
-        //     setAuthor(each)
-        //   }
-        // })
-        // console.log(author)
-      })
-    }, [])
+  console.log(currentUser)
+  let authorId = localStorage.getItem('userId')
+  console.log(authorId)
 
   const navigate = useNavigate()
 
   const initialState = {
     topic: topic,
     body: '',
-    author: '',
+    author: authorId,
     imageURL: ''
     // user_string: 'simple_user'
 
@@ -92,7 +71,7 @@ function PostForm({topic, accessToken, getPosts, getComments}) {
       <input
         id="author"
         type="hidden"
-        value={localStorage.getItem('currentUserId')}
+        value={authorId}
       />
         <textarea
           value={formData.body}
