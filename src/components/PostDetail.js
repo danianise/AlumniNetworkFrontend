@@ -7,21 +7,25 @@ import "../css/PostList.css"
 
 function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPosts, getComments}) {
   
-let timestamp = "2022-07-20T00:18:28.497677Z"
-let hour = timestamp.slice(11, 13)
+// let timestamp = "2022-07-20T00:18:28.497677Z"
+// let hour = timestamp.slice(11, 13)
 
-if (hour < 1){
-  hour = 12
-}
-console.log(hour)
+// if (hour < 1){
+//   hour = 12
+// }
+// console.log(hour)
 
   const params = useParams()
 
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
+  const [users, setUsers] = useState([])
+  // const [currentUser, setCurrentUser] = useState([])
+
+  let commentsThisPost = []
 
   useEffect(() => {
-    const url = process.env.REACT_APP_API_URL + 'posts/'
+    const url = process.env.REACT_APP_API_URL
     const opts = {
       method: 'GET',
       headers: {
@@ -29,23 +33,26 @@ console.log(hour)
         'Authorization': `Bearer ${accessToken}`
       }
     }
-    fetch(url, opts)
-    .then(res => res.json())
-    .then(data => setPostData(data))
-  }, [])
-
-  useEffect(() => {
-    const url = process.env.REACT_APP_API_URL + 'comments/'
-    const opts = {
+    const authOpts= {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
       }
     }
-    fetch(url, opts)
+    fetch(url + 'users/', opts)
+    .then(
+      fetch(url + 'posts/', authOpts)
+      .then(
+        fetch(url + 'comments/', authOpts)
+        .then(res=>res.json())
+        .then(data=>setCommentData(data))
+      )
+      .then(res => res.json())
+      .then(data => setPostData(data))
+    )
     .then(res => res.json())
-    .then(data => setCommentData(data))
+    .then(data => setUsers(data))
   }, [])
 
   // console.log(params)
@@ -80,16 +87,31 @@ console.log(hour)
 
         
         if(parseInt(params.postId) === eachPost.id) {
+          let authorOfPost=""
+          {users?.map((eachUser)=>{
+            if (eachUser.id === eachPost.author)
+            authorOfPost=eachUser
+          })}
+          console.log('authorOfPost', authorOfPost)
+
           return(<>
             <div className="postContainer">
             <h6 className = "userHeader">
-                <Avatar src="" className='postAvatar'/> {userData.name}
+                <Avatar src="" className='postAvatar'/> {authorOfPost.first_name} {authorOfPost.last_name}
               </h6>
+              {eachPost.imageURL ? <img src={eachPost.imageURL} style={{width:'500px'}} alt="Image input by poster"/> : ""}
               <p>{eachPost.body}</p>
               <h6>{months[month]} {day}, {year} {hour}:{minutes}{amPM}</h6>
             </div>
 
               {commentData.map((eachComment) => {
+
+                let authorOfComment=""
+                {users?.map((eachUser)=>{
+                  if (eachUser.id === eachComment.author)
+                  authorOfComment=eachUser
+                })}
+                console.log('authorOfComment', authorOfComment)
 
                 // console.log(eachComment)
 
@@ -120,7 +142,7 @@ console.log(hour)
                 if(eachPost.id === eachComment.post){
                   return(
                     <div className='commentContainer'>
-                      <h6>Author of comment here</h6>
+                      <h6>{authorOfComment.first_name} {authorOfComment.last_name}</h6>
                       <p>{eachComment.body}</p>
                       <h6>{commentMonths[commentMonth]} {commentDay}, {commentYear} {commentHour}:{commentMinutes} {commentAMPM}</h6>
                       </div>

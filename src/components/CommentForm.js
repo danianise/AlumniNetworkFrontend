@@ -3,9 +3,13 @@ import React, { useState, useEffect } from 'react'
 
 function CommentForm({post, currentUser, accessToken, getPosts, getComments}) {
 
+  console.log(currentUser)
+  let authorId = localStorage.getItem('userId')
+  console.log(authorId)
+
   const initialState = {
     post: post,
-    author: currentUser.id,
+    author: authorId,
     body: ''
   };
 
