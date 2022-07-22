@@ -8,8 +8,22 @@
     height: auto;
 }
 
+.profileIndex {
+    display: flex;
+    flex-direction: row;
+}
+
 .profileInfoContainer {
     display: flex;
+}
+
+.customProfile{
+    display: flex;
+}
+
+.verticalDisplay {
+    display: flex;
+    flex-direction: column;
 }
 
 .networkInfo {

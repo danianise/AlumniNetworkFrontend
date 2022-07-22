@@ -18,26 +18,26 @@ import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDiss
 import MenuIcon from '@mui/icons-material/Menu';
 
 
-function Sidebar({userData, loggedIn, setLoggedIn, accessToken, setAccessToken, setRefreshToken}) {
+function Sidebar({currentUser, userData, loggedIn, setLoggedIn, setAccessToken}) {
 
-  const [users, setUsers] = useState([])
+  // const [users, setUsers] = useState([])
   const [isActive, setIsActive] = useState(false);
 
   // let {contextData} = useContext(AuthContext)
   // console.log({contextData})
 
-  useEffect(() => {
-    const url = process.env.REACT_APP_API_URL + 'users/'
-    const opts = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-  fetch(url, opts)
-  .then(res => res.json())
-  .then(data => setUsers(data))
-    }, [])
+  // useEffect(() => {
+  //   const url = process.env.REACT_APP_API_URL + 'users/'
+  //   const opts = {
+  //   method: 'GET',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   }
+  // }
+  // fetch(url, opts)
+  // .then(res => res.json())
+  // .then(data => setUsers(data))
+  //   }, [])
   
 
   const handleClick = event => {
@@ -49,18 +49,11 @@ function Sidebar({userData, loggedIn, setLoggedIn, accessToken, setAccessToken, 
       {loggedIn
       ? <>
         <div className='sidebar'>
-          {/* <div className="noHover">
-          <SidebarRow
-            title={userData.name}
-            src={userData.photo ? userData.photo : './profileicon.png'}
-          />
-          </div> */}
-          
 
           <div className="sidebarUser">
             <Avatar src={userData.photo ? userData.photo : './profileicon.png'} />
             <h5>
-                {userData.name}
+                {currentUser.first_name} {currentUser.last_name}
             </h5>
           </div>
 
@@ -130,7 +123,7 @@ function Sidebar({userData, loggedIn, setLoggedIn, accessToken, setAccessToken, 
         <Login
           setLoggedIn={setLoggedIn}
           setAccessToken={setAccessToken}
-          setRefreshToken={setRefreshToken}  
+          // setRefreshToken={setRefreshToken}  
         />
       </>
       }

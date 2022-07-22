@@ -4,7 +4,7 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import EmailIcon from '@mui/icons-material/Email';
 import {useNavigate} from 'react-router-dom'
 
-function Login({setLoggedIn, setAccessToken, setRefreshToken}) {
+function Login({setLoggedIn, setAccessToken}) {
 
   const loginEndpoint = 'api/token/'
   const navigate = useNavigate()
@@ -15,6 +15,26 @@ function Login({setLoggedIn, setAccessToken, setRefreshToken}) {
   const [clientErrMsg, setClientErrMsg] = useState(null)
   const [users, setUsers] = useState(null)
   
+  useEffect(() => {
+    const url = process.env.REACT_APP_API_URL + 'users/'
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }
+    fetch(url, opts)
+    .then(res => res.json())
+    .then(data => {
+      setUsers(data)
+      console.log(users)
+      // users.map((each)=>{
+      //   if(localStorage.getItem('user') === each.username){
+      //     localStorage.setItem('currentUserId', each.id)
+      //   }
+      // })
+    })
+  }, [])
 
   const statusCodeToErr = (responseObj) => {
     setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)
@@ -71,40 +91,42 @@ function Login({setLoggedIn, setAccessToken, setRefreshToken}) {
             
             setLoggedIn(formInfo.username)
             setAccessToken(data.access)
-            // add tokens to localstorage here
+            
             localStorage.setItem('access_token', data.access)
             localStorage.setItem('refresh_token', data.refresh)
             localStorage.setItem('user', formInfo.username)
-            // redirect here
-            // navigate('/')
           }
         })
-        .then(
-          fetch(process.env.REACT_APP_API_URL + 'users/', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          })
-          .then(res => res.json())
-          .then(data => {
-            data.map((eachUser)=>{
+        .then(() =>
+            {users?.map((eachUser) => {
+              console.log(eachUser)
               if(localStorage.getItem('user') === eachUser.username){
                 localStorage.setItem('userId', eachUser.id)
               }
             })
-            setUsers(data)
-          })
-          // .then(() =>
-          //   {users?.map((eachUser) => {
-          //     console.log(eachUser)
-          //     if(localStorage.getItem('user') === eachUser.username){
-          //       localStorage.setItem('userId', eachUser.id)
-          //     }
-          //   })
-          //   navigate('/')
-          // })
+            navigate('/')
+            }
         )
+        // .then(
+        //   fetch(process.env.REACT_APP_API_URL + 'users/', {
+        //     method: 'GET',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     }
+        //   })
+        //   .then(res => res.json())
+        //   .then(data => {
+        //     data?.map((eachUser)=>{
+        //       console.log(eachUser)
+        //       console.log(localStorage.getItem('user'))
+        //       if(localStorage.getItem('user') === eachUser.username){
+        //         localStorage.setItem('userId', eachUser.id)
+        //       }
+        //     })
+        //     setUsers(data)
+        //   }
+        //   )
+        // )
   };
 
   return (

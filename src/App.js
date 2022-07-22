@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from "react-router-dom" 
-import { AuthProvider } from './context/AuthContext'
 
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -55,21 +54,56 @@ function App() {
     networks: networkArray
   }
 
-  // const navigate = useNavigate()
-
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('user'))
   const [users, setUsers] = useState(null)
+  const [currentUser, setCurrentUser] = useState({})
+
+  const userId = localStorage.getItem('userId')
+
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'))
   const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refresh_token'))
+
   const [networkData, setNetworkData] = useState([networkArray])
-  // const [userData, setUserData] = useState({user})
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
   const [eventData, setEventData] = useState([])
 
-  // useEffect(() => {
-  //   
-  //   }, [])
+  useEffect(() => {
+
+    fetch(
+      process.env.REACT_APP_API_URL + `users/${userId}`, 
+      {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Bearer ${accessToken}`
+        }
+      }
+    )
+    .then(res => res.json())
+    .then(data => {
+        setCurrentUser(data)
+        console.log(currentUser)
+    })
+
+    
+    fetch(
+      process.env.REACT_APP_API_URL + 'networks/',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': `Bearer ${accessToken}`
+        }
+      }
+    )
+    .then(res => res.json())
+    .then(data => {
+      setNetworkData(data)
+      console.log(networkData)
+    })
+
+  }, [])
 
   function getNetworks() {
     const url = process.env.REACT_APP_API_URL + 'networks/'
@@ -91,7 +125,7 @@ function App() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${accessToken}`
       }
     }
     fetch(url, opts)
@@ -143,17 +177,14 @@ function App() {
 
   return (
     <div className = "app">
-      {/* <AuthProvider> */}
       <Header loggedIn={loggedIn}/>
       <div className = 'mainContent'>
         <Sidebar
-          // userData={userData}
+          currentUser={currentUser}
           userData={user}
           loggedIn={loggedIn}
           setLoggedIn={setLoggedIn}
           setAccessToken={setAccessToken}
-          setRefreshToken={setRefreshToken}
-          // accessToken={accessToken}
         />
         <div className = 'routes'>
           <Routes>
@@ -163,9 +194,7 @@ function App() {
                 <ProfileIndex
                   networkData={networkData}
                   userData={user}
-                  users={users}
-                  // getNetworks={getNetworks}
-                  // getUsers={getUsers} 
+                  currentUser={currentUser}
                 />
               }/>
             }
