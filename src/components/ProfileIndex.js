@@ -39,10 +39,10 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
                             <div className='customProfile'>
                                 <div className='verticalDisplay'>
                                     
-                                {currentUserProfile === ""
-                                    ? <Link to="/profile">Set Up Profile</Link>
-                                    :<Link to={linkToEditProfile}>Edit Profile</Link>
-                                }
+                               
+                                    <Link to="/profile">Set Up Profile</Link>
+                                    <Link to={linkToEditProfile}>Edit Profile</Link>
+                                
                                     
 
                                     <div className='profilePhoto'>
