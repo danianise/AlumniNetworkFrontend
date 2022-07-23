@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom'
 
-function RegisterForm({setLoggedIn}) {
+function RegisterForm() {
 
     const signUpEndpoint = 'api/auth/signup/'
 
@@ -73,15 +73,7 @@ function RegisterForm({setLoggedIn}) {
                 if (!data) {
                     console.log(`problem with network request: ${networkErrMsg}`)
                 } else {
-                    
-                    console.log(data)
-                    
-                    // setUserSignedIn(data.username)
-
-                    // add call to login
-                    // redirect here
-
-                    navigate('/')
+                    navigate('/register/success')
                 }
             })
     }
@@ -91,11 +83,14 @@ function RegisterForm({setLoggedIn}) {
       <h3>Sign Up</h3>
         <form onSubmit={handleLogin}>
             <label>Email:</label>
-            <input id="username" name="username" type="text" onChange={handleChange}/><br />
+            <input id="username" name="username" type="text" onChange={handleChange}/>
+            <br /><br />
             <label>Password:</label>
-            <input id="password" name="password" type="text" onChange={handleChange}/><br />
+            <input id="password" name="password" type="text" onChange={handleChange}/>
+            <br /><br />
             <label>First Name:</label>
-            <input id="first_name" name="first_name" type="text" onChange={handleChange}/><br />
+            <input id="first_name" name="first_name" type="text" onChange={handleChange}/>
+            <br /><br />
             <label>Last Name:</label>
             <input id="last_name" name="last_name" type="text" onChange={handleChange}/><br />
             <button type="submit">Sign Up</button>

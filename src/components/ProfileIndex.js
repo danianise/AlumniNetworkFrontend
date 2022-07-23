@@ -1,12 +1,21 @@
-import React, {useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import NetworkIndex from './NetworkIndex'
 import { Link } from 'react-router-dom'
+import AuthContext from '../context/AuthContext'
+import ProfileForm from './ProfileForm'
 
 import '../css/ProfileIndex.css'
 import PersonIcon from '@mui/icons-material/Person';
 
 
-function ProfileIndex({userData, networkData, currentUser}) {
+function ProfileIndex({networkData, currentUser, accessToken}) {
+
+    let currentUserName = currentUser.username
+    let currentUserProfile = ""
+    let mailToLink = `mailto:${currentUserName}?body=Hello from your AlumniNetwork connection!`
+    
+
+    let {profileData} = useContext(AuthContext)
     
   return (
     <div className='profileIndex'>
@@ -15,59 +24,72 @@ function ProfileIndex({userData, networkData, currentUser}) {
 
             <div className='profileInfo'>
                 <h1>
-                    [welcome, {currentUser.first_name} {currentUser.last_name}]
+                    [welcome, {currentUser.first_name}]
                 </h1>
 
-                <div className='customProfile'>
-                    <div className='verticalDisplay'>
-                        <Link to=''>Edit Profile</Link>
+                {profileData?.map((eachProfile) => {
 
-                        <div className='profilePhoto'>
-                            <img
-                                src={
-                                    userData.photo
-                                        ? userData.photo
-                                        : './profileicon.png'
-                                    } 
-                                alt='User Profile Picture'
-                            />
-                            {/* <br /> */}
-                        </div>
+                    if(eachProfile.user === currentUser.id){
 
-                        <p className='nameLocation'>
-                            [{currentUser.first_name} {currentUser.last_name}]<br />
-                            {userData.location}
-                        </p>
-                    </div>
+                        currentUserProfile = eachProfile
+                        console.log(currentUserProfile)
+                        let linkToEditProfile = `profile/${currentUserProfile.id}/edit`
+
+                        return(
+                            <div className='customProfile'>
+                                <div className='verticalDisplay'>
+                                    
+                                {currentUserProfile === ""
+                                    ? <Link to="/profile">Set Up Profile</Link>
+                                    :<Link to={linkToEditProfile}>Edit Profile</Link>
+                                }
+                                    
+
+                                    <div className='profilePhoto'>
+                                        <img
+                                            src={
+                                                eachProfile.photo
+                                                    ? eachProfile.photo
+                                                    : './profileicon.png'
+                                                } 
+                                            alt='User Profile Picture'
+                                        />
+                                    </div>
+
+                                    <p className='nameLocation'>
+                                        [{currentUser.first_name} {currentUser.last_name}]<br />
+                                        {eachProfile.location}
+                                    </p>
+                                </div>
                 
                     <ul>
                         <li>
-                            <a href=''>
+                            <a href={mailToLink}>
                                 <img className='contactIcons' src='/EmailLogo.png' alt='Email Icon'/>
                             </a>
                         </li>
                         <li>
-                            <a href={userData.linkedin}>
+                            <a href={eachProfile.linkedin}>
                                 <img className='contactIcons' src='/LinkedInLogo.png' alt='LinkedIn Icon'/>
                             </a>
                         </li>
                         <li>
-                            <a href={userData.github}>
+                            <a href={eachProfile.github}>
                                 <img className='contactIcons' src='/GitHubLogo.png' alt='GitHub Icon'/>
                             </a>
                         </li>
                         <li>
-                            <a href={userData.facebook}>
+                            <a href={eachProfile.facebook}>
                                 <img className='contactIcons' src='/FacebookLogo.png' alt='Facebook Icon'/>
                             </a>
                         </li>
                         <li>
-                            <a href={userData.twitter}>
-                                <img className='contactIcons' src='/TwitterLogo.png' alt='Twitter Icon'/>
+                            <a href={eachProfile.twitter}>
+                                <img className='contactIcons' src='/twitter.png' alt='Twitter Icon'/>
                             </a>
                         </li>
                         <li>
-                            <a href={userData.instagram}>
+                            <a href={eachProfile.instagram}>
                                 <img className='contactIcons' src='/InstagramLogo.png' alt='Instagram Icon'/>
                             </a>
                         </li>
@@ -77,6 +99,19 @@ function ProfileIndex({userData, networkData, currentUser}) {
                         <NetworkIndex networkData={networkData} headline="My Networks"/>
                     </div>
                 </div>
+                        )
+                    } 
+                    // else {
+                    //     return(<>
+                    //         <ProfileForm accessToken={accessToken}/>
+                    //     </>)
+                    // }
+                    
+                })}
+
+                
+
+
             </div>
 
             

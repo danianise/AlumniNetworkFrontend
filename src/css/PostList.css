@@ -49,3 +49,8 @@ form input {
     display: flex;
     align-items: center;
 }
+
+.deleteButton {
+    background-color: rgba(196, 77, 86);
+    margin-left: 5px;
+}

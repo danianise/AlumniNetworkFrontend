@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import CommentForm from './CommentForm'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 
 import { Avatar } from '@mui/material'
 import "../css/PostList.css"
 
-function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPosts, getComments}) {
+function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPosts, getComments, profileData}) {
   
-// let timestamp = "2022-07-20T00:18:28.497677Z"
-// let hour = timestamp.slice(11, 13)
-
-// if (hour < 1){
-//   hour = 12
-// }
-// console.log(hour)
-
   const params = useParams()
+  // console.log(params)
+  let postId = parseInt(params.postId)
+  const navigate = useNavigate()
+
+
+  let topicForRoute = (topic).toLowerCase()
+  topicForRoute = topicForRoute.replace(/\s/g, '')
+
+  // let editURL = `conversations/${topicForRoute}/${postId}/edit`
+  let editURL = `${postId}/edit`
 
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
   const [users, setUsers] = useState([])
-  // const [currentUser, setCurrentUser] = useState([])
 
   let commentsThisPost = []
 
@@ -53,9 +54,24 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
     )
     .then(res => res.json())
     .then(data => setUsers(data))
+
   }, [])
 
-  // console.log(params)
+  const handleClickDeletePost = () => {
+    fetch(
+      process.env.REACT_APP_API_URL + `posts/${postId}`,
+      {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        }
+      }
+    )
+    .then(() => {navigate(-1)})
+  }
+
+  
 
   return (<>
     <div className="postDetail">
@@ -87,6 +103,7 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
 
         
         if(parseInt(params.postId) === eachPost.id) {
+
           let authorOfPost=""
           {users?.map((eachUser)=>{
             if (eachUser.id === eachPost.author)
@@ -94,14 +111,32 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
           })}
           console.log('authorOfPost', authorOfPost)
 
+          let profileOfAuthor={}
+          {profileData?.map((eachProfile) =>{
+            if (eachProfile.user === authorOfPost.id){
+              profileOfAuthor = eachProfile
+            }
+          })}
+          console.log('profileOfAuthor', profileOfAuthor)
+
           return(<>
             <div className="postContainer">
-            <h6 className = "userHeader">
-                <Avatar src="" className='postAvatar'/> {authorOfPost.first_name} {authorOfPost.last_name}
+              <h6 className = "userHeader">
+                <Avatar src={profileOfAuthor.photo} className='postAvatar'/> {authorOfPost.first_name} {authorOfPost.last_name}
               </h6>
               {eachPost.imageURL ? <img src={eachPost.imageURL} style={{width:'500px'}} alt="Image input by poster"/> : ""}
               <p>{eachPost.body}</p>
               <h6>{months[month]} {day}, {year} {hour}:{minutes}{amPM}</h6>
+
+              {authorOfPost.id === currentUser.id
+                ? <>
+                    <a href={editURL}>
+                      <button>Edit Post</button>
+                    </a>
+                    <button className='deleteButton' onClick={handleClickDeletePost}>Delete Post</button>
+                  </>
+                : ""
+              }
             </div>
 
               {commentData.map((eachComment) => {
@@ -113,7 +148,13 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
                 })}
                 console.log('authorOfComment', authorOfComment)
 
-                // console.log(eachComment)
+                let profileOfCommentAuthor={}
+                {profileData?.map((eachProfile) =>{
+                  if (eachProfile.user === authorOfComment.id){
+                    profileOfCommentAuthor = eachProfile
+                  }
+              })}
+              console.log('profileOfCommentAuthor', profileOfCommentAuthor)
 
                 let commentDateTime = eachComment.timestamp
                 let commentDate = commentDateTime.slice(0, 10)
@@ -140,13 +181,24 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
                 }
 
                 if(eachPost.id === eachComment.post){
-                  return(
-                    <div className='commentContainer'>
-                      <h6>{authorOfComment.first_name} {authorOfComment.last_name}</h6>
-                      <p>{eachComment.body}</p>
-                      <h6>{commentMonths[commentMonth]} {commentDay}, {commentYear} {commentHour}:{commentMinutes} {commentAMPM}</h6>
+                  return(<>
+                    <Link to={`/conversations/${topicForRoute}/${params.postId}/comments/${eachComment.id}`}>
+                      <div className='commentContainer'>
+                        <h6 className='userHeader'>
+                          <Avatar src={profileOfCommentAuthor.photo} className='postAvatar'/> {authorOfComment.first_name} {authorOfComment.last_name}
+                        </h6>
+                        <p>{eachComment.body}</p>
+                        <h6>{commentMonths[commentMonth]} {commentDay}, {commentYear} {commentHour}:{commentMinutes} {commentAMPM}</h6>
+                        {/* {authorOfComment.id === currentUser.id
+                          ? <>
+                            <button onClick={''}>Edit Comment</button>
+                            <button className='deleteButton' onClick={handleClickDeleteComment}>Delete Comment</button>
+                            </>
+                          : ""
+                        } */}
                       </div>
-                  )
+                    </Link>
+                  </>)
                 }
               })}
           </>)

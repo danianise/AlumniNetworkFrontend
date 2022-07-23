@@ -4,7 +4,10 @@ import {useNavigate} from 'react-router-dom'
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { Avatar } from "@mui/material"
 
-function PostForm({topic, currentUser, accessToken, getPosts, getComments}) {
+function PostForm({topic, currentUser, accessToken}) {
+
+  let postPlaceholder = `What's on your mind ${currentUser.first_name}?`
+
 
   console.log(currentUser)
   let authorId = localStorage.getItem('userId')
@@ -21,11 +24,11 @@ function PostForm({topic, currentUser, accessToken, getPosts, getComments}) {
 
   }
 
+  const [formData, setFormData] = useState(initialState)
+
   let topicForRoute = topic.toLowerCase()
   topicForRoute = topicForRoute.replace(/\s/g, '') 
   // console.log(topicForRoute)
-
-  const [formData, setFormData] = useState(initialState)
 
   const handleChange = (event) => {
     setFormData({...formData, [event.target.id]: event.target.value})
@@ -53,8 +56,6 @@ function PostForm({topic, currentUser, accessToken, getPosts, getComments}) {
         res.json()
       })
       .then(data => {
-        // getPosts()
-        // getComments()
         console.log(data)
       })
       .catch(err => {
@@ -66,7 +67,7 @@ function PostForm({topic, currentUser, accessToken, getPosts, getComments}) {
 
   return (
     <div className="postForm">
-      <Avatar />
+      
       <form onSubmit={handleSubmit}>
       <input
         id="author"
@@ -78,7 +79,7 @@ function PostForm({topic, currentUser, accessToken, getPosts, getComments}) {
           rows='10'
           cols='60'
           id='body'
-          placeholder="What's on your mind?"
+          placeholder={postPlaceholder}
           onChange={handleChange}
           type='text' 
         />

@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import {useNavigate, useParams} from 'react-router-dom'
 
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import PublicIcon from '@mui/icons-material/Public';
@@ -9,25 +9,32 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
-function ProfileForm({accessToken}) {
+function EditProfile({accessToken}) {
 
-  console.log(accessToken)
-  let userId = localStorage.getItem('userId')
-  console.log(userId)
-
+  const params = useParams()
+  console.log('params', params)
+  let profileId = params.profileId
   let navigate=useNavigate()
 
-  const initialState = { 
-    photo: '',
-    location: '',
-    linkedin: '',
-    github: '',
-    facebook: '',
-    twitter: '',
-    instagram: '',
-    user: userId
-  };
-  const [formState, setFormState] = useState(initialState);
+  const [formState, setFormState] = useState([]);
+
+  useEffect(() => {
+    fetch(
+        process.env.REACT_APP_API_URL + `profile/${profileId}/`, 
+        {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${accessToken}`
+          }
+        }
+      )
+      .then(res => res.json())
+      .then(data => {
+          setFormState(data)
+          
+      })
+  }, [])
 
   const handleChange = event => {
     setFormState({ ...formState, [event.target.id]: event.target.value });
@@ -35,9 +42,9 @@ function ProfileForm({accessToken}) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const url = process.env.REACT_APP_API_URL + 'profile/'
+    const url = process.env.REACT_APP_API_URL + `profile/${profileId}/`
     const options = {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
@@ -61,16 +68,12 @@ function ProfileForm({accessToken}) {
         console.log(err)
       })
       navigate('/')
-    setFormState(initialState)
+    // setFormState(initialState)
   };
   // Note that we need to use `htmlFor` instead of `for` in JSX
-  return (
+  return (<>
+    <h5>...edit your profile</h5>
     <form className='profileForm' onSubmit={handleSubmit}>
-      <input
-        id="user"
-        type="hidden"
-        value={userId}
-      />
       <label htmlFor="photo"><CameraAltIcon/></label>
       <input
         id="photo"
@@ -136,8 +139,8 @@ function ProfileForm({accessToken}) {
       <br /><br />
       <button type="submit">Submit</button>
     </form>
-  );
+    </>);
 }
 
 
-export default ProfileForm
+export default EditProfile

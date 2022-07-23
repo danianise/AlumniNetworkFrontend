@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from "react-router-dom" 
 
+import {AuthProvider} from './context/AuthContext'
+
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 
@@ -9,20 +11,23 @@ import NetworkForm from './components/NetworkForm';
 import RegisterForm from './components/RegisterForm';
 import Login from './components/Login';
 import LogOut from './components/LogOut';
+import ProfileForm from './components/ProfileForm';
 
 import LandingPage from './components/LandingPage';
+import RegisterSuccess from './components/RegisterSuccess';
 import ProfileIndex from './components/ProfileIndex';
 
-import ConversationIndex from './components/ConversationIndex'
 import NetworkIndex from './components/NetworkIndex';
 import EventIndex from './components/EventIndex';
 
 import PostList from './components/PostList';
 import PostDetail from './components/PostDetail';
 
-import CommentList from './components/CommentList';
 import CommentDetail from './components/CommentDetail';
+import EditComment from './components/EditComment';
 import EventForm from './components/EventForm';
+import EditPost from './components/EditPost';
+import EditProfile from './components/EditProfile';
 
 
 function App() {
@@ -64,11 +69,43 @@ function App() {
   const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refresh_token'))
 
   const [networkData, setNetworkData] = useState([networkArray])
+  const [profileData, setProfileData] = useState({})
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
   const [eventData, setEventData] = useState([])
 
   useEffect(() => {
+
+    fetch(
+      process.env.REACT_APP_API_URL + 'profile/', 
+      {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        }
+      }
+    )
+    .then(res => res.json())
+    .then(data => {
+        setProfileData(data)
+        
+    })
+
+    fetch(
+      process.env.REACT_APP_API_URL + 'users/', 
+      {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+      }
+    )
+    .then(res => res.json())
+    .then(data => {
+        setUsers(data)
+        console.log(users)
+    })
 
     fetch(
       process.env.REACT_APP_API_URL + `users/${userId}`, 
@@ -103,33 +140,33 @@ function App() {
 
   }, [])
 
-  function getNetworks() {
-    const url = process.env.REACT_APP_API_URL + 'networks/'
-    const opts = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${accessToken}`
-      }
-    }
-    fetch(url, opts)
-    .then(res => res.json())
-    .then(data => setNetworkData(data))
-  }
+  // function getNetworks() {
+  //   const url = process.env.REACT_APP_API_URL + 'networks/'
+  //   const opts = {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       // 'Authorization': `Bearer ${accessToken}`
+  //     }
+  //   }
+  //   fetch(url, opts)
+  //   .then(res => res.json())
+  //   .then(data => setNetworkData(data))
+  // }
 
-  function getUsers() {
-    const url = process.env.REACT_APP_API_URL + 'users/'
-    const opts = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
-      }
-    }
-    fetch(url, opts)
-    .then(res => res.json())
-    .then(data => setUsers(data))
-  }
+  // function getUsers() {
+  //   const url = process.env.REACT_APP_API_URL + 'users/'
+  //   const opts = {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${accessToken}`
+  //     }
+  //   }
+  //   fetch(url, opts)
+  //   .then(res => res.json())
+  //   .then(data => setUsers(data))
+  // }
 
   function getPosts() {
     const url = process.env.REACT_APP_API_URL + 'posts/'
@@ -159,6 +196,8 @@ function App() {
     .then(data => setCommentData(data))
   }
 
+  console.log(profileData)
+
   function getEvents() {
     const url = process.env.REACT_APP_API_URL + 'events/'
     const opts = {
@@ -174,12 +213,13 @@ function App() {
   }
 
   return (
+    
     <div className = "app">
+    <AuthProvider>
       <Header loggedIn={loggedIn}/>
       <div className = 'mainContent'>
         <Sidebar
           currentUser={currentUser}
-          userData={user}
           loggedIn={loggedIn}
           setLoggedIn={setLoggedIn}
           setAccessToken={setAccessToken}
@@ -191,11 +231,18 @@ function App() {
               : <Route path="/" element={
                 <ProfileIndex
                   networkData={networkData}
-                  userData={user}
                   currentUser={currentUser}
+                  accessToken={accessToken}
                 />
               }/>
             }
+
+            <Route 
+              path='/register/success'
+              element= {
+                <RegisterSuccess />
+              }
+            />
             
             <Route path="/logout" element = {
               <LogOut
@@ -216,12 +263,7 @@ function App() {
                 />
               } 
             />
-            {/* <Route
-              path='/conversations'
-              element={
-                <ConversationIndex />
-              } 
-            /> */}
+        
             <Route
               path='/events'
               element={
@@ -234,7 +276,7 @@ function App() {
             <Route path='/conversations/life' element = {
               <PostList 
                 topic={'Life'}
-                // loggedIn={loggedIn}
+                profileData={profileData}
                 currentUser={currentUser}
                 accessToken={accessToken}
                 refreshToken={refreshToken}
@@ -249,7 +291,7 @@ function App() {
               <PostDetail
                 topic={'Life'}
                 currentUser={currentUser}
-                // getUsers={getUsers}
+                profileData={profileData}
                 userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
@@ -257,36 +299,38 @@ function App() {
                 getComments={getComments}
               />
             }/>
-            <Route path ='/conversations/life/:postId/comments' element = {
-              <CommentList
+            <Route path='/conversations/life/:postId/edit' element = {
+              <EditPost
                 topic={'Life'}
-                // getUsers={getUsers}
+                accessToken={accessToken} 
+              /> 
+            }/>
+          
+            <Route path='/conversations/life/:postId/comments/:commentId' element={
+              <CommentDetail
+                topic={'Life'}
+                currentUser={currentUser}
                 userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
                 postData={postData}
                 commentData={commentData}
+                profileData={profileData}
                 // getPosts={getPosts}
                 // getComments={getComments}
               />
             }/>
-            <Route path='/conversations/life/:postId/comments/:commentId' element={
-              <CommentDetail
-                topic={'Life'}
-                // getUsers={getUsers}
-                userData={user}
-                loggedIn={loggedIn}
-                accessToken={accessToken}
-                postData={postData}
-                commentData={commentData}
-                // getPosts={getPosts}
-                // getComments={getComments}
+            <Route path='/conversations/life/:postId/comments/:commentId/edit' element = {
+              <EditComment 
+              topic={'Life'}
+              accessToken={accessToken}
               />
             }/>
 
             <Route path='/conversations/partytime' element = {
               <PostList
                 topic={'Party Time'}
+                profileData={profileData}
                 currentUser={currentUser}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
@@ -301,6 +345,7 @@ function App() {
               <PostDetail
                 topic={'Party Time'}
                 currentUser={currentUser}
+                profileData={profileData}
                 // getUsers={getUsers}
                 userData={user}
                 loggedIn={loggedIn}
@@ -309,30 +354,32 @@ function App() {
                 getComments={getComments}
               />
             }/>
-            <Route path ='/conversations/partytime/:postId/comments' element = {
-              <CommentList
+            <Route path='/conversations/partytime/:postId/edit' element = {
+              <EditPost
                 topic={'Party Time'}
-                // getUsers={getUsers}
+                accessToken={accessToken} 
+              /> 
+            }/>
+            
+            <Route path='/conversations/partytime/:postId/comments/:commentId' element={
+              <CommentDetail
+                topic={'Party Time'}
+                currentUser={currentUser}
                 userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
                 postData={postData}
                 commentData={commentData}
+                profileData={profileData}
                 // getPosts={getPosts}
                 // getComments={getComments}
               />
             }/>
-            <Route path='/conversations/partytime/:postId/comments/:commentId' element={
-              <CommentDetail
-                topic={'Party Time'}
-                // getUsers={getUsers}
-                userData={user}
-                loggedIn={loggedIn}
-                accessToken={accessToken}
-                postData={postData}
-                commentData={commentData}
-                // getPosts={getPosts}
-                // getComments={getComments}
+
+            <Route path='/conversations/partytime/:postId/comments/:commentId/edit' element = {
+              <EditComment 
+              topic={'Party Time'}
+              accessToken={accessToken}
               />
             }/>
 
@@ -340,6 +387,7 @@ function App() {
               <PostList
                 topic={'Industry'}
                 currentUser={currentUser}
+                profileData={profileData}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
                 userData={user}
@@ -353,6 +401,7 @@ function App() {
               <PostDetail
                 topic={'Industry'}
                 currentUser={currentUser}
+                profileData={profileData}
                 // getUsers={getUsers}
                 userData={user}
                 loggedIn={loggedIn}
@@ -361,30 +410,32 @@ function App() {
                 getComments={getComments}
               />
             }/>
-            <Route path ='/conversations/industry/:postId/comments' element = {
-              <CommentList
+            <Route path='/conversations/industry/:postId/edit' element = {
+              <EditPost
                 topic={'Industry'}
-                // getUsers={getUsers}
+                accessToken={accessToken} 
+              /> 
+            }/>
+            
+            <Route path='/conversations/industry/:postId/comments/:commentId' element={
+              <CommentDetail
+                topic={'Industry'}
+                currentUser={currentUser}
                 userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
                 postData={postData}
                 commentData={commentData}
+                profileData={profileData}
                 // getPosts={getPosts}
                 // getComments={getComments}
               />
             }/>
-            <Route path='/conversations/industry/:postId/comments/:commentId' element={
-              <CommentDetail
-                topic={'Industry'}
-                // getUsers={getUsers}
-                userData={user}
-                loggedIn={loggedIn}
-                accessToken={accessToken}
-                postData={postData}
-                commentData={commentData}
-                // getPosts={getPosts}
-                // getComments={getComments}
+
+            <Route path='/conversations/industry/:postId/comments/:commentId/edit' element = {
+              <EditComment 
+              topic={'Industry'}
+              accessToken={accessToken}
               />
             }/>
 
@@ -392,6 +443,7 @@ function App() {
               <PostList
                 topic={'Crying Room'}
                 currentUser={currentUser}
+                profileData={profileData}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
                 userData={user}
@@ -405,6 +457,7 @@ function App() {
               <PostDetail
                 topic={'Crying Room'}
                 currentUser={currentUser}
+                profileData={profileData}
                 // getUsers={getUsers}
                 userData={user}
                 loggedIn={loggedIn}
@@ -413,52 +466,40 @@ function App() {
                 getComments={getComments}
               />
             }/>
-            <Route path ='/conversations/cryingroom/:postId/comments' element = {
-              <CommentList
+            <Route path='/conversations/cryingroom/:postId/edit' element = {
+              <EditPost
                 topic={'Crying Room'}
-                // getUsers={getUsers}
+                accessToken={accessToken} 
+              /> 
+            }/>
+            
+            <Route path='/conversations/cryingroom/:postId/comments/:commentId' element={
+              <CommentDetail
+                topic={'Crying Room'}
+                currentUser={currentUser}
                 userData={user}
                 loggedIn={loggedIn}
                 accessToken={accessToken}
                 postData={postData}
                 commentData={commentData}
+                profileData={profileData}
                 // getPosts={getPosts}
                 // getComments={getComments}
               />
             }/>
-            <Route path='/conversations/cryingroom/:postId/comments/:commentId' element={
-              <CommentDetail
-                topic={'Crying Room'}
-                // getUsers={getUsers}
-                userData={user}
-                loggedIn={loggedIn}
-                accessToken={accessToken}
-                postData={postData}
-                commentData={commentData}
-                // getPosts={getPosts}
-                // getComments={getComments}
+
+            <Route path='/conversations/cryingroom/:postId/comments/:commentId/edit' element = {
+              <EditComment 
+              topic={'Crying Room'}
+              accessToken={accessToken}
               />
             }/>
             
             <Route path='/addnetwork' element={<NetworkForm />} />
-            <Route path='/register' element={<RegisterForm setLoggedIn={setLoggedIn}/>} />
+            <Route path='/register' element={<RegisterForm />} />
             <Route path='/login' element={<Login setLoggedIn={setLoggedIn}/>} />
-            {/* <Route path='/addpost' element={
-              <PostForm
-                accessToken={accessToken}
-                getUsers={getUsers}
-                getPosts={getPosts}
-                getComments={getComments}
-              />
-            }/> */}
-            {/* <Route path='/addcomment' element = {
-              <CommentForm 
-                accessToken={accessToken}
-                getUsers={getUsers}
-                getPosts={getPosts}
-                getComments={getComments}
-                />
-            }/> */}
+            <Route path='/profile' element={<ProfileForm accessToken={accessToken}/>}/>
+            <Route path='/profile/:profileId/edit' element={<EditProfile accessToken={accessToken}/>}/>
             <Route path='/addevent' element = {
               <EventForm
                 accessToken={accessToken} 
@@ -469,7 +510,7 @@ function App() {
           </Routes>  
         </div>
       </div>
-    {/* </AuthProvider> */}
+    </AuthProvider>
     </div>
   );
 }

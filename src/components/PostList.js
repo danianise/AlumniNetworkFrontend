@@ -10,7 +10,7 @@ import ComputerIcon from '@mui/icons-material/Computer';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 
-function PostList({ topic, currentUser, userData, accessToken, refreshToken, getPosts, getComments }) {
+function PostList({ topic, currentUser, userData, accessToken, refreshToken, getPosts, getComments, profileData }) {
 
   let emojis = [
     {topic: 'Life', icon: <TelegramIcon fontSize="large" />},
@@ -38,6 +38,7 @@ function PostList({ topic, currentUser, userData, accessToken, refreshToken, get
         accessToken={accessToken}
         // userData={userData}
         // postData={postData}
+        profileData={profileData}
         getPosts={getPosts}
         getComments={getComments}
       /><hr />
@@ -47,6 +48,7 @@ function PostList({ topic, currentUser, userData, accessToken, refreshToken, get
           topic={topic}
           currentUser={currentUser}
           userData={userData}
+          profileData={profileData}
           accessToken={accessToken}
           refreshToken={refreshToken}
         />

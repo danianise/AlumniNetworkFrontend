@@ -33,8 +33,14 @@ button{
   color: white;
 }
 
-.landingPage {
+.landingPage, .registerSuccess {
   position: absolute;
   left: 220px;
   margin-right: 10px;
 }
+
+.profileForm, .editPost{
+  margin-top: 30px;
+}
+
+

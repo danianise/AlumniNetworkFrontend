@@ -1,7 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState} from 'react'
 import Login from './Login'
 import { Link, NavLink } from 'react-router-dom'
-// import AuthContext from '../context/AuthContext'
 
 import '../css/Sidebar.css'
 import SidebarRow from './SidebarRow'
@@ -16,42 +15,40 @@ import CelebrationIcon from '@mui/icons-material/Celebration';
 import CodeOffIcon from '@mui/icons-material/CodeOff';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import MenuIcon from '@mui/icons-material/Menu';
+import AuthContext from '../context/AuthContext'
 
 
-function Sidebar({currentUser, userData, loggedIn, setLoggedIn, setAccessToken}) {
+function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
 
-  // const [users, setUsers] = useState([])
+  let {profileData} = useContext(AuthContext)
+
+
   const [isActive, setIsActive] = useState(false);
-
-  // let {contextData} = useContext(AuthContext)
-  // console.log({contextData})
-
-  // useEffect(() => {
-  //   const url = process.env.REACT_APP_API_URL + 'users/'
-  //   const opts = {
-  //   method: 'GET',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   }
-  // }
-  // fetch(url, opts)
-  // .then(res => res.json())
-  // .then(data => setUsers(data))
-  //   }, [])
-  
-
+ 
   const handleClick = event => {
     setIsActive(current => !current);
   };
 
   return (
+
     <div>
       {loggedIn
       ? <>
         <div className='sidebar'>
 
           <div className="sidebarUser">
-            <Avatar src={userData.photo ? userData.photo : './profileicon.png'} />
+          {!profileData
+            ? <>
+                <Avatar src='./profileicon.png' />
+              </>
+            : profileData?.map((eachProfile) => {
+              if(eachProfile.user === currentUser.id){
+                  return(<>
+                    <Avatar src={eachProfile.photo ? eachProfile.photo : './profileicon.png'} />
+                  </>)
+              }
+            })
+          }
             <h5>
                 {currentUser.first_name} {currentUser.last_name}
             </h5>

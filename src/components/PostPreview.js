@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {autocompleteClasses, Avatar} from '@mui/material'
 
-function PostPreview({ topic, accessToken }) {
+function PostPreview({ topic, accessToken, profileData }) {
 
   const [postData, setPostData] = useState([])
   const [commentData, setCommentData] = useState([])
   const [users, setUsers] = useState([])
+  // const [profileData, setProfileData] = useState({})
   // const [currentUser, setCurrentUser] = useState([])
 
   let commentsThisPost = []
@@ -40,43 +41,25 @@ function PostPreview({ topic, accessToken }) {
     )
     .then(res => res.json())
     .then(data => setUsers(data))
+
+    // fetch(
+    //   process.env.REACT_APP_API_URL + 'profile/', 
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${accessToken}`
+    //     }
+    //   }
+    // )
+    // .then(res => res.json())
+    // .then(data => {
+    //     setProfileData(data)
+    // })
   }, [])
 
-  // useEffect(() => {
-  //   const url = process.env.REACT_APP_API_URL + 'posts/'
-  //   const opts = {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${accessToken}`
-  //     }
-  //   }
-  //   fetch(url, opts)
-  //   .then(
-  //     fetch(process.env.REACT_APP_API_URL + 'comments/', opts)
-  //     .then(res => res.json())
-  //     .then(data => setCommentData(data))
-  //   )
-  //   .then(res => res.json())
-  //   .then(data => setPostData(data))
-  // }, [])
-
-  // useEffect(() => {
-  //   const url = process.env.REACT_APP_API_URL + 'comments/'
-  //   const opts = {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${accessToken}`
-  //     }
-  //   }
-  //   fetch(url, opts)
-  //   .then(res => res.json())
-  //   .then(data => setCommentData(data))
-  // }, [])
-
-  console.log(postData)
-  console.log(users)
+  // console.log(postData)
+  // console.log(users)
   // console.log(commentData)
 
   let topicForRoute = (topic).toLowerCase()
@@ -99,7 +82,15 @@ function PostPreview({ topic, accessToken }) {
           if (eachUser.id === eachPost.author)
           authorOfPost=eachUser
         })}
-        console.log('authorOfPost', authorOfPost)
+        // console.log('authorOfPost', authorOfPost)
+
+        let profileOfAuthor={}
+          // {profileData?.map((eachProfile) =>{
+          //   if (eachProfile.user === authorOfPost.id){
+          //     profileOfAuthor = eachProfile
+          //   }
+          // })}
+          // console.log('profileOfAuthor', profileOfAuthor)
 
         let dateTime = eachPost.timestamp
         let date = dateTime.slice(0, 10)
@@ -134,7 +125,7 @@ function PostPreview({ topic, accessToken }) {
           <Link to={`/conversations/${topicForRoute}/${eachPost.id}`}>
             <div className='postContainer'>
               <h6 className = "userHeader">
-                <Avatar src="" className='postAvatar'/>
+                <Avatar src={profileOfAuthor.photo} className='postAvatar'/>
                 {authorOfPost.first_name} {authorOfPost.last_name}
               </h6>
               {eachPost.imageURL ? <img src={eachPost.imageURL} style={{width:'500px'}} alt="Image input by poster"/> : ""}
