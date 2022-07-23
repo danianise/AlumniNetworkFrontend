@@ -2,7 +2,7 @@ import React, {useContext, useState, useEffect} from 'react'
 import NetworkIndex from './NetworkIndex'
 import { Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
-import ProfileForm from './ProfileForm'
+
 
 import '../css/ProfileIndex.css'
 import PersonIcon from '@mui/icons-material/Person';
@@ -101,11 +101,7 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
                 </div>
                         )
                     } 
-                    // else {
-                    //     return(<>
-                    //         <ProfileForm accessToken={accessToken}/>
-                    //     </>)
-                    // }
+                   
                     
                 })}
 
