@@ -29,3 +29,10 @@ Future additions/corrections will include:
 ### Blockers
 - Fetch calls for profile information doesn't always come through and blocks the site from rendering user data (right now it is affecting the post previews on the conversation pages)
 - How to toggle between setting profile (once only) and updating profile (all future changes)
+
+### Resources
+- https://www.youtube.com/watch?v=B-kxUMHBxNo
+- https://www.youtube.com/watch?v=2_mH8HyZLvA
+- https://www.youtube.com/watch?v=xjMP0hspNLE
+- https://www.youtube.com/watch?v=fr3yF30GWi0
+- https://www.youtube.com/watch?v=_9vgd9XKlDQ&t=75s
