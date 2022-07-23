@@ -25,15 +25,7 @@ function Login({setLoggedIn, setAccessToken}) {
     }
     fetch(url, opts)
     .then(res => res.json())
-    .then(data => {
-      setUsers(data)
-      console.log(users)
-      // users.map((each)=>{
-      //   if(localStorage.getItem('user') === each.username){
-      //     localStorage.setItem('currentUserId', each.id)
-      //   }
-      // })
-    })
+    .then(data => setUsers(data))
   }, [])
 
   const statusCodeToErr = (responseObj) => {

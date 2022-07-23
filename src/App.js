@@ -87,10 +87,7 @@ function App() {
       }
     )
     .then(res => res.json())
-    .then(data => {
-        setProfileData(data)
-        
-    })
+    .then(data => setProfileData(data))
 
     // fetch(
     //   process.env.REACT_APP_API_URL + 'users/', 
@@ -117,10 +114,7 @@ function App() {
       }
     )
     .then(res => res.json())
-    .then(data => {
-        setCurrentUser(data)
-        console.log(currentUser)
-    })
+    .then(data => setCurrentUser(data))
 
     
     fetch(
@@ -133,10 +127,7 @@ function App() {
       }
     )
     .then(res => res.json())
-    .then(data => {
-      setNetworkData(data)
-      console.log(networkData)
-    })
+    .then(data => setNetworkData(data))
 
   }, [])
 

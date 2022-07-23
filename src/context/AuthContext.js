@@ -45,9 +45,7 @@ export const AuthProvider = ({children}) => {
             }
           )
           .then(res => res.json())
-          .then(data => {
-              setProfileData(data)
-          })
+          .then(data => setProfileData(data))
           
     }, [])
 
