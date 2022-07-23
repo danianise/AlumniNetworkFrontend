@@ -92,20 +92,20 @@ function App() {
         
     })
 
-    fetch(
-      process.env.REACT_APP_API_URL + 'users/', 
-      {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-      }
-    )
-    .then(res => res.json())
-    .then(data => {
-        setUsers(data)
-        console.log(users)
-    })
+    // fetch(
+    //   process.env.REACT_APP_API_URL + 'users/', 
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     }
+    //   }
+    // )
+    // .then(res => res.json())
+    // .then(data => {
+    //     setUsers(data)
+    //     console.log(users)
+    // })
 
     fetch(
       process.env.REACT_APP_API_URL + `users/${userId}`, 
