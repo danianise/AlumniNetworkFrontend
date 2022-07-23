@@ -26,6 +26,8 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
                 <h1>
                     [welcome, {currentUser.first_name}]
                 </h1>
+                <Link to="/profile">Set Up Profile</Link>
+                <Link to={linkToEditProfile}>Edit Profile</Link>
 
                 {profileData?.map((eachProfile) => {
 
@@ -38,13 +40,7 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
                         return(
                             <div className='customProfile'>
                                 <div className='verticalDisplay'>
-                                    
-                               
-                                    <Link to="/profile">Set Up Profile</Link>
-                                    <Link to={linkToEditProfile}>Edit Profile</Link>
                                 
-                                    
-
                                     <div className='profilePhoto'>
                                         <img
                                             src={
