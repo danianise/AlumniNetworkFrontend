@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# [theAlumniNetwork]
+### Description 
+ A social media site that connects people who have attended the same school or completed the same program.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Tech Stack
+React, Django, PostgreSQL
 
-## Available Scripts
+### User stories
+As a user, I would like to create an account that connects me with my specific network(s).
+As a user I would like a space to link my contact information for other users in my network(s).
+As a user I would like to see a list of network-specific events, and add my own relevant events to the list.
+As a user I would like a space to keep up conversations on specific topics with other users in my network as a way to keep in touch.
 
-In the project directory, you can run:
+### Screenshots
 
-### `npm start`
+![Screen Shot 2022-07-23 at 2 35 45 AM](https://user-images.githubusercontent.com/97096664/180594542-039f4a42-ce4f-4a12-8aa0-e2a8364fe0b0.png)
+![Screen Shot 2022-07-23 at 2 35 18 AM](https://user-images.githubusercontent.com/97096664/180594548-13af4779-f248-4852-91db-fac5f16a0c48.png)
+![Screen Shot 2022-07-23 at 3 08 56 AM](https://user-images.githubusercontent.com/97096664/180594577-270288b1-beb7-4f39-a49f-42c48e7d825e.png)
+![Screen Shot 2022-07-23 at 3 10 06 AM](https://user-images.githubusercontent.com/97096664/180594628-b3d2ae56-2e5c-4413-9275-488d3f17685b.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Still To Come....
+Future additions/corrections will include:
+- Multiple networks for users to connect with, with the option to switch between networks
+- Users will be able to add events relevant to their network
+- Public profiles to see other user's contact information
+- Users will have the option to create a profile on their first sign-in, and update it on future sign-ins
+- Option to upload files instead of using image URLs
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Blockers
+- Fetch calls for profile information doesn't always come through and blocks the site from rendering user data (right now it is affecting the post previews on the conversation pages)
+- How to toggle between setting profile (once only) and updating profile (all future changes)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Resources
+- https://www.youtube.com/watch?v=B-kxUMHBxNo
+- https://www.youtube.com/watch?v=2_mH8HyZLvA
+- https://www.youtube.com/watch?v=xjMP0hspNLE
+- https://www.youtube.com/watch?v=fr3yF30GWi0
+- https://www.youtube.com/watch?v=_9vgd9XKlDQ&t=75s

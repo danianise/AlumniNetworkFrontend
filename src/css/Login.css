@@ -1,0 +1,23 @@
+.login input {
+    display: inline;
+    width: 125px;
+    margin: 6px 0 6px 0;
+    border-radius: 4px;
+    border: none;
+    background-color: #eff2f5;
+    outline-width: 0;
+}
+
+.login {
+    /* display: inline-flex; */
+    width: 160px;
+    margin: 105px 0 0 10px;
+    padding: 10px;
+    box-shadow: 5px 5px 9px -9px rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    /* color: grey; */
+}
+
+.login label {
+    padding-right: 5px;
+}

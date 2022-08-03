@@ -1,38 +1,44 @@
-.App {
-  text-align: center;
+.app {
+  color: grey;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ul {
+  list-style: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  color: #89cff0
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+a {
+  text-decoration: none;
+  color: gray;
+}
+
+.mainContent {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.routes {
+  margin-left: 200px;
+  margin-top:100px;
+}
+
+button{
+  border: none;
+  padding: 5px 10px 5px 10px;
+  border-radius: 4px;
+  margin-top: 5px;
+  background-color: #89cff0;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.landingPage, .registerSuccess {
+  position: absolute;
+  left: 220px;
+  margin-right: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.profileForm, .editPost{
+  margin-top: 30px;
 }
