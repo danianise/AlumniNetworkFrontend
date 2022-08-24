@@ -23,7 +23,7 @@ function LandingPage(props) {
             the same school or completed the same course(s).<br /> Stay connected, strengthen your network.
         </p>
         <h4>
-            <a href=''>[REGISTER HERE]</a> to get started.
+            <a href='/register'>[REGISTER HERE]</a> to get started.
         </h4>
             <NetworkIndex />
         <p>

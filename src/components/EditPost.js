@@ -16,7 +16,8 @@ function EditPost({topic, accessToken}) {
     useEffect(() => {
 
         fetch(
-            process.env.REACT_APP_API_URL + `posts/${postId}`,
+            // process.env.REACT_APP_API_URL + `posts/${postId}`,
+            `https://radiant-tundra-28877.herokuapp.com/posts/${postId}/`,
             {
                 method: 'GET',
                 headers: {
@@ -38,7 +39,8 @@ function EditPost({topic, accessToken}) {
     let updatePost= async () => {
 
         await fetch(
-            process.env.REACT_APP_API_URL + `posts/${postId}/`,
+            // process.env.REACT_APP_API_URL + `posts/${postId}/`,
+            `https://radiant-tundra-28877.herokuapp.com/posts/${postId}/`,
             {
                 method: 'PUT',
                 headers: {

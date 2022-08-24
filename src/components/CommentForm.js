@@ -23,7 +23,8 @@ function CommentForm({post, currentUser, accessToken, getPosts, getComments}) {
   const handleSubmit = event => {
     // event.preventDefault()
 
-    const url = process.env.REACT_APP_API_URL + 'comments/'
+    // const url = process.env.REACT_APP_API_URL + 'comments/'
+    const url = 'https://radiant-tundra-28877.herokuapp.com/comments/'
     const options = {
       method: 'POST',
       headers: {

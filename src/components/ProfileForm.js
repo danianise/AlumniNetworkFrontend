@@ -35,7 +35,8 @@ function ProfileForm({accessToken}) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const url = process.env.REACT_APP_API_URL + 'profile/'
+    // const url = process.env.REACT_APP_API_URL + 'profile/'
+    const url = 'https://radiant-tundra-28877.herokuapp.com/profile/'
     const options = {
       method: 'POST',
       headers: {

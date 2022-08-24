@@ -39,12 +39,12 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
           <div className="sidebarUser">
           {!profileData
             ? <>
-                <Avatar src='./profileicon.png' />
+                <Avatar src='profileicon.png' />
               </>
             : profileData?.map((eachProfile) => {
               if(eachProfile.user === currentUser.id){
                   return(<>
-                    <Avatar src={eachProfile.photo ? eachProfile.photo : './profileicon.png'} />
+                    <Avatar src={eachProfile.photo ? eachProfile.photo : 'profileicon.png'} />
                   </>)
               }
             })

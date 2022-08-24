@@ -38,7 +38,8 @@ function PostForm({topic, currentUser, accessToken}) {
   const handleSubmit = (event) => {
     // event.preventDefault()
 
-    const url = process.env.REACT_APP_API_URL + 'posts/'
+    // const url = process.env.REACT_APP_API_URL + 'posts/'
+    const url = 'https://radiant-tundra-28877.herokuapp.com/posts/'
     const options = {
       method: 'POST',
       headers: {

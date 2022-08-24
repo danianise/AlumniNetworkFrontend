@@ -17,7 +17,8 @@ function EventForm({accessToken}) {
   const handleSubmit = event => {
     event.preventDefault();
 
-    const url = process.env.REACT_APP_API_URL + 'events/'
+    // const url = process.env.REACT_APP_API_URL + 'events/'
+    const url = 'https://radiant-tundra-28877.herokuapp.com/events/'
     const options = {
       method: 'POST',
       headers: {

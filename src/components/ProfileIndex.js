@@ -16,6 +16,7 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
     
 
     let {profileData} = useContext(AuthContext)
+    let linkToEditProfile = `profile/${currentUserProfile.id}/edit`
     
   return (
     <div className='profileIndex'>
@@ -26,8 +27,9 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
                 <h1>
                     [welcome, {currentUser.first_name}]
                 </h1>
-                <Link to="/profile">Set Up Profile</Link>
-                {/* <Link to={linkToEditProfile}>Edit Profile</Link> */}
+                {!profileData
+                ? <Link to="/profile">Set Up Profile</Link>
+                : <Link to={linkToEditProfile}>Edit Profile</Link> }
 
                 {profileData?.map((eachProfile) => {
 
@@ -35,7 +37,7 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
 
                         currentUserProfile = eachProfile
                         console.log(currentUserProfile)
-                        let linkToEditProfile = `profile/${currentUserProfile.id}/edit`
+                        // let linkToEditProfile = `profile/${currentUserProfile.id}/edit`
 
                         return(
                             <div className='customProfile'>

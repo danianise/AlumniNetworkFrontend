@@ -13,7 +13,8 @@ function PostPreview({ topic, accessToken, profileData }) {
   let commentsThisPost = []
 
   useEffect(() => {
-    const url = process.env.REACT_APP_API_URL
+    // const url = process.env.REACT_APP_API_URL
+    const url = 'https://radiant-tundra-28877.herokuapp.com/'
     const opts = {
       method: 'GET',
       headers: {

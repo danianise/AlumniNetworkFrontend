@@ -26,7 +26,8 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
   let commentsThisPost = []
 
   useEffect(() => {
-    const url = process.env.REACT_APP_API_URL
+    // const url = process.env.REACT_APP_API_URL
+    const url = 'https://radiant-tundra-28877.herokuapp.com/'
     const opts = {
       method: 'GET',
       headers: {
@@ -59,7 +60,8 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
 
   const handleClickDeletePost = () => {
     fetch(
-      process.env.REACT_APP_API_URL + `posts/${postId}`,
+      // process.env.REACT_APP_API_URL + `posts/${postId}`,
+      `https://radiant-tundra-28877.herokuapp.com/posts/${postId}/`,
       {
         method: 'DELETE',
         headers: {
