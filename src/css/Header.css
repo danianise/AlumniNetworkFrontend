@@ -64,3 +64,26 @@
     margin-right: 0 !important;
     padding-right: 0 !important;
 }
+
+@media (max-width: 940px) {
+    .header__left > img {
+        width: 10vw;
+    }
+
+    .header__center > h1 {
+        font-size: 25px;
+        margin-right: 10px;
+    }
+
+    .header__text {
+        display: none;
+    }
+
+    .header__right{
+        margin-top: 50px;
+        text-align: center;
+    }
+    .header__option > a{
+        margin: 0 50px 0 0;
+    }
+}

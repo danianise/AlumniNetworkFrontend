@@ -55,9 +55,41 @@
     width: 150px;
 }
 
+.hamburger {
+    display: none;
+}
 
-@media (max-width: 600px) {
-    .hideSidebar{
-        display: none
+@media (max-width: 940px) {
+
+    .sidebar {
+        box-shadow: none;
+        width: auto;
+    }
+
+    .hamburger {
+        display: block;
+        margin: 15px 10px 0 0;
+        cursor: pointer;
+    }
+
+    .nav-menu {
+        color: grey;
+        position: fixed;
+        right: -100%;
+        top: 5rem;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 5px;
+        width: 150px;
+        height: 90vh;
+        z-index: 999;
+        text-align: center;
+        transition: .3s;
+
+    }
+
+    .nav-menu.active {
+        left: 0;
+        margin: 100px 0 0 10px;
     }
 }

@@ -15,6 +15,7 @@ import CelebrationIcon from '@mui/icons-material/Celebration';
 import CodeOffIcon from '@mui/icons-material/CodeOff';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import AuthContext from '../context/AuthContext'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
@@ -31,12 +32,22 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
     setIsActive(current => !current);
   };
 
+  const [click, setClick] = useState(false)
+
+  const handleClickMedia = () => {
+    setClick(!click)
+  }
+
+  const closeMenu = () => setClick(false)
+
   return (
 
     <div>
       {loggedIn
       ? <>
         <div className='sidebar'>
+
+        <div className={click ? "nav-menu active" : "nav-menu"}>
 
           <div className="sidebarUser">
           {
@@ -49,17 +60,19 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
               }
             })
           }
-
             <Avatar src={currentUserPhoto ? currentUserPhoto : <AccountCircleIcon/>} />
             <h5>
                 {currentUser.first_name} {currentUser.last_name}
             </h5>
           </div>
 
+          
+
           <Link to='/'>
             <SidebarRow 
               title={"My Profile"}
               Icon={PersonIcon}
+              onClick={closeMenu}
             />
           </Link>
 
@@ -67,6 +80,7 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
             <SidebarRow
               title={"My Networks"}
               Icon={PeopleAltIcon}
+              onClick={closeMenu}
             />
           </Link>
 
@@ -74,6 +88,7 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
             <SidebarRow
               title={"Events"}
               Icon={EventIcon}
+              onClick={closeMenu}
             />
           </Link>
 
@@ -88,6 +103,7 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
               <SidebarRow
                 title={"Life"}
                 Icon={TelegramIcon}
+                onClick={closeMenu}
               />
               </Link>
 
@@ -95,6 +111,7 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
               <SidebarRow
                 title={"Party Time"}
                 Icon={CelebrationIcon}
+                onClick={closeMenu}
               />
               </Link>
 
@@ -102,6 +119,7 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
               <SidebarRow
                 title={"Industry"}
                 Icon={CodeOffIcon}
+                onClick={closeMenu}
               />
               </Link>
 
@@ -109,12 +127,16 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
                   <SidebarRow
                     title={"Crying Room"}
                     Icon={SentimentVeryDissatisfiedIcon}
+                    onClick={closeMenu}
                   />
                 
               </Link>
+              </div>
             </div>  
           </div>
-          
+          <div className='hamburger' onClick={handleClickMedia}>
+                    {click ? <CloseIcon/> : <MenuIcon/>} 
+            </div>
         </div>
       </>
       : 

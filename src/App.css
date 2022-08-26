@@ -42,3 +42,9 @@ button{
 .profileForm, .editPost{
   margin-top: 30px;
 }
+
+@media (max-width: 940px) {
+    .routes {
+      margin-left: 75px;
+    }
+}

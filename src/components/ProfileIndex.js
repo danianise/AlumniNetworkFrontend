@@ -16,7 +16,7 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
     let linkToEditProfile = ""
 
     let {profileData} = useContext(AuthContext)
-    console.log(profileData)
+    // console.log(profileData)
 
     // useEffect(()=>{
     //     window.onload = function() {
@@ -26,6 +26,17 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
     //         }
     //     }
     // },[])
+
+    let reloadCount = sessionStorage.getItem('reloadCount')
+
+    useEffect(() => {
+        if(reloadCount < 2) {
+          sessionStorage.setItem('reloadCount', String(reloadCount + 1));
+          window.location.reload();
+        } else {
+          sessionStorage.removeItem('reloadCount');
+        }
+      }, []);
     
   return (
     <div className='profileIndex'>
