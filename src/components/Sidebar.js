@@ -16,11 +16,13 @@ import CodeOffIcon from '@mui/icons-material/CodeOff';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import MenuIcon from '@mui/icons-material/Menu';
 import AuthContext from '../context/AuthContext'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
 
   let {profileData} = useContext(AuthContext)
+  let currentUserPhoto = null
 
 
   const [isActive, setIsActive] = useState(false);
@@ -37,18 +39,18 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
         <div className='sidebar'>
 
           <div className="sidebarUser">
-          {!profileData
-            ? <>
-                <Avatar src='profileicon.png' />
-              </>
-            : profileData?.map((eachProfile) => {
+          {
+            profileData.map((eachProfile) => {
               if(eachProfile.user === currentUser.id){
-                  return(<>
-                    <Avatar src={eachProfile.photo ? eachProfile.photo : 'profileicon.png'} />
-                  </>)
+                currentUserPhoto = eachProfile.photo 
+                  // return(<>
+                  //   <Avatar src={eachProfile.photo} />
+                  // </>)
               }
             })
           }
+
+            <Avatar src={currentUserPhoto ? currentUserPhoto : <AccountCircleIcon/>} />
             <h5>
                 {currentUser.first_name} {currentUser.last_name}
             </h5>

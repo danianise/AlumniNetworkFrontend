@@ -11,12 +11,20 @@ import PersonIcon from '@mui/icons-material/Person';
 function ProfileIndex({networkData, currentUser, accessToken}) {
 
     let currentUserName = currentUser.username
-    let currentUserProfile = ""
     let mailToLink = `mailto:${currentUserName}?body=Hello from your AlumniNetwork connection!`
-    
+    let currentUserProfile = null
+    let linkToEditProfile = ""
 
     let {profileData} = useContext(AuthContext)
-    let linkToEditProfile = `profile/${currentUserProfile.id}/edit`
+
+    // useEffect(()=>{
+    //     window.onload = function() {
+    //         if(!window.location.hash) {
+    //             window.location = window.location + '#loaded';
+    //             window.location.reload();
+    //         }
+    //     }
+    // },[])
     
   return (
     <div className='profileIndex'>
@@ -27,27 +35,26 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
                 <h1>
                     [welcome, {currentUser.first_name}]
                 </h1>
-                {!profileData
-                ? <Link to="/profile">Set Up Profile</Link>
-                : <Link to={linkToEditProfile}>Edit Profile</Link> }
 
                 {profileData?.map((eachProfile) => {
-
                     if(eachProfile.user === currentUser.id){
 
                         currentUserProfile = eachProfile
                         console.log(currentUserProfile)
-                        // let linkToEditProfile = `profile/${currentUserProfile.id}/edit`
-
-                        return(
+                        linkToEditProfile = `profile/${currentUserProfile.id}/edit`
+                    }
+                })}
+                {!currentUserProfile 
+                            ? <><Link to="/profile">Set Up Profile</Link></>
+                            : <>
+                            <Link to={linkToEditProfile}>Edit Profile</Link>
                             <div className='customProfile'>
                                 <div className='verticalDisplay'>
-                                
                                     <div className='profilePhoto'>
                                         <img
                                             src={
-                                                eachProfile.photo
-                                                    ? eachProfile.photo
+                                                currentUserProfile.photo
+                                                    ? currentUserProfile.photo
                                                     : './profileicon.png'
                                                 } 
                                             alt='User Profile Picture'
@@ -56,61 +63,51 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
 
                                     <p className='nameLocation'>
                                         [{currentUser.first_name} {currentUser.last_name}]<br />
-                                        {eachProfile.location}
+                                        {currentUserProfile.location}
                                     </p>
                                 </div>
                 
-                    <ul>
-                        <li>
-                            <a href={mailToLink}>
-                                <img className='contactIcons' src='/EmailLogo.png' alt='Email Icon'/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href={eachProfile.linkedin}>
-                                <img className='contactIcons' src='/LinkedInLogo.png' alt='LinkedIn Icon'/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href={eachProfile.github}>
-                                <img className='contactIcons' src='/GitHubLogo.png' alt='GitHub Icon'/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href={eachProfile.facebook}>
-                                <img className='contactIcons' src='/FacebookLogo.png' alt='Facebook Icon'/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href={eachProfile.twitter}>
-                                <img className='contactIcons' src='/twitter.png' alt='Twitter Icon'/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href={eachProfile.instagram}>
-                                <img className='contactIcons' src='/InstagramLogo.png' alt='Instagram Icon'/>
-                            </a>
-                        </li>
-                    </ul>
+                                <ul>
+                                    <li>
+                                        <a href={mailToLink}>
+                                            <img className='contactIcons' src='/EmailLogo.png' alt='Email Icon'/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href={currentUserProfile.linkedin}>
+                                            <img className='contactIcons' src='/LinkedInLogo.png' alt='LinkedIn Icon'/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href={currentUserProfile.github}>
+                                            <img className='contactIcons' src='/GitHubLogo.png' alt='GitHub Icon'/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href={currentUserProfile.facebook}>
+                                            <img className='contactIcons' src='/FacebookLogo.png' alt='Facebook Icon'/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href={currentUserProfile.twitter}>
+                                            <img className='contactIcons' src='/twitter.png' alt='Twitter Icon'/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href={currentUserProfile.instagram}>
+                                            <img className='contactIcons' src='/InstagramLogo.png' alt='Instagram Icon'/>
+                                        </a>
+                                    </li>
+                                </ul>
 
-                    <div className='networkInfo'>
-                        <NetworkIndex networkData={networkData} headline="My Networks"/>
-                    </div>
-                </div>
-                        )
-                    } 
-                   
-                    
-                })}
-
-                
-
-
-            </div>
-
-            
-            </div>
-        
+                                <div className='networkInfo'>
+                                    <NetworkIndex networkData={networkData} headline="My Networks"/>
+                                </div>
+                            </div>
+                            </>
+                        }
+            </div>            
+        </div>    
     </div>
   )
 }
