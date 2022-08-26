@@ -32,32 +32,32 @@ import EditProfile from './components/EditProfile';
 
 function App() {
 
-  const networkArray = [
-    {
-      name: 'General Assembly',
-      location: 'Boston, MA',
-      logo: 'https://i.imgur.com/mTuKYLr.png'
-    },
-    {
-      name: "Miss Hall's School",
-      location: 'Pittsfield, MA',
-      logo: 'https://i.imgur.com/VQR5BL1.png'
-    }
-  ]
+  // const networkArray = [
+  //   {
+  //     name: 'General Assembly',
+  //     location: 'Boston, MA',
+  //     logo: 'https://i.imgur.com/mTuKYLr.png'
+  //   },
+  //   {
+  //     name: "Miss Hall's School",
+  //     location: 'Pittsfield, MA',
+  //     logo: 'https://i.imgur.com/VQR5BL1.png'
+  //   }
+  // ]
 
-  const user = {
-    name: 'Danielle Hoey',
-    email: 'danianisehoey@gmail.com',
-    password: 'PASSWORD',
-    photo: 'https://i.imgur.com/hqp432f.jpg',
-    location: 'Lunenburg, MA',
-    linkedin: 'https://www.linkedin.com/in/danielleahoey/',
-    github: 'https://github.com/danianise',
-    facebook: 'https://www.facebook.com/danianise',
-    twitter: null,
-    instagram: 'https://www.instagram.com/danianise/',
-    networks: networkArray
-  }
+  // const user = {
+  //   name: 'Danielle Hoey',
+  //   email: 'danianisehoey@gmail.com',
+  //   password: 'PASSWORD',
+  //   photo: 'https://i.imgur.com/hqp432f.jpg',
+  //   location: 'Lunenburg, MA',
+  //   linkedin: 'https://www.linkedin.com/in/danielleahoey/',
+  //   github: 'https://github.com/danianise',
+  //   facebook: 'https://www.facebook.com/danianise',
+  //   twitter: null,
+  //   instagram: 'https://www.instagram.com/danianise/',
+  //   networks: networkArray
+  // }
 
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('user'))
   const [users, setUsers] = useState(null)
@@ -77,7 +77,8 @@ function App() {
   useEffect(() => {
 
     fetch(
-      process.env.REACT_APP_API_URL + 'profile/', 
+      // process.env.REACT_APP_API_URL + 'profile/',
+      'https://radiant-tundra-28877.herokuapp.com/profile/', 
       {
         method: 'GET',
         headers: {
@@ -105,7 +106,8 @@ function App() {
     // })
 
     fetch(
-      process.env.REACT_APP_API_URL + `users/${userId}`, 
+      // process.env.REACT_APP_API_URL + `users/${userId}`,
+      `https://radiant-tundra-28877.herokuapp.com/users/${userId}/`, 
       {
         method: 'GET',
         headers: {
@@ -118,7 +120,8 @@ function App() {
 
     
     fetch(
-      process.env.REACT_APP_API_URL + 'networks/',
+      // process.env.REACT_APP_API_URL + 'networks/',
+      'https://radiant-tundra-28877.herokuapp.com/networks',
       {
         method: 'GET',
         headers: {
@@ -160,7 +163,8 @@ function App() {
   // }
 
   function getPosts() {
-    const url = process.env.REACT_APP_API_URL + 'posts/'
+    // const url = process.env.REACT_APP_API_URL + 'posts/'
+    const url = 'https://radiant-tundra-28877.herokuapp.com/posts/'
     const opts = {
       method: 'GET',
       headers: {
@@ -174,7 +178,8 @@ function App() {
   }
 
   function getComments() {
-    const url = process.env.REACT_APP_API_URL + 'comments/'
+    // const url = process.env.REACT_APP_API_URL + 'comments/'
+    const url = 'https://radiant-tundra-28877.herokuapp.com/comments/'
     const opts = {
       method: 'GET',
       headers: {
@@ -190,7 +195,8 @@ function App() {
   console.log(profileData)
 
   function getEvents() {
-    const url = process.env.REACT_APP_API_URL + 'events/'
+    // const url = process.env.REACT_APP_API_URL + 'events/'
+    const url = 'https://radiant-tundra-28877.herokuapp.com/events/'
     const opts = {
       method: 'GET',
       headers: {

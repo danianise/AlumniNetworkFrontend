@@ -16,6 +16,7 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
     let linkToEditProfile = ""
 
     let {profileData} = useContext(AuthContext)
+    console.log(profileData)
 
     // useEffect(()=>{
     //     window.onload = function() {
