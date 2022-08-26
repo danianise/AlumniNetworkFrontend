@@ -32,32 +32,32 @@ import EditProfile from './components/EditProfile';
 
 function App() {
 
-  // const networkArray = [
-  //   {
-  //     name: 'General Assembly',
-  //     location: 'Boston, MA',
-  //     logo: 'https://i.imgur.com/mTuKYLr.png'
-  //   },
-  //   {
-  //     name: "Miss Hall's School",
-  //     location: 'Pittsfield, MA',
-  //     logo: 'https://i.imgur.com/VQR5BL1.png'
-  //   }
-  // ]
+  const networkArray = [
+    {
+      name: 'General Assembly',
+      location: 'Boston, MA',
+      logo: 'https://i.imgur.com/mTuKYLr.png'
+    },
+    {
+      name: "Miss Hall's School",
+      location: 'Pittsfield, MA',
+      logo: 'https://i.imgur.com/VQR5BL1.png'
+    }
+  ]
 
-  // const user = {
-  //   name: 'Danielle Hoey',
-  //   email: 'danianisehoey@gmail.com',
-  //   password: 'PASSWORD',
-  //   photo: 'https://i.imgur.com/hqp432f.jpg',
-  //   location: 'Lunenburg, MA',
-  //   linkedin: 'https://www.linkedin.com/in/danielleahoey/',
-  //   github: 'https://github.com/danianise',
-  //   facebook: 'https://www.facebook.com/danianise',
-  //   twitter: null,
-  //   instagram: 'https://www.instagram.com/danianise/',
-  //   networks: networkArray
-  // }
+  const user = {
+    name: 'Danielle Hoey',
+    email: 'danianisehoey@gmail.com',
+    password: 'PASSWORD',
+    photo: 'https://i.imgur.com/hqp432f.jpg',
+    location: 'Lunenburg, MA',
+    linkedin: 'https://www.linkedin.com/in/danielleahoey/',
+    github: 'https://github.com/danianise',
+    facebook: 'https://www.facebook.com/danianise',
+    twitter: null,
+    instagram: 'https://www.instagram.com/danianise/',
+    networks: networkArray
+  }
 
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('user'))
   const [users, setUsers] = useState(null)
