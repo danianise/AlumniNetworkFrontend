@@ -69,12 +69,14 @@
 
     .header{
         padding: 0;
-        height: 20vh;
+        /* height: 20vh; */
+        /* box-shadow: none; */
     }
 
     .header__left > img {
-        width: 10vw;
-        margin-top: 5px;
+        /* width: 10vw;
+        margin-top: 5px; */
+        display: none;
     }
 
     .header__center > h1 {
@@ -83,7 +85,7 @@
     }
 
     .header__text {
-        display: none;
+        font-size: x-small;
     }
 
     .header__right{
