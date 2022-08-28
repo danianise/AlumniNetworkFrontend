@@ -1,3 +1,14 @@
 .registerForm {
-    margin-top: 10px;
+    margin-left: -180px;
+}
+
+.registerForm input {
+   float: right;
+}
+
+@media (max-width: 940px) {
+    .registerForm {
+      margin-left: -60px;
+      margin-top: -70px;
+    }
 }

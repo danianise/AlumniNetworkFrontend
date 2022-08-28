@@ -43,6 +43,12 @@ button{
   margin-top: 30px;
 }
 
+.errMsg {
+  color: #b30000;
+  font-size: small;
+  text-align: center;
+}
+
 @media (max-width: 940px) {
     .routes {
       margin-left: 75px;

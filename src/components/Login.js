@@ -30,14 +30,18 @@ function Login({setLoggedIn, setAccessToken}) {
   }, [])
 
   const statusCodeToErr = (responseObj) => {
-    setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)
+    if (responseObj.status === 401){
+      setNetworkErrMsg('Invalid username and/or password')
+    } else {
+      setNetworkErrMsg(`Network Error of code: ${responseObj.status}`)
+    }
   }
 
   const clientFormValidation = (formInfo) => {
     const blankFields = Object.entries(formInfo)
                               .filter(kv => kv[1] === '')
     if (blankFields.length > 0) {
-        setClientErrMsg(`${blankFields[0][0]} can not be blank`)
+        setClientErrMsg(`${blankFields[0][0]} cannot be blank`)
         return false
     }
     setClientErrMsg(null)
@@ -144,8 +148,8 @@ function Login({setLoggedIn, setAccessToken}) {
             <br />
             <button type="submit">Login</button>
         </form>
-        <p>{networkErrMsg}</p>
-        <p>{clientErrMsg}</p>
+        <p className='errMsg'>{networkErrMsg}</p>
+        <p className='errMsg'>{clientErrMsg}</p>
     </div>
 
   )

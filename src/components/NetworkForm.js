@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import '../css/NetworkForm.css'
 
 function NetworkForm() {
   
@@ -17,83 +18,94 @@ function NetworkForm() {
     setFormState(initialState)
   }
 
-  return (<>
+  return (
+  
+    <div className = 'networkForm'>
 
-    <h1>[Request a Network]</h1>
-    <p>Don't see your network? Request a new network with the form below:</p>
+      <h1>[Request a Network]</h1>
+      <p>Don't see your network? Request a new network with the form below:</p>
 
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Network Name:</label>
-      <input
-        id="name"
-        type="text"
-        onChange={handleChange}
-        value={formState.name}
-      /><br />
+      <form onSubmit={handleSubmit}>
+        <label>Network Name:</label>
+        <input
+          id="name"
+          type="text"
+          onChange={handleChange}
+          value={formState.name}
+        />
+        <br /><br />
 
-      <label htmlFor="password">Network Location:</label>
-      <input
-        id="password"
-        type="password"
-        onChange={handleChange}
-        value={formState.password}
-      /><br />
+        <label>Network Location:</label>
+        <input
+          id="password"
+          type="password"
+          onChange={handleChange}
+          value={formState.password}
+        />
+        <br /><br />
 
-    <label htmlFor="logo">Logo (URL):</label>
-      <input
-        id="logo"
-        type="url"
-        onChange={handleChange}
-        value={formState.logo}
-      /><br />
+      <label>Logo (URL):</label>
+        <input
+          id="logo"
+          type="url"
+          onChange={handleChange}
+          value={formState.logo}
+        />
+        <br /><br />
 
-      {/* <label htmlFor="logo">Logo:</label>
-      <input
-        id="logo" 
-        type="file"
-        onChange={handleChange}
-        value={formState.logo}
-      /><br /> */}
+        {/* <label htmlFor="logo">Logo:</label>
+        <input
+          id="logo" 
+          type="file"
+          onChange={handleChange}
+          value={formState.logo}
+        /><br /> */}
 
-      Would you like to be the main contact for this network?<br />
-      
-      <input
-        id="adminYes"
-        type="radio"
-        onChange={handleChange}
-        value={formState.admin}
-      />
-      <label htmlFor='adminYes'>Yes</label><br />
-      
-      <input
-        id="adminNo"
-        type="radio"
-        onChange={handleChange}
-        value={formState.admin}
-      />
-      <label htmlFor='adminNo'>No</label><br />
+        Would you like to be the main contact for this network?
+        <br />
+        
+        
+        <input
+          id="adminYes"
+          type="radio"
+          onChange={handleChange}
+          value={formState.admin}
+        />
+        <label>Yes</label>
+        
+        <input
+          id="adminNo"
+          type="radio"
+          onChange={handleChange}
+          value={formState.admin}
+        />
+        <label>No</label>
+        <br /><br />
 
 
-      <label htmlFor="yourName">Your Name:</label>
-      <input
-        id="yourName"
-        type="text"
-        onChange={handleChange}
-        value={formState.yourName}
-      /><br />
+        <label htmlFor="yourName">Your Name:</label>
+        <input
+          id="yourName"
+          type="text"
+          onChange={handleChange}
+          value={formState.yourName}
+        />
+        <br /><br />
 
-      <label htmlFor="email">Your Email:</label>
-      <input
-        id="email"
-        type="email"
-        onChange={handleChange}
-        value={formState.email}
-      /><br />
+        <label htmlFor="email">Your Email:</label>
+        <input
+          id="email"
+          type="email"
+          onChange={handleChange}
+          value={formState.email}
+        />
+        <br /><br />
 
-      
-      <button type="submit">Submit</button>
-    </form>
-    </>)
+        
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    )
 }
 
 export default NetworkForm

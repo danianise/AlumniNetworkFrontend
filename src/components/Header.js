@@ -60,7 +60,7 @@ function Header({loggedIn}) {
               >
                 <AppRegistrationIcon />
                 <span className = "header__text">
-                  REGISTER
+                  SIGN UP
                 </span>
               </NavLink> 
 
