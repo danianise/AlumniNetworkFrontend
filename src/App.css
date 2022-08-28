@@ -50,8 +50,8 @@ button{
 }
 
 @media (max-width: 940px) {
-    .routes {
-      margin-left: 75px;
-      margin-top: 20vh;
-    }
+  .routes {
+    margin-left: 75px;
+    margin-top: 20vh;
+  }
 }

@@ -21,3 +21,12 @@
 .login label {
     padding-right: 5px;
 }
+
+@media (max-width: 940px) {
+    .login {
+        width: 100px;
+    }
+    .login input{
+        width: 95px;
+    }
+}
