@@ -22,7 +22,7 @@ function PostList({ topic, currentUser, userData, accessToken, refreshToken, get
   // console.log(props.userData)
 
   return (
-    <div>
+    <div className = 'postList'>
       {emojis.map((each) => {
         if (topic === each.topic){
           return(

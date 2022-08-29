@@ -83,15 +83,14 @@ function PostPreview({ topic, accessToken, profileData }) {
           if (eachUser.id === eachPost.author)
           authorOfPost=eachUser
         })}
-        // console.log('authorOfPost', authorOfPost)
+        console.log('authorOfPost', authorOfPost)
 
         let profileOfAuthor={}
-          // {profileData?.map((eachProfile) =>{
-          //   if (eachProfile.user === authorOfPost.id){
-          //     profileOfAuthor = eachProfile
-          //   }
-          // })}
-          // console.log('profileOfAuthor', profileOfAuthor)
+        {profileData?.map((eachProfile) =>{
+          if (eachProfile.user === authorOfPost.id){
+            profileOfAuthor = eachProfile
+          }
+        })}
 
         let dateTime = eachPost.timestamp
         let date = dateTime.slice(0, 10)

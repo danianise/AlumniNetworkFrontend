@@ -50,8 +50,11 @@ button{
 }
 
 @media (max-width: 940px) {
-  .routes {
-    margin-left: 75px;
-    margin-top: 20vh;
+  .landingPage, .registerSuccess{
+    left: 160px;
+  }
+
+  .profileForm, .postList, .profileIndex, .eventIndex {
+    margin-left: -20vh;
   }
 }

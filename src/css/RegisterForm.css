@@ -7,8 +7,8 @@
 }
 
 @media (max-width: 940px) {
-    .registerForm {
-      margin-left: -60px;
-      margin-top: -70px;
+    .registerForm > form{
+      display: flex; 
+      flex-direction: column;
     }
 }

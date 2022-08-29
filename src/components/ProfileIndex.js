@@ -16,7 +16,7 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
     let linkToEditProfile = ""
 
     let {profileData} = useContext(AuthContext)
-    // console.log(profileData)
+    console.log(currentUser)
 
     // useEffect(()=>{
     //     window.onload = function() {
@@ -36,6 +36,18 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
         } else {
           sessionStorage.removeItem('reloadCount');
         }
+        // fetch(
+        //     // process.env.REACT_APP_API_URL + `users/${userId}`,
+        //     `https://radiant-tundra-28877.herokuapp.com/users/${userId}/`, 
+        //     {
+        //       method: 'GET',
+        //       headers: {
+        //           'Content-Type': 'application/json',
+        //       }
+        //     }
+        //   )
+        //   .then(res => res.json())
+        //   .then(data => setCurrentUser(data))
       }, []);
     
   return (
@@ -115,6 +127,9 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
                                 <div className='networkInfo'>
                                     <NetworkIndex networkData={networkData} headline="My Networks"/>
                                 </div>
+                            </div>
+                            <div className='networkInfoMedia'>
+                                    <NetworkIndex networkData={networkData} headline="My Networks"/>
                             </div>
                             </>
                         }
