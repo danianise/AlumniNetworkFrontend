@@ -44,6 +44,7 @@
     }
     .networkInfoMedia {
         display: block;
+        text-align: center;
     }
   }
 

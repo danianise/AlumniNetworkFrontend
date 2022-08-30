@@ -66,6 +66,10 @@ button{
   }
 
   .profileForm, .postList, .profileIndex, .eventIndex, .networkIndex{
-    margin-left: -20vh;
+    margin-left: -20vh !important;
+  }
+
+  .postDetailContainer{
+    border: 1px solid red;
   }
 }

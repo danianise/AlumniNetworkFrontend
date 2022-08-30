@@ -75,7 +75,8 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
 
   
 
-  return (<>
+  return (
+  <div className='postDetailContainer'>
     <div className="postDetail">
       {postData.map((eachPost) => {
 
@@ -218,7 +219,7 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
         getComments={getComments}
       />
     </div>
-  </>)
+  </div>)
 }
 
 export default PostDetail

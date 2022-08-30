@@ -36,18 +36,6 @@ function ProfileIndex({networkData, currentUser, accessToken}) {
         } else {
           sessionStorage.removeItem('reloadCount');
         }
-        // fetch(
-        //     // process.env.REACT_APP_API_URL + `users/${userId}`,
-        //     `https://radiant-tundra-28877.herokuapp.com/users/${userId}/`, 
-        //     {
-        //       method: 'GET',
-        //       headers: {
-        //           'Content-Type': 'application/json',
-        //       }
-        //     }
-        //   )
-        //   .then(res => res.json())
-        //   .then(data => setCurrentUser(data))
       }, []);
     
   return (

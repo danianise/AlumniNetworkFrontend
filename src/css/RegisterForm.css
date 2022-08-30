@@ -10,6 +10,10 @@
     .registerForm > form{
       display: flex; 
       flex-direction: column;
+    }
+
+    .registerForm {
       width: 60vw;
     }
 }
+

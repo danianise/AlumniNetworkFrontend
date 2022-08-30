@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import PostForm from './PostForm'
 import PostPreview from './PostPreview';
 
@@ -18,6 +18,17 @@ function PostList({ topic, currentUser, userData, accessToken, refreshToken, get
     {topic: 'Industry', icon: <ComputerIcon fontSize="large" />},
     {topic: 'Crying Room', icon: <SentimentVeryDissatisfiedIcon fontSize="large" />}
   ]
+
+  let reloadCount = sessionStorage.getItem('reloadCount')
+
+  useEffect(() => {
+    if(reloadCount < 2) {
+      sessionStorage.setItem('reloadCount', String(reloadCount + 1));
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem('reloadCount');
+    }
+  }, []);
 
   // console.log(props.userData)
 
