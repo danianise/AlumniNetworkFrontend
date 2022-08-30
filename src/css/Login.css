@@ -24,9 +24,9 @@
 
 @media (max-width: 940px) {
     .login {
-        width: 12vw;
+        width: 100px;
     }
     .login input{
-        width: 10vw;
+        width: 90px;
     }
 }

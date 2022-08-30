@@ -51,8 +51,8 @@ button{
 
 @media (max-width: 940px) {
   .landingPage, .registerSuccess{
-    left: 20vw;
-    width:70vw;
+    left: 150px;
+    width:60vw;
   }
 
   .profileForm, .postList, .profileIndex, .eventIndex {
