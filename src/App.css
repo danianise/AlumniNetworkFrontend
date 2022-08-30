@@ -51,7 +51,7 @@ button{
 
 @media (max-width: 940px) {
   .landingPage, .registerSuccess{
-    left: 160px;
+    left: 20vw;
     width:70vw;
   }
 
