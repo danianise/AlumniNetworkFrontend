@@ -38,7 +38,7 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
     setClick(!click)
   }
 
-  const closeMenu = () => setClick(false)
+  const closeMenu = () => setClick(!click)
 
   return (
 
