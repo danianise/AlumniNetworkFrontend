@@ -55,6 +55,10 @@ button{
     width:60vw;
   }
 
+  .landingPage > h1 {
+    font-size: 20px;
+  }
+
   .profileForm, .postList, .profileIndex, .eventIndex {
     margin-left: -20vh;
   }
