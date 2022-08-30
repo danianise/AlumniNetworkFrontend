@@ -39,7 +39,7 @@ button{
   margin-right: 10px;
 }
 
-.profileForm, .editPost{
+.profileForm, .editPost, .networkForm{
   margin-top: 30px;
 }
 
@@ -55,11 +55,17 @@ button{
     width:60vw;
   }
 
-  .landingPage > h1 {
+  h1{
     font-size: 20px;
   }
 
-  .profileForm, .postList, .profileIndex, .eventIndex {
+  .networkForm{
+    margin-top: -20px !important;
+    margin-left: -25vh !important;
+    width: 60vw;
+  }
+
+  .profileForm, .postList, .profileIndex, .eventIndex, .networkIndex{
     margin-left: -20vh;
   }
 }
