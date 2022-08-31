@@ -72,4 +72,8 @@ button{
   .profileForm {
     width: 60vw;
   }
+  
+  .postList {
+    margin-right: 20px !important;
+  }
 }
