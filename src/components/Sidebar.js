@@ -38,7 +38,7 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
     setClick(!click)
   }
 
-  const closeMenu = () => setClick(!click)
+  const closeMenu = () => setClick(false)
 
   return (
 
@@ -68,29 +68,36 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
 
           
 
-          <Link to='/'>
+          {/* <Link to='/'>
             <SidebarRow 
               title={"My Profile"}
               Icon={PersonIcon}
               onClick={closeMenu}
             />
-          </Link>
+          </Link> */}
+          <a href='/'>
+            <SidebarRow 
+              title={"My Profile"}
+              Icon={PersonIcon}
+              onClick={closeMenu}
+            />
+          </a>
 
-          <Link to='/networks'>
+          <a href='/networks'>
             <SidebarRow
               title={"My Networks"}
               Icon={PeopleAltIcon}
               onClick={closeMenu}
             />
-          </Link>
+          </a>
 
-          <Link to='/events'>
+          <a href='/events'>
             <SidebarRow
               title={"Events"}
               Icon={EventIcon}
               onClick={closeMenu}
             />
-          </Link>
+          </a>
 
           <div className={isActive ? 'hide' : ''} onClick={handleClick}>
             <SidebarRow
@@ -99,38 +106,38 @@ function Sidebar({currentUser, loggedIn, setLoggedIn, setAccessToken}) {
             />
 
             <div className=" topics tab">
-              <Link to='/conversations/life'>
+              <a href='/conversations/life'>
               <SidebarRow
                 title={"Life"}
                 Icon={TelegramIcon}
                 onClick={closeMenu}
               />
-              </Link>
+              </a>
 
-              <Link to='/conversations/partytime'>
+              <a href='/conversations/partytime'>
               <SidebarRow
                 title={"Party Time"}
                 Icon={CelebrationIcon}
                 onClick={closeMenu}
               />
-              </Link>
+              </a>
 
-              <Link to='/conversations/industry'>
+              <a href='/conversations/industry'>
               <SidebarRow
                 title={"Industry"}
                 Icon={CodeOffIcon}
                 onClick={closeMenu}
               />
-              </Link>
+              </a>
 
-              <Link to='/conversations/cryingroom'>
+              <a href='/conversations/cryingroom'>
                   <SidebarRow
                     title={"Crying Room"}
                     Icon={SentimentVeryDissatisfiedIcon}
                     onClick={closeMenu}
                   />
                 
-              </Link>
+              </a>
               </div>
             </div>  
           </div>

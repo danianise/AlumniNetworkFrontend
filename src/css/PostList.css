@@ -54,3 +54,12 @@ form input {
     background-color: rgba(196, 77, 86);
     margin-left: 5px;
 }
+
+.postDetailContainer {
+    margin-bottom: 40px;
+    margin-right: 20px;
+}
+
+.postAvatar {
+    z-index: -1;
+}

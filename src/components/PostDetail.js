@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import CommentForm from './CommentForm'
 import { useParams, useNavigate, Link } from 'react-router-dom'
+import AuthContext from '../context/AuthContext'
 
 import { Avatar } from '@mui/material'
 import "../css/PostList.css"
 
-function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPosts, getComments, profileData}) {
+function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPosts, getComments}) {
   
   const params = useParams()
   // console.log(params)
   let postId = parseInt(params.postId)
   const navigate = useNavigate()
+  let {profileData} = useContext(AuthContext)
 
 
   let topicForRoute = (topic).toLowerCase()

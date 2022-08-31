@@ -65,11 +65,11 @@ button{
     width: 60vw;
   }
 
-  .profileForm, .postList, .profileIndex, .eventIndex, .networkIndex{
+  .profileForm, .postList, .profileIndex, .eventIndex, .networkIndex, .postDetailContainer{
     margin-left: -20vh !important;
   }
 
-  .postDetailContainer{
-    border: 1px solid red;
+  .profileForm {
+    width: 60vw;
   }
 }

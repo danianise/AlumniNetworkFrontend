@@ -11,8 +11,11 @@
       display: flex; 
       flex-direction: column;
     }
+    .registerButton {
+      width: 70px;
+    }
 
-    .registerForm {
+    .registerForm{
       width: 60vw;
     }
 }

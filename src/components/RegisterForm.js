@@ -104,7 +104,7 @@ function RegisterForm() {
             <br /><br />
             <label>Last Name:</label>
             <input id="last_name" name="last_name" type="text" onChange={handleChange}/><br />
-            <button type="submit">Sign Up</button>
+            <button className='registerButton' type="submit">Sign Up</button>
         </form>
         <p className='errMsg'>{networkErrMsg}</p>
         <p className='errMsg'>{clientErrMsg}</p>

@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useContext} from 'react'
 import PostForm from './PostForm'
 import PostPreview from './PostPreview';
+import AuthContext from '../context/AuthContext'
 
 
 import '../css/PostList.css'
@@ -10,7 +11,9 @@ import ComputerIcon from '@mui/icons-material/Computer';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 
-function PostList({ topic, currentUser, userData, accessToken, refreshToken, getPosts, getComments, profileData }) {
+function PostList({ topic, currentUser, userData, accessToken, refreshToken, getPosts, getComments }) {
+
+  let {profileData} = useContext(AuthContext)
 
   let emojis = [
     {topic: 'Life', icon: <TelegramIcon fontSize="large" />},
