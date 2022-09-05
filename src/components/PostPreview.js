@@ -128,7 +128,7 @@ function PostPreview({ topic, accessToken, profileData }) {
                 <Avatar src={profileOfAuthor.photo} className='postAvatar'/>
                 {authorOfPost.first_name} {authorOfPost.last_name}
               </h6>
-              {eachPost.imageURL ? <img src={eachPost.imageURL} style={{width:'500px'}} alt="Image input by poster"/> : ""}
+              {eachPost.imageURL ? <img src={eachPost.imageURL} className='postedImage' alt="Image input by poster"/> : ""}
               <p className="postBody">{eachPost.body.substring(0, 50)}{eachPost.body.length > 50 ? "..." : ""}</p>
               <h6>{months[month]} {day}, {year} {hour}:{minutes}{amPM}</h6>
               

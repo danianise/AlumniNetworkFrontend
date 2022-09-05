@@ -6,7 +6,7 @@ import { Avatar } from "@mui/material"
 
 function PostForm({topic, currentUser, accessToken}) {
 
-  let postPlaceholder = `What's on your mind ${currentUser.first_name}?`
+  let postPlaceholder = `What's on your mind, ${currentUser.first_name}?`
 
 
   console.log(currentUser)
@@ -69,7 +69,7 @@ function PostForm({topic, currentUser, accessToken}) {
   return (
     <div className="postForm">
       
-      <form onSubmit={handleSubmit}>
+      <form className='form' onSubmit={handleSubmit}>
       <input
         id="author"
         type="hidden"
@@ -77,8 +77,8 @@ function PostForm({topic, currentUser, accessToken}) {
       />
         <textarea
           value={formData.body}
-          rows='10'
-          cols='60'
+          // rows='10'
+          // cols='60'
           id='body'
           placeholder={postPlaceholder}
           onChange={handleChange}
