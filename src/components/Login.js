@@ -102,9 +102,18 @@ function Login({setLoggedIn, setAccessToken}) {
                 localStorage.setItem('userId', eachUser.id)
               }
             })
-            navigate('/')
             }
         )
+        .then(() => {
+          navigate('/')
+          let reloadCount = sessionStorage.getItem('reloadCount')
+          if(reloadCount < 2) {
+            sessionStorage.setItem('reloadCount', String(reloadCount + 1));
+            window.location.reload();
+          } else {
+            sessionStorage.removeItem('reloadCount');
+          }
+        })
         // .then(
         //   fetch(process.env.REACT_APP_API_URL + 'users/', {
         //     method: 'GET',
