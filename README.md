@@ -26,10 +26,6 @@ Future additions/corrections will include:
 - Users will have the option to create a profile on their first sign-in, and update it on future sign-ins
 - Option to upload files instead of using image URLs
 
-### Blockers
-- Fetch calls for profile information doesn't always come through and blocks the site from rendering user data (right now it is affecting the post previews on the conversation pages)
-- How to toggle between setting profile (once only) and updating profile (all future changes)
-
 ### Resources
 - https://www.youtube.com/watch?v=B-kxUMHBxNo
 - https://www.youtube.com/watch?v=2_mH8HyZLvA
