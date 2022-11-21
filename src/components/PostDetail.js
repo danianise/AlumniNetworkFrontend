@@ -18,7 +18,6 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
   let topicForRoute = (topic).toLowerCase()
   topicForRoute = topicForRoute.replace(/\s/g, '')
 
-  // let editURL = `conversations/${topicForRoute}/${postId}/edit`
   let editURL = `${postId}/edit`
 
   const [postData, setPostData] = useState([])
@@ -194,13 +193,6 @@ function PostDetail({topic, currentUser, userData, loggedIn, accessToken, getPos
                         </h6>
                         <p>{eachComment.body}</p>
                         <h6>{commentMonths[commentMonth]} {commentDay}, {commentYear} {commentHour}:{commentMinutes} {commentAMPM}</h6>
-                        {/* {authorOfComment.id === currentUser.id
-                          ? <>
-                            <button onClick={''}>Edit Comment</button>
-                            <button className='deleteButton' onClick={handleClickDeleteComment}>Delete Comment</button>
-                            </>
-                          : ""
-                        } */}
                       </div>
                     </Link>
                   </>)
