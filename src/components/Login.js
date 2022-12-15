@@ -16,8 +16,8 @@ function Login({setLoggedIn, setAccessToken}) {
   const [users, setUsers] = useState(null)
   
   useEffect(() => {
-    // const url = process.env.REACT_APP_API_URL + 'users/'
-    const url = 'https://radiant-tundra-28877.herokuapp.com/users/'
+    const url = process.env.REACT_APP_API_URL + 'users/'
+    // const url = 'https://radiant-tundra-28877.herokuapp.com/users/'
     const opts = {
       method: 'GET',
       headers: {
@@ -61,8 +61,8 @@ function Login({setLoggedIn, setAccessToken}) {
           return
       }
         
-      // const url = process.env.REACT_APP_API_URL
-      const url = 'https://radiant-tundra-28877.herokuapp.com/'
+      const url = process.env.REACT_APP_API_URL
+      // const url = 'https://radiant-tundra-28877.herokuapp.com/'
         
         fetch(url + loginEndpoint, 
           {

@@ -21,8 +21,8 @@ function CommentDetail({topic, currentUser, accessToken}) {
   useEffect(() => {
    
     fetch(
-      // process.env.REACT_APP_API_URL + 'comments/',
-      'https://radiant-tundra-28877.herokuapp.com/comments/',
+      process.env.REACT_APP_API_URL + 'comments/',
+      // 'https://radiant-tundra-28877.herokuapp.com/comments/',
       {
         method: 'GET',
         headers: {
@@ -35,8 +35,8 @@ function CommentDetail({topic, currentUser, accessToken}) {
     .then(data => setCommentData(data))
 
     fetch(
-      // process.env.REACT_APP_API_URL + 'users/',
-      'https://radiant-tundra-28877.herokuapp.com/users/',
+      process.env.REACT_APP_API_URL + 'users/',
+      // 'https://radiant-tundra-28877.herokuapp.com/users/',
       {
         method: 'GET',
         headers: {
@@ -48,8 +48,8 @@ function CommentDetail({topic, currentUser, accessToken}) {
     .then(data => setUserData(data))
 
     fetch(
-      // process.env.REACT_APP_API_URL + 'profile/',
-      'https://radiant-tundra-28877.herokuapp.com/profile/',
+      process.env.REACT_APP_API_URL + 'profile/',
+      // 'https://radiant-tundra-28877.herokuapp.com/profile/',
       {
         method: 'GET',
         headers: {
@@ -64,8 +64,8 @@ function CommentDetail({topic, currentUser, accessToken}) {
 
   const handleClickDeleteComment = () => {
     fetch(
-      // process.env.REACT_APP_API_URL + `comments/${params.commentId}`,
-      `https://radiant-tundra-28877.herokuapp.com/comments/${params.commentId}/`,
+      process.env.REACT_APP_API_URL + `comments/${params.commentId}`,
+      // `https://radiant-tundra-28877.herokuapp.com/comments/${params.commentId}/`,
       {
         method: 'DELETE',
         headers: {

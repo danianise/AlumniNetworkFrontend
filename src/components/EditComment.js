@@ -17,8 +17,8 @@ function EditComment({topic, accessToken}) {
     useEffect(() => {
 
         fetch(
-            // process.env.REACT_APP_API_URL + `comments/${commentId}/`,
-            `https://radiant-tundra-28877.herokuapp.com/comments/${commentId}/`,
+            process.env.REACT_APP_API_URL + `comments/${commentId}/`,
+            // `https://radiant-tundra-28877.herokuapp.com/comments/${commentId}/`,
             {
                 method: 'GET',
                 headers: {
@@ -40,8 +40,8 @@ function EditComment({topic, accessToken}) {
     let updatePost= async () => {
 
         await fetch(
-            // process.env.REACT_APP_API_URL + `comments/${commentId}/`,
-            `https://radiant-tundra-28877.herokuapp.com/comments/${commentId}/`,
+            process.env.REACT_APP_API_URL + `comments/${commentId}/`,
+            // `https://radiant-tundra-28877.herokuapp.com/comments/${commentId}/`,
             {
                 method: 'PUT',
                 headers: {

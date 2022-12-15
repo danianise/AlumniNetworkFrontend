@@ -20,8 +20,8 @@ function EditProfile({accessToken}) {
 
   useEffect(() => {
     fetch(
-        // process.env.REACT_APP_API_URL + `profile/${profileId}/`, 
-        `https://radiant-tundra-28877.herokuapp.com/profile/${profileId}/`,
+        process.env.REACT_APP_API_URL + `profile/${profileId}/`, 
+        // `https://radiant-tundra-28877.herokuapp.com/profile/${profileId}/`,
         {
           method: 'GET',
           headers: {

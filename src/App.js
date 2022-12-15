@@ -77,8 +77,8 @@ function App() {
   useEffect(() => {
 
     fetch(
-      // process.env.REACT_APP_API_URL + 'profile/',
-      'https://radiant-tundra-28877.herokuapp.com/profile/', 
+      process.env.REACT_APP_API_URL + 'profile/',
+      // 'https://radiant-tundra-28877.herokuapp.com/profile/', 
       {
         method: 'GET',
         headers: {
@@ -106,8 +106,8 @@ function App() {
     // })
 
     fetch(
-      // process.env.REACT_APP_API_URL + `users/${userId}`,
-      `https://radiant-tundra-28877.herokuapp.com/users/${userId}/`, 
+      process.env.REACT_APP_API_URL + `users/${userId}`,
+      // `https://radiant-tundra-28877.herokuapp.com/users/${userId}/`, 
       {
         method: 'GET',
         headers: {
@@ -120,8 +120,8 @@ function App() {
 
     
     fetch(
-      // process.env.REACT_APP_API_URL + 'networks/',
-      'https://radiant-tundra-28877.herokuapp.com/networks',
+      process.env.REACT_APP_API_URL + 'networks/',
+      // 'https://radiant-tundra-28877.herokuapp.com/networks',
       {
         method: 'GET',
         headers: {
@@ -163,8 +163,8 @@ function App() {
   // }
 
   function getPosts() {
-    // const url = process.env.REACT_APP_API_URL + 'posts/'
-    const url = 'https://radiant-tundra-28877.herokuapp.com/posts/'
+    const url = process.env.REACT_APP_API_URL + 'posts/'
+    // const url = 'https://radiant-tundra-28877.herokuapp.com/posts/'
     const opts = {
       method: 'GET',
       headers: {
@@ -178,8 +178,8 @@ function App() {
   }
 
   function getComments() {
-    // const url = process.env.REACT_APP_API_URL + 'comments/'
-    const url = 'https://radiant-tundra-28877.herokuapp.com/comments/'
+    const url = process.env.REACT_APP_API_URL + 'comments/'
+    // const url = 'https://radiant-tundra-28877.herokuapp.com/comments/'
     const opts = {
       method: 'GET',
       headers: {
@@ -195,8 +195,8 @@ function App() {
   console.log(profileData)
 
   function getEvents() {
-    // const url = process.env.REACT_APP_API_URL + 'events/'
-    const url = 'https://radiant-tundra-28877.herokuapp.com/events/'
+    const url = process.env.REACT_APP_API_URL + 'events/'
+    // const url = 'https://radiant-tundra-28877.herokuapp.com/events/'
     const opts = {
       method: 'GET',
       headers: {

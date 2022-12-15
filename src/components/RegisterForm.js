@@ -56,8 +56,8 @@ function RegisterForm() {
                 return
             }
             
-            // const apiUrl = process.env.REACT_APP_API_URL
-            const apiUrl = 'https://radiant-tundra-28877.herokuapp.com/'
+            const apiUrl = process.env.REACT_APP_API_URL
+            // const apiUrl = 'https://radiant-tundra-28877.herokuapp.com/'
             
             fetch( apiUrl + signUpEndpoint, 
                     {
