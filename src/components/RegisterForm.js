@@ -56,7 +56,7 @@ function RegisterForm() {
                 return
             }
             
-            const apiUrl = process.env.REACT_APP_API_URL
+            const apiUrl = 'https://web-production-0556.up.railway.app'
             
             fetch( apiUrl + signUpEndpoint, 
                     {
