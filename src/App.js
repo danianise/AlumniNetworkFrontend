@@ -78,7 +78,6 @@ function App() {
 
     fetch(
       process.env.REACT_APP_API_URL + 'profile/',
-      // 'https://radiant-tundra-28877.herokuapp.com/profile/', 
       {
         method: 'GET',
         headers: {
