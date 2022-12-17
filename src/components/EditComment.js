@@ -18,7 +18,7 @@ function EditComment({topic, accessToken}) {
 
         fetch(
             process.env.REACT_APP_API_URL + `comments/${commentId}/`,
-            // `https://radiant-tundra-28877.herokuapp.com/comments/${commentId}/`,
+            // `https://alumninetworkbackend-production.up.railway.app/comments/${commentId}/`,
             {
                 method: 'GET',
                 headers: {
@@ -41,7 +41,7 @@ function EditComment({topic, accessToken}) {
 
         await fetch(
             process.env.REACT_APP_API_URL + `comments/${commentId}/`,
-            // `https://radiant-tundra-28877.herokuapp.com/comments/${commentId}/`,
+            // `https://alumninetworkbackend-production.up.railway.app/comments/${commentId}/`,
             {
                 method: 'PUT',
                 headers: {

@@ -78,6 +78,7 @@ function App() {
 
     fetch(
       process.env.REACT_APP_API_URL + 'profile/',
+      // 'https://alumninetworkbackend-production.up.railway.app/profile/',
       {
         method: 'GET',
         headers: {
@@ -106,7 +107,7 @@ function App() {
 
     fetch(
       process.env.REACT_APP_API_URL + `users/${userId}`,
-      // `https://radiant-tundra-28877.herokuapp.com/users/${userId}/`, 
+      // `https://alumninetworkbackend-production.up.railway.app/users/${userId}/`, 
       {
         method: 'GET',
         headers: {
@@ -120,7 +121,7 @@ function App() {
     
     fetch(
       process.env.REACT_APP_API_URL + 'networks/',
-      // 'https://radiant-tundra-28877.herokuapp.com/networks',
+      // 'https://alumninetworkbackend-production.up.railway.app/networks',
       {
         method: 'GET',
         headers: {
@@ -163,7 +164,7 @@ function App() {
 
   function getPosts() {
     const url = process.env.REACT_APP_API_URL + 'posts/'
-    // const url = 'https://radiant-tundra-28877.herokuapp.com/posts/'
+    // const url = 'https://alumninetworkbackend-production.up.railway.app/posts/'
     const opts = {
       method: 'GET',
       headers: {
@@ -178,7 +179,7 @@ function App() {
 
   function getComments() {
     const url = process.env.REACT_APP_API_URL + 'comments/'
-    // const url = 'https://radiant-tundra-28877.herokuapp.com/comments/'
+    // const url = 'https://alumninetworkbackend-production.up.railway.app/comments/'
     const opts = {
       method: 'GET',
       headers: {
@@ -195,7 +196,7 @@ function App() {
 
   function getEvents() {
     const url = process.env.REACT_APP_API_URL + 'events/'
-    // const url = 'https://radiant-tundra-28877.herokuapp.com/events/'
+    // const url = 'https://alumninetworkbackend-production.up.railway.app/events/'
     const opts = {
       method: 'GET',
       headers: {

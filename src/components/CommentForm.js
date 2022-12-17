@@ -24,7 +24,7 @@ function CommentForm({post, currentUser, accessToken, getPosts, getComments}) {
     // event.preventDefault()
 
     const url = process.env.REACT_APP_API_URL + 'comments/'
-    // const url = 'https://radiant-tundra-28877.herokuapp.com/comments/'
+    // const url = 'https://alumninetworkbackend-production.up.railway.app/comments/'
     const options = {
       method: 'POST',
       headers: {

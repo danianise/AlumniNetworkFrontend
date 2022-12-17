@@ -61,8 +61,8 @@ function Login({setLoggedIn, setAccessToken}) {
           return
       }
         
-      const url = process.env.REACT_APP_API_URL
-      // const url = 'https://radiant-tundra-28877.herokuapp.com/'
+      // const url = process.env.REACT_APP_API_URL
+      const url = 'https://web-production-0556.up.railway.app/'
         
         fetch(url + loginEndpoint, 
           {

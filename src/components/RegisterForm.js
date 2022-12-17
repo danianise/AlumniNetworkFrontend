@@ -56,8 +56,9 @@ function RegisterForm() {
                 return
             }
             
-            const apiUrl = 'https://web-production-0556.up.railway.app'
-            
+            // const apiUrl = 'https://alumninetworkbackend-production.up.railway.app'
+            const apiUrl = process.env.REACT_APP_API_URL
+
             fetch( apiUrl + signUpEndpoint, 
                     {
                         method: 'POST',

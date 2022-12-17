@@ -22,7 +22,7 @@ function CommentDetail({topic, currentUser, accessToken}) {
    
     fetch(
       process.env.REACT_APP_API_URL + 'comments/',
-      // 'https://radiant-tundra-28877.herokuapp.com/comments/',
+      // 'https://alumninetworkbackend-production.up.railway.app/comments/',
       {
         method: 'GET',
         headers: {
@@ -36,7 +36,7 @@ function CommentDetail({topic, currentUser, accessToken}) {
 
     fetch(
       process.env.REACT_APP_API_URL + 'users/',
-      // 'https://radiant-tundra-28877.herokuapp.com/users/',
+      // 'https://alumninetworkbackend-production.up.railway.app/users/',
       {
         method: 'GET',
         headers: {
@@ -49,7 +49,7 @@ function CommentDetail({topic, currentUser, accessToken}) {
 
     fetch(
       process.env.REACT_APP_API_URL + 'profile/',
-      // 'https://radiant-tundra-28877.herokuapp.com/profile/',
+      // 'https://alumninetworkbackend-production.up.railway.app/profile/',
       {
         method: 'GET',
         headers: {
@@ -65,7 +65,7 @@ function CommentDetail({topic, currentUser, accessToken}) {
   const handleClickDeleteComment = () => {
     fetch(
       process.env.REACT_APP_API_URL + `comments/${params.commentId}`,
-      // `https://radiant-tundra-28877.herokuapp.com/comments/${params.commentId}/`,
+      // `https://alumninetworkbackend-production.up.railway.app/comments/${params.commentId}/`,
       {
         method: 'DELETE',
         headers: {
