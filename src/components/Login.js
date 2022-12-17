@@ -61,9 +61,8 @@ function Login({setLoggedIn, setAccessToken}) {
           return
       }
         
-      // const url = process.env.REACT_APP_API_URL
-      const url = 'https://web-production-0556.up.railway.app/'
-        
+      const url = process.env.REACT_APP_API_URL
+      
         fetch(url + loginEndpoint, 
           {
             method: 'POST',
