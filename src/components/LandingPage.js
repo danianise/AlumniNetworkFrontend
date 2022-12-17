@@ -4,14 +4,6 @@ import { Link } from 'react-router-dom'
 
 function LandingPage(props) {
 
-  // const [djangoData, setDjangoData] = useState([])
-
-  // useEffect(() => {
-  //   fetch('https://radiant-tundra-28877.herokuapp.com/networks')
-  //   .then(res => res.json())
-  //   // .then(data => console.log(data))
-  //   .then(data => setDjangoData(data))
-  // })
 
   return (
     <div className='landingPage'>

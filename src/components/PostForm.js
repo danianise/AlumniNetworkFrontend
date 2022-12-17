@@ -38,8 +38,8 @@ function PostForm({topic, currentUser, accessToken}) {
   const handleSubmit = (event) => {
     // event.preventDefault()
 
-    // const url = process.env.REACT_APP_API_URL + 'posts/'
-    const url = 'https://web-production-0556.up.railway.app/posts/'
+    const url = process.env.REACT_APP_API_URL + 'posts/'
+  
     const options = {
       method: 'POST',
       headers: {

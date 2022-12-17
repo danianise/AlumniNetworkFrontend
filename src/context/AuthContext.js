@@ -35,7 +35,7 @@ export const AuthProvider = ({children}) => {
         //   })
 
         fetch(
-            'https://web-production-0556.up.railway.app/profile/',
+            process.env.REACT_APP_API_URL,
             {
               method: 'GET',
               headers: {

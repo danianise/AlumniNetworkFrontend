@@ -17,8 +17,7 @@ function EventForm({accessToken}) {
   const handleSubmit = event => {
     event.preventDefault();
 
-    // const url = process.env.REACT_APP_API_URL + 'events/'
-    const url = 'https://web-production-0556.up.railway.app/events/'
+    const url = process.env.REACT_APP_API_URL + 'events/'
     const options = {
       method: 'POST',
       headers: {

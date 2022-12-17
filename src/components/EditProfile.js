@@ -20,8 +20,7 @@ function EditProfile({accessToken}) {
 
   useEffect(() => {
     fetch(
-        // process.env.REACT_APP_API_URL + `profile/${profileId}/`, 
-        `https://web-production-0556.up.railway.app/profile/${profileId}/`,
+        process.env.REACT_APP_API_URL + `profile/${profileId}/`,
         {
           method: 'GET',
           headers: {
@@ -43,7 +42,7 @@ function EditProfile({accessToken}) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const url = `https://web-production-0556.up.railway.app/profile/${profileId}/`
+    const url = process.env.REACT_APP_API_URL + `profile/${profileId}/`
     const options = {
       method: 'PUT',
       headers: {

@@ -22,7 +22,6 @@ function CommentDetail({topic, currentUser, accessToken}) {
    
     fetch(
       process.env.REACT_APP_API_URL + 'comments/',
-      // 'https://alumninetworkbackend-production.up.railway.app/comments/',
       {
         method: 'GET',
         headers: {
@@ -36,7 +35,6 @@ function CommentDetail({topic, currentUser, accessToken}) {
 
     fetch(
       process.env.REACT_APP_API_URL + 'users/',
-      // 'https://alumninetworkbackend-production.up.railway.app/users/',
       {
         method: 'GET',
         headers: {
@@ -49,7 +47,6 @@ function CommentDetail({topic, currentUser, accessToken}) {
 
     fetch(
       process.env.REACT_APP_API_URL + 'profile/',
-      // 'https://alumninetworkbackend-production.up.railway.app/profile/',
       {
         method: 'GET',
         headers: {
@@ -65,7 +62,6 @@ function CommentDetail({topic, currentUser, accessToken}) {
   const handleClickDeleteComment = () => {
     fetch(
       process.env.REACT_APP_API_URL + `comments/${params.commentId}`,
-      // `https://alumninetworkbackend-production.up.railway.app/comments/${params.commentId}/`,
       {
         method: 'DELETE',
         headers: {

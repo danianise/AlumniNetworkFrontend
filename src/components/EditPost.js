@@ -17,7 +17,6 @@ function EditPost({topic, accessToken}) {
 
         fetch(
             process.env.REACT_APP_API_URL + `posts/${postId}`,
-            // `https://alumninetworkbackend-production.up.railway.app/posts/${postId}/`,
             {
                 method: 'GET',
                 headers: {
@@ -40,7 +39,6 @@ function EditPost({topic, accessToken}) {
 
         await fetch(
             process.env.REACT_APP_API_URL + `posts/${postId}/`,
-            // `https://alumninetworkbackend-production.up.railway.app/posts/${postId}/`,
             {
                 method: 'PUT',
                 headers: {

@@ -18,7 +18,6 @@ function EditComment({topic, accessToken}) {
 
         fetch(
             process.env.REACT_APP_API_URL + `comments/${commentId}/`,
-            // `https://alumninetworkbackend-production.up.railway.app/comments/${commentId}/`,
             {
                 method: 'GET',
                 headers: {
@@ -41,7 +40,6 @@ function EditComment({topic, accessToken}) {
 
         await fetch(
             process.env.REACT_APP_API_URL + `comments/${commentId}/`,
-            // `https://alumninetworkbackend-production.up.railway.app/comments/${commentId}/`,
             {
                 method: 'PUT',
                 headers: {
@@ -51,18 +49,6 @@ function EditComment({topic, accessToken}) {
                 body: JSON.stringify(formState)
             }
         )
-        // .then(res => {
-        //     if(!res.ok){
-        //     throw Error(res.status)
-        //     }
-        //     res.json()
-        // })
-        // .then(data => {
-        //     console.log(data)
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        // })
     }
 
     const handleChange = (event) => {
