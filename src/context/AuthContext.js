@@ -35,7 +35,7 @@ export const AuthProvider = ({children}) => {
         //   })
 
         fetch(
-            process.env.REACT_APP_API_URL,
+            process.env.REACT_APP_API_URL + 'profiles/',
             {
               method: 'GET',
               headers: {
