@@ -5,6 +5,13 @@
 ### Tech Stack
 React, Django, PostgreSQL
 
+### Links
+[Netlify Deployment](https://thealumninetwork.netlify.app/)
+
+[GitHub Repository, Front-end](https://github.com/danianise/AlumniNetworkFrontend)
+
+[GitHub Repository, Back-end](https://github.com/danianise/AlumniNetworkBackend)
+
 ### User stories
 As a user, I would like to create an account that connects me with my specific network(s).
 As a user I would like a space to link my contact information for other users in my network(s).
