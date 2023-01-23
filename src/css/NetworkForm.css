@@ -1,5 +1,5 @@
 .networkForm {
-    margin-left: -180px;
+    /* margin-left: -180px; */
 }
 
 .networkForm input:not(#adminNo, #adminYes) {
@@ -12,7 +12,8 @@
  
  @media (max-width: 940px) {
      .networkForm {
-       margin-left: -60px;
-       margin-top: -70px;
+       padding-left: 40px;
+       padding-top: 20px;
+       width: 80vw;
      }
  }
