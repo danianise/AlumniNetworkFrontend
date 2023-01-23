@@ -1,7 +1,3 @@
-.networkForm {
-    /* margin-left: -180px; */
-}
-
 .networkForm input:not(#adminNo, #adminYes) {
     float: right;
  }
