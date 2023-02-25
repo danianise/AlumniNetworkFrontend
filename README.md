@@ -21,7 +21,3 @@ As a user I would like a space to keep up conversations on specific topics with 
 ### 
 
 ![Screen Shot 2022-07-23 at 2 35 45 AM](https://user-images.githubusercontent.com/97096664/180594542-039f4a42-ce4f-4a12-8aa0-e2a8364fe0b0.png)
-![Screen Shot 2022-07-23 at 2 35 18 AM](https://user-images.githubusercontent.com/97096664/180594548-13af4779-f248-4852-91db-fac5f16a0c48.png)
-![Screen Shot 2022-07-23 at 3 08 56 AM](https://user-images.githubusercontent.com/97096664/180594577-270288b1-beb7-4f39-a49f-42c48e7d825e.png)
-![Screen Shot 2022-07-23 at 3 10 06 AM](https://user-images.githubusercontent.com/97096664/180594628-b3d2ae56-2e5c-4413-9275-488d3f17685b.png)
-
